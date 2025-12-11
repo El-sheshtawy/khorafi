@@ -19,9 +19,6 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                 <div class="single-slider swiper-slide slider__height slider__overlay d-flex align-items-center" data-background="{{url('website/public/images/' . $val->image)}}">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-12" style="z-index: 99; position: absolute; top: 70px; left: 0;">
-                                <h2 style="text-align: center; color: white; font-size: 30px;">{{trans('web.year')}} {{$config->year}}</h2>
-                            </div>
                             <div class="col-xxl-7 col-xl-8 col-lg-9 col-md-9 col-sm-10">
                                 <div class="slider__content">
                                     <h3 class="slider__title">{{$val->$name}}</h3>
@@ -37,34 +34,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
         </div>
-        <div class="swiper-container slider__nav d-none d-md-block">
-            <div class="swiper-wrapper">
-                <div class="slider__nav-item swiper-slide orange-bg" data-background="assets/img/slider/nav/slider-nav-4.jpg">
-                    <div class="slider__nav-content">
-                        <span>{{trans('web.users')}}</span>
-                        <h4>{{\App\User::where('active', 'active')->count()}}</h4>
-                    </div>
-                </div>
-                <div class="slider__nav-item swiper-slide blue-bg" data-background="assets/img/slider/nav/slider-nav-1.jpg">
-                    <div class="slider__nav-content">
-                        <a href="{{url('posts')}}" style="display: inline-block; font-size: 15px; color: #ffffff; opacity: 0.8;">{{trans('web.news')}}</a>
-                        <h4>{{\App\Post::where('active', 'active')->count()}}</h4>
-                    </div>
-                </div>
-                <div class="slider__nav-item swiper-slide pink-bg" data-background="assets/img/slider/nav/slider-nav-2.jpg">
-                    <div class="slider__nav-content">
-                        <a href="{{url('gallery')}}" style="display: inline-block; font-size: 15px; color: #ffffff; opacity: 0.8;">{{trans('web.images')}}</a>
-                        <h4>{{\App\Gallery::where('active', 'active')->count()}}</h4>
-                    </div>
-                </div>
-                <div class="slider__nav-item swiper-slide green-bg" data-background="assets/img/slider/nav/slider-nav-3.jpg">
-                    <div class="slider__nav-content">
-                        <a href="{{url('locations')}}" style="display: inline-block; font-size: 15px; color: #ffffff; opacity: 0.8;">{{trans('web.locations')}}</a>
-                        <h4>{{\App\Location::where('active', 'active')->count()}}</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </section>
     <!-- slider area end -->
 
