@@ -34,45 +34,27 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
         </div>
-        <div class="swiper-container slider__nav" style="display: none !important;">
-            <div class="swiper-wrapper">
-                <div class="slider__nav-item swiper-slide orange-bg" data-background="assets/img/slider/nav/slider-nav-4.jpg">
-                    <div class="slider__nav-content">
-                        <span>{{trans('web.users')}}</span>
-                    </div>
-                </div>
-                <div class="slider__nav-item swiper-slide blue-bg" data-background="assets/img/slider/nav/slider-nav-1.jpg">
-                    <div class="slider__nav-content">
-                        <a href="{{url('posts')}}" style="display: inline-block; font-size: 15px; color: #ffffff; opacity: 0.8;">{{trans('web.news')}}</a>
-                    </div>
-                </div>
-                <div class="slider__nav-item swiper-slide pink-bg" data-background="assets/img/slider/nav/slider-nav-2.jpg">
-                    <div class="slider__nav-content">
-                        <a href="{{url('gallery')}}" style="display: inline-block; font-size: 15px; color: #ffffff; opacity: 0.8;">{{trans('web.images')}}</a>
-                    </div>
-                </div>
-                <div class="slider__nav-item swiper-slide green-bg" data-background="assets/img/slider/nav/slider-nav-3.jpg">
-                    <div class="slider__nav-content">
-                        <a href="{{url('locations')}}" style="display: inline-block; font-size: 15px; color: #ffffff; opacity: 0.8;">{{trans('web.locations')}}</a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
     <!-- slider area end -->
-    <style>
-    .slider__nav,
-    .slider__nav *,
-    .swiper-pagination,
-    .swiper-pagination-bullet,
-    .slider__nav-item h4,
-    .slider__nav-content h4 {
-        display: none !important;
-        visibility: hidden !important;
-        opacity: 0 !important;
-        height: 0 !important;
-    }
-    </style>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof Swiper !== 'undefined') {
+            new Swiper('.slider__wrapper', {
+                loop: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                effect: 'fade',
+                speed: 1000,
+            });
+        }
+    });
+    </script>
 
     <section class="breaking-news wow animate__fadeInUp" data-wow-duration="2s" dir="ltr">
         <div class="container-fluid">
