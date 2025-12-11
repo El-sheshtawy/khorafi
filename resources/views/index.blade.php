@@ -32,6 +32,15 @@
     @else
     <link rel="stylesheet" href="{{url('web/')}}/css/style.css?1">
     @endif
+    <style>
+    .slider__nav,
+    .slider__nav-item,
+    .swiper-pagination,
+    .swiper-pagination-bullet,
+    .swiper-pagination-fraction {
+        display: none !important;
+    }
+    </style>
 </head>
 
 <body>
