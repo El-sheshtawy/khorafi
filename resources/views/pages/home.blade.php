@@ -34,7 +34,30 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
         </div>
-
+        <div class="swiper-container slider__nav d-none d-md-block">
+            <div class="swiper-wrapper">
+                <div class="slider__nav-item swiper-slide orange-bg" data-background="assets/img/slider/nav/slider-nav-4.jpg">
+                    <div class="slider__nav-content">
+                        <span>{{trans('web.users')}}</span>
+                    </div>
+                </div>
+                <div class="slider__nav-item swiper-slide blue-bg" data-background="assets/img/slider/nav/slider-nav-1.jpg">
+                    <div class="slider__nav-content">
+                        <a href="{{url('posts')}}" style="display: inline-block; font-size: 15px; color: #ffffff; opacity: 0.8;">{{trans('web.news')}}</a>
+                    </div>
+                </div>
+                <div class="slider__nav-item swiper-slide pink-bg" data-background="assets/img/slider/nav/slider-nav-2.jpg">
+                    <div class="slider__nav-content">
+                        <a href="{{url('gallery')}}" style="display: inline-block; font-size: 15px; color: #ffffff; opacity: 0.8;">{{trans('web.images')}}</a>
+                    </div>
+                </div>
+                <div class="slider__nav-item swiper-slide green-bg" data-background="assets/img/slider/nav/slider-nav-3.jpg">
+                    <div class="slider__nav-content">
+                        <a href="{{url('locations')}}" style="display: inline-block; font-size: 15px; color: #ffffff; opacity: 0.8;">{{trans('web.locations')}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
     <!-- slider area end -->
 
