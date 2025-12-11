@@ -60,6 +60,19 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
         </div>
     </section>
     <!-- slider area end -->
+    <style>
+    .slider__nav,
+    .slider__nav *,
+    .swiper-pagination,
+    .swiper-pagination-bullet,
+    .slider__nav-item h4,
+    .slider__nav-content h4 {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        height: 0 !important;
+    }
+    </style>
 
     <section class="breaking-news wow animate__fadeInUp" data-wow-duration="2s" dir="ltr">
         <div class="container-fluid">
