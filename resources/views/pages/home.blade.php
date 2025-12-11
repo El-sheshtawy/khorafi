@@ -34,7 +34,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
         </div>
-        <div class="swiper-container slider__nav d-none d-md-block">
+        <div class="swiper-container slider__nav" style="display: none !important;">
             <div class="swiper-wrapper">
                 <div class="slider__nav-item swiper-slide orange-bg" data-background="assets/img/slider/nav/slider-nav-4.jpg">
                     <div class="slider__nav-content">
