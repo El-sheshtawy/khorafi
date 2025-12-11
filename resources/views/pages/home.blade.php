@@ -36,6 +36,20 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
         </div>
     </section>
     <!-- slider area end -->
+    <script>
+    if (typeof Swiper !== 'undefined') {
+        new Swiper('.slider__wrapper', {
+            loop: true,
+            autoplay: {
+                delay: 5000,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    }
+    </script>
 
     <section class="breaking-news wow animate__fadeInUp" data-wow-duration="2s" dir="ltr">
         <div class="container-fluid">
