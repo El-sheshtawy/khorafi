@@ -34,22 +34,36 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
         </div>
+        <div class="swiper-container slider__nav d-none d-md-block">
+            <div class="swiper-wrapper">
+                <div class="slider__nav-item swiper-slide orange-bg" data-background="assets/img/slider/nav/slider-nav-4.jpg">
+                    <div class="slider__nav-content">
+                        <span>{{trans('web.users')}}</span>
+                        <h4 style="display: none;">{{\App\User::where('active', 'active')->count()}}</h4>
+                    </div>
+                </div>
+                <div class="slider__nav-item swiper-slide blue-bg" data-background="assets/img/slider/nav/slider-nav-1.jpg">
+                    <div class="slider__nav-content">
+                        <a href="{{url('posts')}}" style="display: inline-block; font-size: 15px; color: #ffffff; opacity: 0.8;">{{trans('web.news')}}</a>
+                        <h4 style="display: none;">{{\App\Post::where('active', 'active')->count()}}</h4>
+                    </div>
+                </div>
+                <div class="slider__nav-item swiper-slide pink-bg" data-background="assets/img/slider/nav/slider-nav-2.jpg">
+                    <div class="slider__nav-content">
+                        <a href="{{url('gallery')}}" style="display: inline-block; font-size: 15px; color: #ffffff; opacity: 0.8;">{{trans('web.images')}}</a>
+                        <h4 style="display: none;">{{\App\Gallery::where('active', 'active')->count()}}</h4>
+                    </div>
+                </div>
+                <div class="slider__nav-item swiper-slide green-bg" data-background="assets/img/slider/nav/slider-nav-3.jpg">
+                    <div class="slider__nav-content">
+                        <a href="{{url('locations')}}" style="display: inline-block; font-size: 15px; color: #ffffff; opacity: 0.8;">{{trans('web.locations')}}</a>
+                        <h4 style="display: none;">{{\App\Location::where('active', 'active')->count()}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
     <!-- slider area end -->
-    <script>
-    if (typeof Swiper !== 'undefined') {
-        new Swiper('.slider__wrapper', {
-            loop: true,
-            autoplay: {
-                delay: 5000,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-    }
-    </script>
 
     <section class="breaking-news wow animate__fadeInUp" data-wow-duration="2s" dir="ltr">
         <div class="container-fluid">
