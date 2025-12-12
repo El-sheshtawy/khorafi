@@ -69,34 +69,10 @@ use Illuminate\Support\Facades\DB;
     sortButtons.forEach(button => {
         button.addEventListener('click', function () {
             const order = this.getAttribute('data-order');
-            const table = document.getElementById('dataTable');
-            const tbody = table.querySelector('tbody');
-            const rows = Array.from(tbody.querySelectorAll('tr'));
-
-            if (!rows.length) {
-                console.warn("No rows found to sort.");
-                return;
-            }
-
-            // Sort rows based on the "تاريخ التسجيل" column
-            rows.sort((rowA, rowB) => {
-                const dateAElement = rowA.querySelector('.created-at');
-                const dateBElement = rowB.querySelector('.created-at');
-
-                if (!dateAElement || !dateBElement) {
-                    console.error("One or more rows missing 'created-at' element.");
-                    return 0;
-                }
-
-                const dateA = new Date(dateAElement.textContent.trim());
-                const dateB = new Date(dateBElement.textContent.trim());
-
-                return order === 'asc' ? dateA - dateB : dateB - dateA;
-            });
-
-            // Clear existing rows and append sorted rows
-            tbody.innerHTML = '';
-            rows.forEach(row => tbody.appendChild(row));
+            const url = new URL(window.location.href);
+            url.searchParams.set('type', 'created_at');
+            url.searchParams.set('order_type', order);
+            window.location.href = url.toString();
         });
     });
 });
