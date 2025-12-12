@@ -51,9 +51,9 @@
 
 <body>
   
-    <div class="advs-hei" style="position: relative;">
-        <img src="{{url('website/public/images/' . $config->header_image)}}" alt="" style="width: 100%; display: block;">
-        <h2 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: black; font-size: 120px; font-weight: bold; margin: 0;">{{$config->number}}</h2>
+    <div class="advs-hei">
+        <img src="{{url('website/public/images/' . $config->header_image)}}" alt="">
+        <h2 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: black; font-size: 120px; font-weight: bold; margin: 0; z-index: 10;">{{$config->number}}</h2>
     </div>
 
     <!-- pre loader area start -->
@@ -287,6 +287,15 @@
         overflow: hidden !important;
         position: absolute !important;
         left: -9999px !important;
+    }
+    .advs-hei {
+        position: relative;
+        width: 100%;
+    }
+    .advs-hei img {
+        width: 100%;
+        height: auto;
+        display: block;
     }
     @media (max-width: 768px) {
         .advs-hei h2 {
