@@ -9,4 +9,6 @@ use Illuminate\Notifications\Notifiable;
 class Admin extends Authenticatable
 {
     protected $table = "users";
+
+    // comment
 }
