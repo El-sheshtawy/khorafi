@@ -54,8 +54,12 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
         
         // Auto play video on load
         if (video) {
-            video.muted = false;
-            video.play().catch(function(e) {
+            video.muted = true;
+            video.play().then(function() {
+                setTimeout(function() {
+                    video.muted = false;
+                }, 100);
+            }).catch(function(e) {
                 console.log('Autoplay prevented:', e);
             });
         }
