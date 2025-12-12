@@ -168,6 +168,21 @@
                                 </div>
                             </div>
 
+                            <div class="card" style="margin-bottom: 20px">
+                                <div class="card-body">
+                                    <h5 class="card-title">فيديو السلايدر</h5>
+                                    <div>
+                                        <input type="file" name="slider_video" class="form-control" accept="video/*">
+                                        <input type="hidden" name="old_slider_video" value="{{ $data->slider_video ?? '' }}">
+                                        @if(!empty($data->slider_video))
+                                        <video width="100%" controls style="margin-top: 10px;">
+                                            <source src="{{ url('website/public/videos/' . $data->slider_video) }}" type="video/mp4">
+                                        </video>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="card">
                                 <div class="card-body">
                                     <h5>تعديل</h5>

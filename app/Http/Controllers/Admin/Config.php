@@ -37,6 +37,7 @@ class Config extends Controller
             'ig' => 'url',
             'image' => 'image|mimes:jpg,jpeg,png',
             'header_image' => 'image|mimes:jpg,jpeg,png',
+            'slider_video' => 'mimes:mp4,mov,avi|max:20480',
         ]);
 
         if (!empty(request()->file('image'))) {
@@ -57,6 +58,15 @@ class Config extends Controller
             $header_image = request('old_header_image');
         }
 
+        if (!empty(request()->file('slider_video'))) {
+            $file = request()->file('slider_video');
+            $ext = $file->getClientOriginalExtension();
+            $slider_video = Str::Random(40) . "." . $ext;
+            $file->move(public_path('videos'), $slider_video);
+        } else {
+            $slider_video = request('old_slider_video');
+        }
+
         DB::table('config')->where('id', $id)->update([
             "name" => request('name'),
             "email" => request('email'),
@@ -69,6 +79,7 @@ class Config extends Controller
             "number" => request('number'),
             "image" => $image,
             "header_image" => $header_image,
+            "slider_video" => $slider_video,
         ]);
 
         return back()->with("success", "تم التعديل بنجاح.");
