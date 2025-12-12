@@ -51,8 +51,9 @@
 
 <body>
   
-    <div class="advs-hei">
+    <div class="advs-hei" style="position: relative;">
         <img src="{{url('website/public/images/' . $config->header_image)}}" alt="">
+        <h2 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 40px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin: 0;">{{trans('web.year')}} {{$config->year}}</h2>
     </div>
 
     <!-- pre loader area start -->
