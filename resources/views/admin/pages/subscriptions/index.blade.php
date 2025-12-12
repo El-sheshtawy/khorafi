@@ -641,7 +641,7 @@ $(document).ready(function() {
                                                     <!--<td>{{ $val->user->gender == 'male' ? 'ذكر' : 'أنثى' }}</td>-->
                                                         <!--<td>{{ $val->user->nationality->name_ar ?? '-' }}</td>-->
                                                       <td>  
-                                                       {{ DB::table('nationalities')->where('id', $val->user->nationality_id)->value('name_ar') }}
+                                                       {{ DB::table('nationalities')->where('id', $val->user->nationality_id)->value('name_ar') ?? '-' }}
                                              </td>
                                                     <td>{{ $val->user->identify }}</td>
                                                     <!--<td>{{ $val->user->mobile }}</td>-->

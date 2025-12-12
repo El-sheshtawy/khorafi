@@ -120,7 +120,7 @@
                                     <div class="sign__input-wrapper mb-25">
                                         <h5>{{ trans('web.nationality') }}</h5>
                                         <div class="">
-                                            <select class="form-control" name="nationality">
+                                            <select class="form-control" name="nationality" required>
                                                 <option value="">...</option>
                                                 @foreach (\App\Nationality::where('active', 'active')->get() as $val)
                                                     <option value="{{ $val->id }}"
@@ -157,8 +157,8 @@
                                     <div class="sign__input-wrapper mb-25">
                                         <h5>{{ trans('web.city') }}</h5>
                                         <div class="">
-                                            <select class="form-control" name="city" id="change-city-register-page">
-                                                <option value="0">...</option>
+                                            <select class="form-control" name="city" id="change-city-register-page" required>
+                                                <option value="">...</option>
                                                 @foreach (\App\City::where('active', 'active')->get() as $val)
                                                     <option value="{{ $val->id }}"
                                                         {{ old('city') == $val->id ? 'selected' : '' }}>
