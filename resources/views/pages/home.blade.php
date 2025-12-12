@@ -52,6 +52,14 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
     document.addEventListener('DOMContentLoaded', function() {
         var video = document.getElementById('sliderVideo');
         
+        // Auto play video on load
+        if (video) {
+            video.muted = false;
+            video.play().catch(function(e) {
+                console.log('Autoplay prevented:', e);
+            });
+        }
+        
         if (typeof Swiper !== 'undefined') {
             var swiper = new Swiper('.slider__wrapper', {
                 loop: true,
@@ -66,22 +74,19 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                 effect: 'fade',
                 speed: 1000,
                 on: {
-                    init: function() {
-                        if (video && this.realIndex === 0) {
+                    slideChange: function() {
+                        // Pause all videos first
+                        var allVideos = document.querySelectorAll('video');
+                        allVideos.forEach(function(v) {
+                            v.pause();
+                            v.muted = true;
+                        });
+                        
+                        // Play video only on first slide
+                        if (this.realIndex === 0 && video) {
+                            video.currentTime = 0;
                             video.muted = false;
                             video.play();
-                        }
-                    },
-                    slideChange: function() {
-                        if (video) {
-                            if (this.realIndex === 0) {
-                                video.currentTime = 0;
-                                video.muted = false;
-                                video.play();
-                            } else {
-                                video.muted = true;
-                                video.pause();
-                            }
                         }
                     }
                 }
