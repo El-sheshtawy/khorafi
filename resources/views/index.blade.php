@@ -316,6 +316,20 @@
         }
         #navbarSupportedContent {
             text-align: right;
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 80%;
+            background: white;
+            z-index: 9999;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        #navbarSupportedContent.show {
+            transform: translateX(0);
         }
     }
     </style>
