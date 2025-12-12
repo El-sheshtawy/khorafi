@@ -4,12 +4,12 @@
 $number = request('number', 27);
 $from_date = request('from_date');
 $to_date = request('to_date');
-
-// Redirect to add number to URL if not present
-if (!request()->has('number')) {
-    return redirect()->to('/admin?number=' . $number . '&from_date=' . $from_date . '&to_date=' . $to_date);
-}
 ?>
+@if(!request()->has('number'))
+<script>
+    window.location.href = '/admin?number=27&from_date=&to_date=';
+</script>
+@endif
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <script>
