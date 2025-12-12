@@ -27,11 +27,11 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{url('/')}}">{{trans('web.home')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">{{trans('web.opinions')}}</li>
+                                    <li class="breadcrumb-item active" aria-current="page">اعداد المشاركين</li>
                                 </ol>
                             </nav>
                         </div>
-                        <h5 class="page__title-3">{{trans('web.opinions')}}</h5>
+                        <h5 class="page__title-3">اعداد المشاركين</h5>
                     </div>
                 </div>
             </div>
@@ -39,52 +39,44 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
     </section>
     <!-- page title area end -->
 
-    <div class="container">
-        <form action="">
-            <div class="row">
-
-                <div class="col-md-3 mt-3">
-                    <input class="form-control" type="date" name="date" placeholder="{{trans('web.date')}}" value="{{request('date')}}">
-                </div>
-
-                <div class="col-md-3 mt-3">
-                    <input class="btn btn-info" type="submit" value="{{trans('web.filter')}}">
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <!-- blog area start -->
     <section class="blog__area pt-115 pb-150">
         <div class="container">
-            <div class="row">
-                @foreach($data as $key => $val)
-                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
-                    <div class="blog__item white-bg mb-30 transition-3 fix">
-                        <div class="blog__thumb w-img fix">
-                            <a href="{{url('post/' . $val->id)}}">
-                                <img src="{{url('website/public/images/' . $val->image)}}" alt="">
-                            </a>
-                        </div>
-                        <div class="blog__content">
-
-                            <h3 class="blog__title"><a href="{{url('post/' . $val->id)}}">{{$val->$name}}</a></h3>
-
-                            <div class="blog__meta d-flex align-items-center justify-content-between">
-                                <div class="blog__date d-flex align-items-center">
-                                    <i class="fal fa-clock"></i>
-                                    <span>{{$val->created_at}}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
+            <?php
+            $config = DB::table('config')->first();
+            $number = $config->filter_number ?? $config->number;
+            ?>
+            <h3 class="text-center mb-4">الإجمالي: {{\App\Subscription::where('number', $number)->count()}}</h3>
+            
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead style="background-color: #6c757d; color: white;">
+                        <tr>
+                            <th>فئة</th>
+                            <th>مشترك</th>
+                            <th>ذكر</th>
+                            <th>أنثى</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(\App\SubscriptionsName::get() as $val)
+                        <tr>
+                            <td>{{$val->name_ar}}</td>
+                            <td><strong>{{\App\Subscription::where('name_id', $val->id)->where('number', $number)->count()}}</strong></td>
+                            <td style="color: #085d9e; font-weight: bold;">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'male')->count()}}</td>
+                            <td style="color: red; font-weight: bold;">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'female')->count()}}</td>
+                        </tr>
+                        @endforeach
+                        <tr style="background-color: #369bdd;">
+                            <th style="color: white;">الاجمالي العام</th>
+                            <td style="color: white; font-weight: bold;">{{\App\Subscription::where('number', $number)->count()}}</td>
+                            <td style="color: white; font-weight: bold;">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('users.gender', 'male')->where('subscriptions.number', $number)->count()}}</td>
+                            <td style="color: white; font-weight: bold;">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('users.gender', 'female')->where('subscriptions.number', $number)->count()}}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            {{$data->links()}}
         </div>
     </section>
-    <!-- blog area end -->
 
 
 </main>

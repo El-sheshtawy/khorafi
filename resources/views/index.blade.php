@@ -110,7 +110,7 @@
                             </li>
 
                             <li>
-                                <a href="{{url('/opinions')}}" class="nav-link">{{trans('web.opinions')}}</a>
+                                <a href="{{url('/opinions')}}" class="nav-link">اعداد المشاركين</a>
                             </li>
 
                             <li>
