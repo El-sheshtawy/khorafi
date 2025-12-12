@@ -110,10 +110,22 @@ $to_date = request('to_date');
         <div class="container-fluid">
 
             <div class="page-title-box">
+                <div class="float-left">
+                    <button class="btn btn-info" id="exportPDF">تصدير PDF</button>
+                </div>
                 <ol class="breadcrumb float-right">
                     <li class="breadcrumb-item"><a href="javascript:void(0);">الرئيسية</a></li>
                 </ol>
-                <h4 class="page-title">رقم المسابقة {{$number}}</h4>
+                <h4 class="page-title">رقم المسابقة {{$number}} - الإجمالي: {{
+                    \App\Subscription::where('number', $number)
+                    ->when($from_date, function ($query) use ($from_date) {
+                        return $query->whereDate('created_at', '>=', $from_date);
+                    })
+                    ->when($to_date, function ($query) use ($to_date) {
+                        return $query->whereDate('created_at', '<=', $to_date);
+                    })
+                    ->count()
+                }}</h4>
             </div>
 
             <div class="card">
@@ -148,7 +160,6 @@ $to_date = request('to_date');
                     </form>
 
                     <br>
-                    <button class="btn btn-info" id="exportPDF">تصدير PDF</button>
             <div id="pdfContent">
                 <div class="table-wrapper">
    
