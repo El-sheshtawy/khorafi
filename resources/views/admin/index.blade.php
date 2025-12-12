@@ -205,7 +205,16 @@
                             <a href="{{url('/admin/gallery')}}">
                                 <i class="mdi mdi-atom"></i>
                                 <span>
-                                    الأنشطة والفعاليات
+                                    الأنشطة
+                                </span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{url('/admin/events')}}">
+                                <i class="mdi mdi-atom"></i>
+                                <span>
+                                    الفعاليات
                                 </span>
                             </a>
                         </li>
