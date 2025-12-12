@@ -52,7 +52,7 @@
 <body>
   
     <div class="advs-hei" style="position: relative;">
-        <img src="{{url('website/public/images/' . $config->header_image)}}" alt="">
+        <img src="{{url('website/public/images/' . $config->header_image)}}" alt="" style="width: 100%; height: auto; display: block;">
         <h2 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: black; font-size: 120px; font-weight: bold; margin: 0;">{{$config->number}}</h2>
     </div>
 
@@ -84,10 +84,7 @@
         <div id="header-sticky" class="header__area header__transparent header__padding-2">
             <nav class="navbar navbar-expand-lg navbar-light bg-custom">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="{{url('/')}}">
-                        <img src="{{url('website/public/images/' . $config->image)}}" width="100px" alt="logo">
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -290,6 +287,14 @@
         overflow: hidden !important;
         position: absolute !important;
         left: -9999px !important;
+    }
+    @media (max-width: 768px) {
+        .advs-hei h2 {
+            font-size: 60px !important;
+        }
+        #navbarSupportedContent {
+            text-align: right;
+        }
     }
     </style>
 
