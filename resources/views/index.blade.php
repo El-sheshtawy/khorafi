@@ -51,8 +51,8 @@
 
 <body>
   
-    <div class="advs-hei" style="background: url('{{url('website/public/images/' . $config->header_image)}}') center/cover;">
-        <img src="{{url('website/public/images/' . $config->header_image)}}" alt="" style="opacity: 0;">
+    <div class="advs-hei">
+        <img src="{{url('website/public/images/' . $config->header_image)}}" alt="">
         <h2 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: black; font-size: 120px; font-weight: bold; margin: 0; z-index: 10;">{{$config->number}}</h2>
     </div>
 
@@ -329,6 +329,7 @@
         position: relative;
         width: 100%;
         line-height: 0;
+        background: #f5f5f5;
     }
     .advs-hei img {
         width: 100%;
@@ -337,14 +338,9 @@
         vertical-align: bottom;
     }
     @media (min-width: 769px) {
-        .advs-hei {
-            max-height: 150px;
-        }
         .advs-hei img {
-            width: 100%;
-            height: 150px;
-            object-fit: contain;
-            background: white;
+            height: auto;
+            max-height: 150px;
         }
     }
     @media (max-width: 768px) {
