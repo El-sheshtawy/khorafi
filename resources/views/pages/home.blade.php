@@ -16,8 +16,9 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
         <div class="slider__wrapper swiper-container">
             <div class="swiper-wrapper">
                 <div class="single-slider swiper-slide slider__height d-flex align-items-end justify-content-center" style="background: #000; position: relative; overflow: hidden;">
-                    <video id="sliderVideo" autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
-                        <source src="{{asset('videos/مسابقة الخرافي السنوية.mp4')}}" type="video/mp4">
+                    <video id="sliderVideo" autoplay muted loop playsinline preload="auto" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                        <source src="/videos/مسابقة الخرافي السنوية.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
                     </video>
                     <div class="container" style="position: relative; z-index: 2;">
                         <div class="row">
@@ -51,7 +52,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         if (typeof Swiper !== 'undefined') {
-            var swiper = new Swiper('.slider__wrapper', {
+            new Swiper('.slider__wrapper', {
                 loop: true,
                 autoplay: {
                     delay: 5000,
@@ -63,24 +64,17 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                 },
                 effect: 'fade',
                 speed: 1000,
-                on: {
-                    slideChange: function() {
-                        var video = document.getElementById('sliderVideo');
-                        if (video && this.realIndex === 0) {
-                            video.play();
-                        }
-                    }
-                }
             });
-            
-            // Play video on load
+        }
+        
+        // Force video play
+        setTimeout(function() {
             var video = document.getElementById('sliderVideo');
             if (video) {
-                video.play().catch(function(error) {
-                    console.log('Video autoplay failed:', error);
-                });
+                video.muted = true;
+                video.play();
             }
-        }
+        }, 500);
     });
     </script>
 
