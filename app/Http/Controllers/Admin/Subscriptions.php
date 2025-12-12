@@ -317,32 +317,21 @@ public function index()
             $data = $data->where('winner', $winner);
         }
 
+        // Apply ordering
         if (!empty(request('type')) and in_array(request('type'), ['winner', 'name_id', 'degree', 'level']) and !empty(request('order_type')) and in_array(request('order_type'), ['asc', 'desc'])) {
             $data = $data->orderBy(request('type'), request('order_type'));
         } else {
-            $data->orderBy('degree', 'desc')->orderBy('level', 'asc');
+            $data = $data->orderBy('degree', 'desc')->orderBy('level', 'asc');
         }
 
-        $count = $data->count();
-        //dd($data->count());
-//$count = $data->where('number', 26)->count();
-
-        if (!empty(request('username')) or !empty(request('number')) or !empty(request('id')) or !empty(request('email')) or !empty(request('gender')) or !empty(request('city_id')) or !empty(request('nationality_id')) or !empty(request('name_id')) or !empty(request('date')) or !empty(request('type'))) {
-           // $count = $data->count();
-        $data = $data->get();
-            //$data = $data->p;
-           // $count = $data->count();
+        // Get data
+        if (!empty(request('username')) or !empty(request('number')) or !empty(request('id')) or !empty(request('email')) or !empty(request('gender')) or !empty(request('city_id')) or !empty(request('nationality_id')) or !empty(request('name_id')) or !empty(request('date')) or !empty(request('type')) or !empty(request('order_type'))) {
+            $data = $data->get();
         } else {
-
-         //they are working here 
-    //       $data = $data->where('number', 26)->paginate(100);
-    // $count = $data->total(); // Get total count for pagination
-    // Remove pagination and get all filtered records
-$data = $data->where('number', 26)->get(); 
-
-// Count the total records (no pagination required)
-$count = $data->count(); 
+            $data = $data->where('number', 26)->get(); 
         }
+        
+        $count = $data->count();
    
         return view("admin.pages.subscriptions.index", ['data' => $data, 'count' => $count]);
     }
