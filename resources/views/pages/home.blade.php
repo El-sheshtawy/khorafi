@@ -21,8 +21,6 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                         <div class="row">
                             <div class="col-xxl-7 col-xl-8 col-lg-9 col-md-9 col-sm-10">
                                 <div class="slider__content">
-                                    <h3 class="slider__title">{{$val->$name}}</h3>
-                                    <p>{{$val->$body}}</p>
                                     <a href="{{url('subscription')}}" class="e-btn slider__btn">{{trans('web.subscription')}}</a>
                                 </div>
                             </div>
