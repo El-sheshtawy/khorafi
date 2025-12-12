@@ -291,7 +291,7 @@
     .advs-hei {
         position: relative;
         width: 100%;
-        max-height: 400px;
+        max-height: 200px;
         overflow: hidden;
     }
     .advs-hei img {
