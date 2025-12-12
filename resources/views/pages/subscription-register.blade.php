@@ -21,7 +21,7 @@
             .section-title { color: #667eea; font-size: 20px; font-weight: 700; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 3px solid #667eea; text-align: center; }
             .sign__input-wrapper { margin-bottom: 0; }
             .sign__input-wrapper h5 { color: #2d3748; font-weight: 700; margin-bottom: 8px; font-size: 16px; text-align: center; }
-            .form-control, .form-select { border: 2px solid #e2e8f0; border-radius: 12px; padding: 14px 16px; transition: all 0.3s; font-size: 15px; background: #fef9e7; height: 50px; width: 100%; }
+            .form-control, .form-select { border: 2px solid #e2e8f0; border-radius: 12px; padding: 14px 16px; transition: all 0.3s; font-size: 15px; background: #fef3c7; height: 50px; width: 100%; color: #2563eb; font-weight: 700; }
             textarea.form-control { height: auto; min-height: 100px; }
             .form-control:focus, .form-select:focus { border-color: #667eea; box-shadow: 0 0 0 4px rgba(102,126,234,0.1); background: white; outline: none; }
             .e-btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; padding: 18px 60px; border-radius: 12px; font-weight: 700; font-size: 18px; transition: all 0.3s; color: white; box-shadow: 0 10px 25px rgba(102,126,234,0.3); display: inline-flex; align-items: center; justify-content: center; min-width: 200px; }
@@ -35,7 +35,7 @@
                 .form-section { padding: 20px 15px; border-radius: 12px; margin-bottom: 20px; }
                 .section-title { font-size: 18px; margin-bottom: 20px; padding-bottom: 12px; }
                 .sign__input-wrapper h5 { font-size: 15px; margin-bottom: 6px; }
-                .form-control, .form-select { padding: 12px 14px; font-size: 14px; height: 46px; border-radius: 10px; background: #fef9e7; }
+                .form-control, .form-select { padding: 12px 14px; font-size: 14px; height: 46px; border-radius: 10px; background: #fef3c7; color: #2563eb; font-weight: 700; }
                 textarea.form-control { min-height: 80px; }
                 .e-btn { padding: 14px 40px; font-size: 16px; width: 100%; }
                 .col-md-3, .col-md-6 { margin-bottom: 15px; }
