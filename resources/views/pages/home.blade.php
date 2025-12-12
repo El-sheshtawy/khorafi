@@ -76,7 +76,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                 </div>
             </div>
             <div class="row">
-                @foreach(\App\Gallery::where('active', 'active')->where('type', 'activity')->orderBy('id', 'desc')->paginate(6) as $key => $val)
+                @foreach(\App\Gallery::where('active', 'active')->orderBy('id', 'desc')->take(6)->get() as $key => $val)
                 <a href="{{url('website/public/images/' . $val->image)}}" data-toggle="lightbox" data-gallery="activity" class="col-md-4">
                     <img src="{{url('website/public/images/' . $val->image)}}" class="img-fluid rounded">
                 </a>
@@ -100,7 +100,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
             </div>
             <div class="events-slider swiper-container">
                 <div class="swiper-wrapper">
-                    @foreach(\App\Gallery::where('active', 'active')->where('type', 'event')->orderBy('id', 'desc')->get() as $key => $val)
+                    @foreach(\App\Gallery::where('active', 'active')->orderBy('id', 'asc')->take(6)->get() as $key => $val)
                     <div class="swiper-slide">
                         <a href="{{url('website/public/images/' . $val->image)}}" data-toggle="lightbox" data-gallery="events">
                             <img src="{{url('website/public/images/' . $val->image)}}" class="img-fluid rounded" style="width: 100%; height: 400px; object-fit: cover;">
