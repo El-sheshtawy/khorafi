@@ -16,12 +16,12 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
         <div class="slider__wrapper swiper-container">
             <div class="swiper-wrapper">
                 @foreach(\App\Slider::where('active', 'active')->orderBy('id', 'desc')->paginate(15) as $key => $val)
-                <div class="single-slider swiper-slide slider__height slider__overlay d-flex align-items-center" data-background="{{url('website/public/images/' . $val->image)}}">
+                <div class="single-slider swiper-slide slider__height slider__overlay d-flex align-items-end justify-content-center" data-background="{{url('website/public/images/' . $val->image)}}">
                     <div class="container">
                         <div class="row">
-                            <div class="col-xxl-7 col-xl-8 col-lg-9 col-md-9 col-sm-10">
+                            <div class="col-12 text-center" style="margin-bottom: 50px;">
                                 <div class="slider__content">
-                                    <a href="{{url('subscription')}}" class="e-btn slider__btn">{{trans('web.subscription')}}</a>
+                                    <a href="{{url('subscription')}}" class="e-btn slider__btn" style="font-size: 20px; padding: 15px 40px;">{{trans('web.subscription')}}</a>
                                 </div>
                             </div>
                         </div>
