@@ -14,20 +14,32 @@
 
         <!-- sign up area start -->
         <style>
-            .signup__area { background: #f0f4f8; min-height: 100vh; padding: 60px 0; }
-            .section__title { color: #1a202c !important; -webkit-text-fill-color: #1a202c !important; font-weight: 800; }
+            .signup__area { background: #f0f4f8; min-height: 100vh; padding: 40px 0; }
+            .section__title { color: #1a202c !important; -webkit-text-fill-color: #1a202c !important; font-weight: 800; font-size: 28px; }
             .form-container { background: white; padding: 50px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); max-width: 1100px; margin: 0 auto; }
             .form-section { background: #f8fafc; padding: 35px; border-radius: 16px; border: 2px solid #e2e8f0; margin-bottom: 30px; }
-            .section-title { color: #667eea; font-size: 20px; font-weight: 700; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 3px solid #667eea; }
-            .sign__input-wrapper { margin-bottom: 20px; }
-            .sign__input-wrapper h5 { color: #4a5568; font-weight: 600; margin-bottom: 10px; font-size: 14px; }
-            .form-control, .form-select { border: 2px solid #e2e8f0; border-radius: 12px; padding: 14px 18px; transition: all 0.3s; font-size: 15px; background: white; height: 50px; }
-            textarea.form-control { height: auto; }
+            .section-title { color: #667eea; font-size: 20px; font-weight: 700; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 3px solid #667eea; text-align: center; }
+            .sign__input-wrapper { margin-bottom: 0; }
+            .sign__input-wrapper h5 { color: #4a5568; font-weight: 600; margin-bottom: 8px; font-size: 13px; }
+            .form-control, .form-select { border: 2px solid #e2e8f0; border-radius: 12px; padding: 14px 16px; transition: all 0.3s; font-size: 15px; background: white; height: 50px; width: 100%; }
+            textarea.form-control { height: auto; min-height: 100px; }
             .form-control:focus, .form-select:focus { border-color: #667eea; box-shadow: 0 0 0 4px rgba(102,126,234,0.1); background: white; outline: none; }
-            .e-btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; padding: 18px 60px; border-radius: 12px; font-weight: 700; font-size: 18px; transition: all 0.3s; color: white; box-shadow: 0 10px 25px rgba(102,126,234,0.3); }
+            .e-btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; padding: 18px 60px; border-radius: 12px; font-weight: 700; font-size: 18px; transition: all 0.3s; color: white; box-shadow: 0 10px 25px rgba(102,126,234,0.3); display: inline-flex; align-items: center; justify-content: center; min-width: 200px; }
             .e-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(102,126,234,0.4); }
+            .e-btn span { display: none; }
             .alert { border-radius: 12px; border: none; padding: 18px 24px; margin-bottom: 30px; }
-            @media (max-width: 768px) { .form-container { padding: 30px 20px; } .form-section { padding: 25px 20px; } }
+            @media (max-width: 768px) {
+                .signup__area { padding: 20px 0; }
+                .section__title { font-size: 22px; }
+                .form-container { padding: 25px 15px; border-radius: 16px; }
+                .form-section { padding: 20px 15px; border-radius: 12px; margin-bottom: 20px; }
+                .section-title { font-size: 18px; margin-bottom: 20px; padding-bottom: 12px; }
+                .sign__input-wrapper h5 { font-size: 12px; margin-bottom: 6px; }
+                .form-control, .form-select { padding: 12px 14px; font-size: 14px; height: 46px; border-radius: 10px; }
+                textarea.form-control { min-height: 80px; }
+                .e-btn { padding: 14px 40px; font-size: 16px; width: 100%; }
+                .col-md-3, .col-md-6 { margin-bottom: 15px; }
+            }
         </style>
         <section class="signup__area po-rel-z1 pt-100 pb-145">
             <div class="sign__shape">
