@@ -21,7 +21,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                         <div class="row">
                             <div class="col-12 text-center" style="margin-bottom: 50px;">
                                 <div class="slider__content">
-                                    <a href="{{url('subscription')}}" class="e-btn slider__btn" style="font-size: 20px; padding: 15px 40px;">{{trans('web.subscription')}}</a>
+                                    <a href="{{url('subscription')}}" class="e-btn slider__btn" style="font-size: 20px; padding: 15px 40px; display: inline-block; text-align: center;">{{trans('web.subscription')}}</a>
                                 </div>
                             </div>
                         </div>
