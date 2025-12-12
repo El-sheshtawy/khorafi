@@ -349,6 +349,10 @@
         }
         .navbar-toggler {
             margin-left: auto;
+            border-color: white !important;
+        }
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='3' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
         }
         #navbarSupportedContent {
             text-align: right;
