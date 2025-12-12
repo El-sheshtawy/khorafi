@@ -14,49 +14,20 @@
 
         <!-- sign up area start -->
         <style>
-            .signup__area {
-                background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            }
-            .sign__input-wrapper h5 {
-                color: #667eea;
-                font-weight: 600;
-                margin-bottom: 10px;
-            }
-            .form-control, .form-select {
-                border: 2px solid #e0e6ed;
-                border-radius: 8px;
-                padding: 12px 15px;
-                transition: all 0.3s;
-            }
-            .form-control:focus, .form-select:focus {
-                border-color: #667eea;
-                box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-            }
-            .e-btn {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                border: none;
-                padding: 15px 40px;
-                border-radius: 8px;
-                font-weight: 600;
-                transition: all 0.3s;
-            }
-            .e-btn:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-            }
-            .alert {
-                border-radius: 8px;
-                border: none;
-            }
-            .row.justify-content-center > .col-md-8 {
-                background: white;
-                padding: 40px;
-                border-radius: 15px;
-                box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            }
-            .row.justify-content-center > .col-md-6:first-child {
-                margin-bottom: 20px;
-            }
+            .signup__area { background: #f0f4f8; min-height: 100vh; padding: 60px 0; }
+            .section__title { color: #1a202c !important; -webkit-text-fill-color: #1a202c !important; font-weight: 800; }
+            .form-container { background: white; padding: 50px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); max-width: 1100px; margin: 0 auto; }
+            .form-section { background: #f8fafc; padding: 35px; border-radius: 16px; border: 2px solid #e2e8f0; margin-bottom: 30px; }
+            .section-title { color: #667eea; font-size: 20px; font-weight: 700; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 3px solid #667eea; }
+            .sign__input-wrapper { margin-bottom: 20px; }
+            .sign__input-wrapper h5 { color: #4a5568; font-weight: 600; margin-bottom: 10px; font-size: 14px; }
+            .form-control, .form-select { border: 2px solid #e2e8f0; border-radius: 12px; padding: 14px 18px; transition: all 0.3s; font-size: 15px; background: white; height: 50px; }
+            textarea.form-control { height: auto; }
+            .form-control:focus, .form-select:focus { border-color: #667eea; box-shadow: 0 0 0 4px rgba(102,126,234,0.1); background: white; outline: none; }
+            .e-btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; padding: 18px 60px; border-radius: 12px; font-weight: 700; font-size: 18px; transition: all 0.3s; color: white; box-shadow: 0 10px 25px rgba(102,126,234,0.3); }
+            .e-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(102,126,234,0.4); }
+            .alert { border-radius: 12px; border: none; padding: 18px 24px; margin-bottom: 30px; }
+            @media (max-width: 768px) { .form-container { padding: 30px 20px; } .form-section { padding: 25px 20px; } }
         </style>
         <section class="signup__area po-rel-z1 pt-100 pb-145">
             <div class="sign__shape">
@@ -76,25 +47,18 @@
                     {{ csrf_field() }}
                     <div class="form-container">
                         @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
+                            <div class="alert alert-success">{{ session('success') }}</div>
                         @endif
                         @if (session('error'))
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
+                            <div class="alert alert-danger">{{ session('error') }}</div>
                         @endif
                         @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
+                            <div class="alert alert-danger"><ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>
                         @endif
-                        <div class="row">
+                        
+                        <div class="form-section">
+                            <h3 class="section-title">البيانات الشخصية</h3>
+                            <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="sign__input-wrapper mb-25">
                                         <h5>{{ trans('web.identify') }}</h5>
@@ -248,7 +212,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-3">
+                        
+                        <div class="form-section">
+                            <h3 class="section-title">بيانات الاشتراك</h3>
+                            <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="sign__input-wrapper">
                                     <h5>{{ trans('web.subscription_type') }}</h5>
