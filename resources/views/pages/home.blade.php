@@ -67,9 +67,15 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                 speed: 1000,
                 on: {
                     slideChange: function() {
-                        if (this.realIndex === 0 && video) {
-                            video.currentTime = 0;
-                            video.play();
+                        if (video) {
+                            if (this.realIndex === 0) {
+                                video.currentTime = 0;
+                                video.muted = false;
+                                video.play();
+                            } else {
+                                video.muted = true;
+                                video.pause();
+                            }
                         }
                     }
                 }
