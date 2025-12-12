@@ -45,11 +45,70 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
             $config = DB::table('config')->first();
             $number = $config->filter_number ?? $config->number;
             ?>
+            <style>
+                .table thead th { background-color: #6c757d; color: white; }
+                .table-wrapper:nth-of-type(1) .table tbody td:nth-child(4) { color: #085d9e; font-weight: bold; }
+                .table-wrapper:nth-of-type(1) .table tbody td:nth-child(5) { color: red; font-weight: bold; }
+                .table-wrapper:nth-of-type(1) .table tbody td:nth-child(3) { font-weight: bold; }
+                .table-wrapper:nth-of-type(2) .table tbody td:nth-child(3) { color: #085d9e; font-weight: bold; }
+                .table-wrapper:nth-of-type(2) .table tbody td:nth-child(4) { color: red; font-weight: bold; }
+                .table-wrapper:nth-of-type(2) .table tbody td:nth-child(2) { font-weight: bold; }
+                .table-wrapper:nth-of-type(3) .table tbody td:nth-child(3) { color: #085d9e; font-weight: bold; }
+                .table-wrapper:nth-of-type(3) .table tbody td:nth-child(4) { color: red; font-weight: bold; }
+                .table-wrapper:nth-of-type(3) .table tbody td:nth-child(2) { font-weight: bold; }
+                .table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 15px; }
+            </style>
+            
             <h3 class="text-center mb-4">{{trans('web.total')}}: {{\App\Subscription::where('number', $number)->count()}}</h3>
             
-            <div class="table-responsive">
+            <div class="table-wrapper">
                 <table class="table table-bordered">
-                    <thead style="background-color: #6c757d; color: white;">
+                    <thead>
+                        <tr>
+                            <th>{{trans('web.category')}}</th>
+                            <th>المحافظة</th>
+                            <th>{{trans('web.subscriber')}}</th>
+                            <th>{{trans('web.male_short')}}</th>
+                            <th>{{trans('web.female_short')}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $totalSubscribers = 0; $totalMales = 0; $totalFemales = 0; $rowCount = 0; ?>
+                        @foreach(\App\SubscriptionsName::get() as $val)
+                            @foreach(\App\City::get() as $city)
+                                <?php
+                                $subscribersCount = \App\Subscription::where('city_id', $city->id)->where('name_id', $val->id)->where('number', $number)->count();
+                                $maleCount = \App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.city_id', $city->id)->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'male')->count();
+                                $femaleCount = \App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.city_id', $city->id)->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'female')->count();
+                                $totalSubscribers += $subscribersCount; $totalMales += $maleCount; $totalFemales += $femaleCount; $rowCount++;
+                                ?>
+                                <tr>
+                                    <td>{{$val->name_ar}}</td>
+                                    <td>{{$city->name_ar}}</td>
+                                    <td>{{$subscribersCount}}</td>
+                                    <td>{{$maleCount}}</td>
+                                    <td>{{$femaleCount}}</td>
+                                </tr>
+                                @if($rowCount % 6 == 0)
+                                    <tr style="color:white;background-color:#369bdd">
+                                        <th style="color:white;background-color:#369bdd">الاجمالي</th>
+                                        <td></td>
+                                        <td><strong style="color:white">{{$totalSubscribers}}</strong></td>
+                                        <td><strong style="color:white">{{$totalMales}}</strong></td>
+                                        <td><strong style="color:white">{{$totalFemales}}</strong></td>
+                                    </tr>
+                                    <?php $totalSubscribers = 0; $totalMales = 0; $totalFemales = 0; ?>
+                                @endif
+                            @endforeach
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 style="padding-right: 5px;">الاجمالي مسابقة {{$number}}</h3>
+            <div class="table-wrapper">
+                <table class="table table-bordered">
+                    <thead>
                         <tr>
                             <th>{{trans('web.category')}}</th>
                             <th>{{trans('web.subscriber')}}</th>
@@ -61,18 +120,93 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                         @foreach(\App\SubscriptionsName::get() as $val)
                         <tr>
                             <td>{{$val->name_ar}}</td>
-                            <td><strong>{{\App\Subscription::where('name_id', $val->id)->where('number', $number)->count()}}</strong></td>
-                            <td style="color: #085d9e; font-weight: bold;">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'male')->count()}}</td>
-                            <td style="color: red; font-weight: bold;">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'female')->count()}}</td>
+                            <td>{{\App\Subscription::where('name_id', $val->id)->where('number', $number)->count()}}</td>
+                            <td>{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'male')->count()}}</td>
+                            <td>{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'female')->count()}}</td>
                         </tr>
                         @endforeach
-                        <tr style="background-color: #369bdd;">
-                            <th style="color: white;">{{trans('web.grand_total')}}</th>
-                            <td style="color: white; font-weight: bold;">{{\App\Subscription::where('number', $number)->count()}}</td>
-                            <td style="color: white; font-weight: bold;">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('users.gender', 'male')->where('subscriptions.number', $number)->count()}}</td>
-                            <td style="color: white; font-weight: bold;">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('users.gender', 'female')->where('subscriptions.number', $number)->count()}}</td>
+                        <tr style="background-color:#369bdd">
+                            <th style="color:white">{{trans('web.grand_total')}}</th>
+                            <td style="color:white">{{\App\Subscription::where('number', $number)->count()}}</td>
+                            <td style="color:white">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('users.gender', 'male')->where('subscriptions.number', $number)->count()}}</td>
+                            <td style="color:white">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('users.gender', 'female')->where('subscriptions.number', $number)->count()}}</td>
                         </tr>
                     </tbody>
+                </table>
+            </div>
+
+            <h3 style="padding-right: 5px;">كويتي مسابقة {{$number}}</h3>
+            <div class="table-wrapper">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>{{trans('web.category')}}</th>
+                            <th>{{trans('web.subscriber')}}</th>
+                            <th>{{trans('web.male_short')}}</th>
+                            <th>{{trans('web.female_short')}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(\App\SubscriptionsName::get() as $val)
+                        <tr>
+                            <td>{{$val->name_ar}}</td>
+                            <td>{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.name_id', $val->id)->where('users.nationality_id', 1)->where('subscriptions.number', $number)->count()}}</td>
+                            <td>{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.name_id', $val->id)->where('users.nationality_id', 1)->where('subscriptions.number', $number)->where('users.gender', 'male')->count()}}</td>
+                            <td>{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.name_id', $val->id)->where('users.nationality_id', 1)->where('subscriptions.number', $number)->where('users.gender', 'female')->count()}}</td>
+                        </tr>
+                        @endforeach
+                        <tr style="background-color:#369bdd">
+                            <th style="color:white">الاجمالي</th>
+                            <td style="color:white">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('users.nationality_id', 1)->where('subscriptions.number', $number)->count()}}</td>
+                            <td style="color:white">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('users.nationality_id', 1)->where('subscriptions.number', $number)->where('users.gender', 'male')->count()}}</td>
+                            <td style="color:white">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('users.nationality_id', 1)->where('subscriptions.number', $number)->where('users.gender', 'female')->count()}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 style="padding-right: 5px;">محافظات مسابقة {{$number}}</h3>
+            <div class="table-wrapper">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>المحافظة</th>
+                            <th>{{trans('web.category')}}</th>
+                            <th>{{trans('web.subscriber')}}</th>
+                            <th>{{trans('web.male_short')}}</th>
+                            <th>{{trans('web.female_short')}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $totalSubscribers = 0; $totalMales = 0; $totalFemales = 0; $rowCount = 0; $previousCity = ''; ?>
+                        @foreach(\App\City::get() as $city)
+                            @foreach(\App\SubscriptionsName::get() as $category)
+                                <?php
+                                $subscribersCount = \App\Subscription::where('city_id', $city->id)->where('name_id', $category->id)->where('number', $number)->count();
+                                $maleCount = \App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.city_id', $city->id)->where('subscriptions.name_id', $category->id)->where('subscriptions.number', $number)->where('users.gender', 'male')->count();
+                                $femaleCount = \App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.city_id', $city->id)->where('subscriptions.name_id', $category->id)->where('subscriptions.number', $number)->where('users.gender', 'female')->count();
+                                $totalSubscribers += $subscribersCount; $totalMales += $maleCount; $totalFemales += $femaleCount;
+                                ?>
+                                <tr>
+                                    <td>@if($city->name_ar != $previousCity){{$city->name_ar}}@endif</td>
+                                    <td>{{$category->name_ar}}</td>
+                                    <td><strong>{{$subscribersCount}}</strong></td>
+                                    <td><strong style="color: #085d9e;">{{$maleCount}}</strong></td>
+                                    <td><strong style="color: red;">{{$femaleCount}}</strong></td>
+                                </tr>
+                                <?php $previousCity = $city->name_ar; $rowCount++; if($rowCount % 4 == 0) { echo '<tr style="border-bottom: 2px solid black;background-color:#369bdd"><th style="color:white">الاجمالي</th><td></td><td><strong style="color:white">' . $totalSubscribers . '</strong></td><td><strong style="color:white">' . $totalMales . '</strong></td><td><strong style="color:white">' . $totalFemales . '</strong></td></tr>'; $totalSubscribers = 0; $totalMales = 0; $totalFemales = 0; } ?>
+                            @endforeach
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr style="background-color:#0cc15d">
+                            <th style="color:white">الاجمالي العام</th>
+                            <td></td>
+                            <td><strong style="color:white">{{\App\Subscription::where('number', $number)->count()}}</strong></td>
+                            <td><strong style="color:white">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('users.gender', 'male')->where('subscriptions.number', $number)->count()}}</strong></td>
+                            <td><strong style="color:white">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('users.gender', 'female')->where('subscriptions.number', $number)->count()}}</strong></td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
