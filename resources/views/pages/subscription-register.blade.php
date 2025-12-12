@@ -14,10 +14,10 @@
 
         <!-- sign up area start -->
         <style>
-            .signup__area { background: #2c5282; min-height: 100vh; padding: 40px 0; }
-            .section__title { color: white !important; -webkit-text-fill-color: white !important; font-weight: 800; font-size: 28px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+            .signup__area { background: #f0f4f8; min-height: 100vh; padding: 40px 0; }
+            .section__title { color: #1a202c !important; -webkit-text-fill-color: #1a202c !important; font-weight: 800; font-size: 28px; }
             .form-container { background: white; padding: 50px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); max-width: 1100px; margin: 0 auto; }
-            .form-section { background: #f8fafc; padding: 35px; border-radius: 16px; border: 2px solid #e2e8f0; margin-bottom: 30px; }
+            .form-section { background: #e8eef5; padding: 35px; border-radius: 16px; border: 2px solid #d1dce8; margin-bottom: 30px; }
             .section-title { color: #667eea; font-size: 20px; font-weight: 700; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 3px solid #667eea; text-align: center; }
             .sign__input-wrapper { margin-bottom: 0; }
             .sign__input-wrapper h5 { color: #4a5568; font-weight: 600; margin-bottom: 8px; font-size: 13px; }
