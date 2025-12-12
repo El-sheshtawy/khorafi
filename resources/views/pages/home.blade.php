@@ -17,7 +17,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
             <div class="swiper-wrapper">
                 <div class="single-slider swiper-slide slider__height d-flex align-items-end justify-content-center" style="background: #f00; position: relative; overflow: hidden;">
                     <video id="sliderVideo" autoplay muted loop playsinline preload="auto" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
-                        <source src="{{url('videos/khorafi.mp4')}}" type="video/mp4">
+                        <source src="{{url('website/public/videos/khorafi.mp4')}}" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; z-index: 999;">VIDEO HERE</div>
