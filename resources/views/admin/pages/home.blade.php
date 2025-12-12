@@ -1,15 +1,30 @@
 @extends('admin.index')
 @section('content')
 <?php
-$number = request('number', 27);
+$number = request('number');
 $from_date = request('from_date');
 $to_date = request('to_date');
 ?>
-@if(!request()->has('number'))
 <script>
-    window.location.href = '/admin?number=27&from_date=&to_date=';
+    // Save filter to localStorage when page loads with parameters
+    if (window.location.search.includes('number=')) {
+        const params = new URLSearchParams(window.location.search);
+        localStorage.setItem('admin_filter_number', params.get('number') || '27');
+        localStorage.setItem('admin_filter_from_date', params.get('from_date') || '');
+        localStorage.setItem('admin_filter_to_date', params.get('to_date') || '');
+    }
+    
+    // Redirect if no parameters in URL
+    if (!window.location.search.includes('number=')) {
+        const savedNumber = localStorage.getItem('admin_filter_number') || '27';
+        const savedFromDate = localStorage.getItem('admin_filter_from_date') || '';
+        const savedToDate = localStorage.getItem('admin_filter_to_date') || '';
+        window.location.href = '/admin?number=' + savedNumber + '&from_date=' + savedFromDate + '&to_date=' + savedToDate;
+    }
 </script>
-@endif
+<?php
+$number = $number ?: 27;
+?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <script>
@@ -127,7 +142,7 @@ $to_date = request('to_date');
                     <form action="" method="GET">
                         <div class="row">
                             <div class="col-md-4">
-                                <input class="form-control" type="number" name="number" placeholder="الرقم" value="{{ $number }}" required>
+                                <input class="form-control" type="number" name="number" placeholder="الرقم" value="{{ request('number', 27) }}" required>
                             </div>
                             <div class="col-md-3 d-flex align-items-center">
                                 <span class="me-2">من</span>
