@@ -1,9 +1,14 @@
 @extends('admin.index')
 @section('content')
 <?php
-$number = request('number') ? request('number') : 26;
+$number = request('number', 27);
 $from_date = request('from_date');
 $to_date = request('to_date');
+
+// Redirect to add number to URL if not present
+if (!request()->has('number')) {
+    return redirect()->to('/admin?number=' . $number . '&from_date=' . $from_date . '&to_date=' . $to_date);
+}
 ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
@@ -119,10 +124,10 @@ $to_date = request('to_date');
 
             <div class="card">
                 <div class="card-body">
-                    <form action="">
+                    <form action="" method="GET">
                         <div class="row">
                             <div class="col-md-4">
-                                <input class="form-control" type="number" name="number" placeholder="الرقم" value="{{ request('number') }}">
+                                <input class="form-control" type="number" name="number" placeholder="الرقم" value="{{ $number }}" required>
                             </div>
                             <div class="col-md-3 d-flex align-items-center">
                                 <span class="me-2">من</span>
@@ -131,7 +136,7 @@ $to_date = request('to_date');
                                     type="date" 
                                     name="from_date" 
                                     id="from_date" 
-                                    value="{{ request('from_date') }}">
+                                    value="{{ $from_date }}">
                             </div>
                             <div class="col-md-3 d-flex align-items-center">
                                 <span class="me-2">إلى</span>
@@ -140,7 +145,7 @@ $to_date = request('to_date');
                                     type="date" 
                                     name="to_date" 
                                     id="to_date" 
-                                    value="{{ request('to_date') }}">
+                                    value="{{ $to_date }}">
                             </div>
                             <div class="col-md-2">
                                 <input class="btn btn-info" type="submit" value="فلترة">
