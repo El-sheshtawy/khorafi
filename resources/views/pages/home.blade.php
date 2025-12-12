@@ -84,9 +84,11 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                         
                         // Play video only on first slide
                         if (this.realIndex === 0 && video) {
-                            video.currentTime = 0;
-                            video.muted = false;
-                            video.play();
+                            setTimeout(function() {
+                                video.currentTime = 0;
+                                video.muted = false;
+                                video.play();
+                            }, 100);
                         }
                     }
                 }
