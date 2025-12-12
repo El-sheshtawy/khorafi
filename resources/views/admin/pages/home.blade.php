@@ -113,8 +113,7 @@ $to_date = request('to_date');
                 <ol class="breadcrumb float-right">
                     <li class="breadcrumb-item"><a href="javascript:void(0);">الرئيسية</a></li>
                 </ol>
-                <br>
-                  <h3>رقم المسابقة  {{$number}}<h3>
+                <h4 class="page-title">رقم المسابقة {{$number}}</h4>
             </div>
 
             <div class="card">
@@ -149,12 +148,8 @@ $to_date = request('to_date');
                     </form>
 
                     <br>
-                    <!-- Display the selected dates -->
-
-                    <!--<a class="btn btn-info" href="{{ url('admin/home/pdf') }}">تصدير PDF</a>-->
                     <button class="btn btn-info" id="exportPDF">تصدير PDF</button>
-            <div id="pdfContent"> 
-            <h3 style="padding-right: 5px;">رقم المسابقة  {{$number}}</h3>
+            <div id="pdfContent">
                 <div class="table-wrapper">
    
     <table class="table">

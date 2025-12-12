@@ -19,22 +19,18 @@ class Home extends Controller
 
     public function index(Request $request)
     {
-        // Save filter to database if provided
+        // Save only number to database if provided
         if ($request->has('number')) {
             DB::table('config')->where('id', 1)->update([
                 'filter_number' => $request->number,
-                'filter_from_date' => $request->from_date,
-                'filter_to_date' => $request->to_date,
             ]);
         }
         
-        // Redirect with saved filter if no parameters
+        // Redirect with saved number if no parameters
         if (!$request->has('number')) {
             $config = DB::table('config')->where('id', 1)->first();
             $number = $config->filter_number ?? 27;
-            $from_date = $config->filter_from_date ?? '';
-            $to_date = $config->filter_to_date ?? '';
-            return redirect()->to('/admin?number=' . $number . '&from_date=' . $from_date . '&to_date=' . $to_date);
+            return redirect()->to('/admin?number=' . $number . '&from_date=&to_date=');
         }
         
         return view("admin.pages.home");
