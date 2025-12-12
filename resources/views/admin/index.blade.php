@@ -232,7 +232,7 @@
                             <a href="{{url('/admin/subscriptions')}}">
                                 <i class="mdi mdi-atom"></i>
                                 <span>
-                                    المسجلون
+                                    المشاركون
                                 </span>
                             </a>
                         </li>

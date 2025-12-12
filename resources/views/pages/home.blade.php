@@ -110,7 +110,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
         <div class="container-fluid">
             <div class='marquee' data-gap='10' data-duplicated='true' style="width: 100%; position: relative; overflow: hidden; text-align: right;">
                 @foreach(\App\Post::where('active', 'active')->paginate(9) as $key => $val)
-                <a href="javascript:;" rel="prefetch">{{$val->$name}}</a> |
+                <a href="{{url('post/' . $val->id)}}" rel="prefetch">{{$val->$name}}</a> |
                 @endforeach
             </div>
         </div>
