@@ -20,7 +20,7 @@
             .form-section { background: #e8eef5; padding: 35px; border-radius: 16px; border: 2px solid #d1dce8; margin-bottom: 30px; }
             .section-title { color: #667eea; font-size: 20px; font-weight: 700; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 3px solid #667eea; text-align: center; }
             .sign__input-wrapper { margin-bottom: 0; }
-            .sign__input-wrapper h5 { color: #2d3748; font-weight: 700; margin-bottom: 8px; font-size: 16px; }
+            .sign__input-wrapper h5 { color: #2d3748; font-weight: 700; margin-bottom: 8px; font-size: 16px; text-align: center; }
             .form-control, .form-select { border: 2px solid #e2e8f0; border-radius: 12px; padding: 14px 16px; transition: all 0.3s; font-size: 15px; background: #fef9e7; height: 50px; width: 100%; }
             textarea.form-control { height: auto; min-height: 100px; }
             .form-control:focus, .form-select:focus { border-color: #667eea; box-shadow: 0 0 0 4px rgba(102,126,234,0.1); background: white; outline: none; }
