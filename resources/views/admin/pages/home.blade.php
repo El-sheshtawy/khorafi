@@ -110,22 +110,10 @@ $to_date = request('to_date');
         <div class="container-fluid">
 
             <div class="page-title-box">
-                <div class="float-left">
-                    <button class="btn btn-info" id="exportPDF">تصدير PDF</button>
-                </div>
                 <ol class="breadcrumb float-right">
                     <li class="breadcrumb-item"><a href="javascript:void(0);">الرئيسية</a></li>
                 </ol>
-                <h4 class="page-title">رقم المسابقة {{$number}} - الإجمالي: {{
-                    \App\Subscription::where('number', $number)
-                    ->when($from_date, function ($query) use ($from_date) {
-                        return $query->whereDate('created_at', '>=', $from_date);
-                    })
-                    ->when($to_date, function ($query) use ($to_date) {
-                        return $query->whereDate('created_at', '<=', $to_date);
-                    })
-                    ->count()
-                }}</h4>
+                <h4 class="page-title">رقم المسابقة {{$number}}</h4>
             </div>
 
             <div class="card">
@@ -153,12 +141,26 @@ $to_date = request('to_date');
                                     id="to_date" 
                                     value="{{ $to_date }}">
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <input class="btn btn-info" type="submit" value="فلترة">
+                            </div>
+                            <div class="col-md-1">
+                                <button class="btn btn-success" id="exportPDF" type="button">تصدير PDF</button>
                             </div>
                         </div>
                     </form>
 
+                    <br>
+                    <h3 class="text-center">الإجمالي: {{
+                        \App\Subscription::where('number', $number)
+                        ->when($from_date, function ($query) use ($from_date) {
+                            return $query->whereDate('created_at', '>=', $from_date);
+                        })
+                        ->when($to_date, function ($query) use ($to_date) {
+                            return $query->whereDate('created_at', '<=', $to_date);
+                        })
+                        ->count()
+                    }}</h3>
                     <br>
             <div id="pdfContent">
                 <div class="table-wrapper">
