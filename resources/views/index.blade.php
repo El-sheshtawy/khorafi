@@ -343,8 +343,7 @@
         .advs-hei img {
             width: 100%;
             height: 150px;
-            object-fit: contain;
-            background: #f5f5f5;
+            object-fit: cover;
         }
     }
     @media (max-width: 768px) {
