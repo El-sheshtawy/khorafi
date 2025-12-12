@@ -318,7 +318,7 @@ public function index()
         }
 
         // Apply ordering
-        if (!empty(request('type')) and in_array(request('type'), ['winner', 'name_id', 'degree', 'level']) and !empty(request('order_type')) and in_array(request('order_type'), ['asc', 'desc'])) {
+        if (!empty(request('type')) and in_array(request('type'), ['winner', 'name_id', 'degree', 'level', 'created_at']) and !empty(request('order_type')) and in_array(request('order_type'), ['asc', 'desc'])) {
             $data = $data->orderBy(request('type'), request('order_type'));
         } else {
             $data = $data->orderBy('degree', 'desc')->orderBy('level', 'asc');
