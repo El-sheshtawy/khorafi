@@ -67,6 +67,13 @@ Route::group(["prefix" => "admin", "namespace" => 'Admin'], function () {
         Route::post("/gallery/edit/{id}", "GalleryController@update");
         Route::get("/gallery/delete/{id}", "GalleryController@delete");
 
+        Route::get("/events", "EventController@index");
+        Route::get("/events/add", "EventController@add");
+        Route::post("/events/add", "EventController@insert");
+        Route::get("/events/edit/{id}", "EventController@edit");
+        Route::post("/events/edit/{id}", "EventController@update");
+        Route::get("/events/delete/{id}", "EventController@delete");
+
         Route::get("/nationalities", "Nationalities@index");
         Route::get("/nationalities/add", "Nationalities@add");
         Route::post("/nationalities/add", "Nationalities@insert");

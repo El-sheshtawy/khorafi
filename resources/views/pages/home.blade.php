@@ -100,7 +100,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
             </div>
             <div class="events-slider swiper-container">
                 <div class="swiper-wrapper">
-                    @foreach(\App\Gallery::where('active', 'active')->orderBy('id', 'asc')->take(6)->get() as $key => $val)
+                    @foreach(\App\Event::where('active', 'active')->orderBy('id', 'desc')->get() as $key => $val)
                     <div class="swiper-slide">
                         <a href="{{url('website/public/images/' . $val->image)}}" data-toggle="lightbox" data-gallery="events">
                             <img src="{{url('website/public/images/' . $val->image)}}" class="img-fluid rounded" style="width: 100%; height: 400px; object-fit: cover;">
