@@ -235,6 +235,20 @@ public function deleteSubscriptiontotal(Request $request) {
 public function index()
     {
         $config = DB::table('config')->first();
+        
+        // Save filter_number if provided
+        if (request()->has('number')) {
+            DB::table('config')->where('id', 1)->update([
+                'filter_number' => request('number'),
+            ]);
+        }
+        
+        // Redirect with saved number if no number parameter
+        if (!request()->has('number') && empty(request()->except(['_token']))) {
+            $filterNumber = $config->filter_number ?? $config->number;
+            return redirect()->to('/admin/subscriptions?number=' . $filterNumber);
+        }
+        
         $data = new Subscription;
 
         if (!empty(request('username'))) {
@@ -328,7 +342,8 @@ public function index()
         if (!empty(request('username')) or !empty(request('number')) or !empty(request('id')) or !empty(request('email')) or !empty(request('gender')) or !empty(request('city_id')) or !empty(request('nationality_id')) or !empty(request('name_id')) or !empty(request('date')) or !empty(request('type')) or !empty(request('order_type'))) {
             $data = $data->get();
         } else {
-            $data = $data->where('number', 26)->get(); 
+            $filterNumber = $config->filter_number ?? $config->number;
+            $data = $data->where('number', $filterNumber)->get(); 
         }
         
         $count = $data->count();

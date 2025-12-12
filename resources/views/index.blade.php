@@ -87,7 +87,11 @@
                     <button class="navbar-toggler order-first" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+                    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <button class="mobile-menu-close d-lg-none" id="mobileMenuClose" aria-label="Close menu">
+                            <i class="fas fa-times"></i>
+                        </button>
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li>
                                 <a href="{{url('/')}}" class="nav-link">{{trans('web.home')}}</a>
@@ -231,6 +235,39 @@
     <script src="{{url('web/')}}/js/main.js"></script>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.navbar-toggler');
+            const menuClose = document.getElementById('mobileMenuClose');
+            const menuOverlay = document.getElementById('mobileMenuOverlay');
+            const menu = document.getElementById('navbarSupportedContent');
+            
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    setTimeout(function() {
+                        if (menu.classList.contains('show')) {
+                            menuOverlay.classList.add('show');
+                        }
+                    }, 10);
+                });
+            }
+            
+            if (menuClose) {
+                menuClose.addEventListener('click', function() {
+                    menu.classList.remove('show');
+                    menuOverlay.classList.remove('show');
+                });
+            }
+            
+            if (menuOverlay) {
+                menuOverlay.addEventListener('click', function() {
+                    menu.classList.remove('show');
+                    menuOverlay.classList.remove('show');
+                });
+            }
+        });
+    </script>
+
+    <script>
         $(document).ready(function() {
             $('.change-select-subscription-type').change(function() {
                 var id = $(this).val();
@@ -324,15 +361,69 @@
             right: 0;
             height: 100vh;
             width: 80%;
-            background: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             z-index: 9999;
             transform: translateX(100%);
             transition: transform 0.3s ease;
             overflow-y: auto;
-            padding: 20px;
+            padding: 60px 20px 20px;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.3);
         }
         #navbarSupportedContent.show {
             transform: translateX(0);
+        }
+        #navbarSupportedContent .navbar-nav .nav-link {
+            color: white !important;
+            padding: 15px 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        #navbarSupportedContent .navbar-nav .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            padding-right: 20px;
+        }
+        #navbarSupportedContent .dropdown-menu {
+            background: rgba(255,255,255,0.95);
+        }
+        #navbarSupportedContent .header__btn .e-btn {
+            background: white;
+            color: #667eea;
+            margin-top: 20px;
+        }
+        .mobile-menu-close {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        .mobile-menu-close:hover {
+            background: rgba(255,255,255,0.3);
+            transform: rotate(90deg);
+        }
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 9998;
+        }
+        .mobile-menu-overlay.show {
+            display: block;
         }
         .slider__height {
             min-height: 300px !important;
