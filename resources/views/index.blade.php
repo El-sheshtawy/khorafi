@@ -301,14 +301,14 @@
     }
     @media (min-width: 769px) {
         .advs-hei {
-            max-height: 250px;
+            max-height: 150px;
             overflow: hidden;
         }
         .advs-hei img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center top;
+            object-position: center;
         }
     }
     @media (max-width: 768px) {
