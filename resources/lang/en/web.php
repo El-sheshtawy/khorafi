@@ -71,7 +71,7 @@ return [
     "subscription_done" => "subscription_done",
     "empty_user" => "unfound user",
     "registerd_bedore" => "registerd_before",
-    "year" => "مسابقة الخرافي",
+    "year" => "Al-Kharafi Competition",
     "enter_identify" => "enter ID number",
     "confirm" => "confirm",
     "view_on_map" => "view on map",
