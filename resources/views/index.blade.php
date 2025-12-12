@@ -51,8 +51,8 @@
 
 <body>
   
-    <div class="advs-hei" style="position: relative; overflow: hidden;">
-        <img src="{{url('website/public/images/' . $config->header_image)}}" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+    <div class="advs-hei" style="position: relative;">
+        <img src="{{url('website/public/images/' . $config->header_image)}}" alt="" style="width: 100%; display: block;">
         <h2 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: black; font-size: 120px; font-weight: bold; margin: 0;">{{$config->number}}</h2>
     </div>
 
