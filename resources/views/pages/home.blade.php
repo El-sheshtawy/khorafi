@@ -81,20 +81,23 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                 speed: 1000,
                 on: {
                     slideChange: function() {
-                        // Pause all videos first
-                        var allVideos = document.querySelectorAll('video');
-                        allVideos.forEach(function(v) {
-                            v.pause();
-                            v.muted = true;
-                        });
-                        
-                        // Play video only on first slide
-                        if (this.realIndex === 0 && video) {
-                            setTimeout(function() {
+                        // Hide/show video based on slide
+                        if (video) {
+                            if (this.realIndex === 0) {
+                                video.style.display = 'block';
                                 video.currentTime = 0;
                                 video.muted = false;
                                 video.play();
-                            }, 100);
+                            } else {
+                                video.style.display = 'none';
+                                video.pause();
+                                video.muted = true;
+                            }
+                        }
+                    },
+                    init: function() {
+                        if (video && this.realIndex === 0) {
+                            video.style.display = 'block';
                         }
                     }
                 }

@@ -331,10 +331,6 @@
         #navbarSupportedContent.show {
             transform: translateX(0);
         }
-        .single-slider {
-            background-size: contain !important;
-            background-position: center !important;
-        }
     }
     </style>
 
