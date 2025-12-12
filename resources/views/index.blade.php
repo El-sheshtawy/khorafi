@@ -331,6 +331,14 @@
         #navbarSupportedContent.show {
             transform: translateX(0);
         }
+        .slider__height {
+            min-height: 300px !important;
+        }
+        .single-slider[data-background] {
+            background-size: contain !important;
+            background-repeat: no-repeat !important;
+            background-position: center !important;
+        }
     }
     </style>
 
