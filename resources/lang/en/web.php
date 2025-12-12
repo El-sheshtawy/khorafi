@@ -82,4 +82,11 @@ return [
     "error_in_your_age_1" => "You must be under nine years old.",
     "error_in_your_age_2" => "You must be under 15 years old to register in this category.",
     "error_in_your_age_3" => "You must be under 25 years old to register in this category.",
+    "participants_stats" => "Participants Statistics",
+    "total" => "Total",
+    "category" => "Category",
+    "subscriber" => "Subscriber",
+    "male_short" => "Male",
+    "female_short" => "Female",
+    "grand_total" => "Grand Total",
 ];

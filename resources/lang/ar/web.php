@@ -84,4 +84,11 @@ return [
     "error_in_your_age_1" => "يجب أن يكون عمرك أقل من تسع سنوات.",
     "error_in_your_age_2" => "يجب أن يكون عمرك أقل من 15 سنة للتسجيل في هذه الفئة.",
     "error_in_your_age_3" => "يجب أن يكون عمرك أقل من 25 سنة للتسجيل في هذه الفئة.",
+    "participants_stats" => "اعداد المشاركين",
+    "total" => "الإجمالي",
+    "category" => "فئة",
+    "subscriber" => "مشترك",
+    "male_short" => "ذكر",
+    "female_short" => "أنثى",
+    "grand_total" => "الاجمالي العام",
 ];

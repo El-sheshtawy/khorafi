@@ -27,11 +27,11 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{url('/')}}">{{trans('web.home')}}</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">اعداد المشاركين</li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{trans('web.participants_stats')}}</li>
                                 </ol>
                             </nav>
                         </div>
-                        <h5 class="page__title-3">اعداد المشاركين</h5>
+                        <h5 class="page__title-3">{{trans('web.participants_stats')}}</h5>
                     </div>
                 </div>
             </div>
@@ -45,16 +45,16 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
             $config = DB::table('config')->first();
             $number = $config->filter_number ?? $config->number;
             ?>
-            <h3 class="text-center mb-4">الإجمالي: {{\App\Subscription::where('number', $number)->count()}}</h3>
+            <h3 class="text-center mb-4">{{trans('web.total')}}: {{\App\Subscription::where('number', $number)->count()}}</h3>
             
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead style="background-color: #6c757d; color: white;">
                         <tr>
-                            <th>فئة</th>
-                            <th>مشترك</th>
-                            <th>ذكر</th>
-                            <th>أنثى</th>
+                            <th>{{trans('web.category')}}</th>
+                            <th>{{trans('web.subscriber')}}</th>
+                            <th>{{trans('web.male_short')}}</th>
+                            <th>{{trans('web.female_short')}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -67,7 +67,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                         </tr>
                         @endforeach
                         <tr style="background-color: #369bdd;">
-                            <th style="color: white;">الاجمالي العام</th>
+                            <th style="color: white;">{{trans('web.grand_total')}}</th>
                             <td style="color: white; font-weight: bold;">{{\App\Subscription::where('number', $number)->count()}}</td>
                             <td style="color: white; font-weight: bold;">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('users.gender', 'male')->where('subscriptions.number', $number)->count()}}</td>
                             <td style="color: white; font-weight: bold;">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('users.gender', 'female')->where('subscriptions.number', $number)->count()}}</td>
