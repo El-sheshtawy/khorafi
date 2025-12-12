@@ -74,30 +74,27 @@
                 </div>
                 <form action="{{ url('subscription/register') }}" method="POST">
                     {{ csrf_field() }}
-                    <div class="row justify-content-center">
-                        <div class="col-md-6">
-                            @if (session('success'))
-                                <div class="alert alert-success">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
-                            @if (session('error'))
-                                <div class="alert alert-danger">
-                                    {{ session('error') }}
-                                </div>
-                            @endif
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-                        </div>
-                        <div class="col-md-8">
-                            <div class="row justify-content-center">
+                    <div class="form-container">
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <div class="row">
                                 <div class="col-md-6">
                                     <div class="sign__input-wrapper mb-25">
                                         <h5>{{ trans('web.identify') }}</h5>
@@ -251,11 +248,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-
-                            <div class="sign__input-wrapper mb-10">
-                                <h5>{{ trans('web.subscription_type') }}</h5>
-                                <div class="sign__input">
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="sign__input-wrapper">
+                                    <h5>{{ trans('web.subscription_type') }}</h5>
                                     <select name="subscription_type" class="form-select change-select-subscription-type">
                                         <option value="0">{{ trans('web.select_subscription_type') }}</option>
                                         @foreach (\App\SubscriptionsName::get() as $val)
@@ -264,26 +260,20 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="result-select-subscription-type"></div>
-                            <div class="sign__input-wrapper mb-10">
-                                <h5>{{ trans('web.subscription_notes') }}</h5>
-                                <div class="sign__input">
-                                    <textarea class="form-control" name="subscription_notes" cols="30" rows="7"></textarea>
+                            <div class="col-md-6">
+                                <div class="sign__input-wrapper">
+                                    <h5>{{ trans('web.subscription_notes') }}</h5>
+                                    <textarea class="form-control" name="subscription_notes" rows="3"></textarea>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="sign__input-wrapper mb-25">
-                                <h5>المسابقة</h5>
-                                <div class="">
-                                    <input type="text" class="form-control" value="{{ $config->number ?? ''}}" readonly>
-                                    <input type="hidden" name="number" value="{{ $config->number  ?? ''}}">
-                                </div>
+                            <div class="col-md-12">
+                                <div class="result-select-subscription-type"></div>
                             </div>
                         </div>
-                        <div class="col-md-12"></div>
-                        <div class="col-md-2">
-                            <button class="e-btn  w-100"> <span></span> {{ trans('web.subscription') }}</button>
+                        <div class="row">
+                            <div class="col-md-12 text-center mt-4">
+                                <button class="e-btn">{{ trans('web.subscription') }}</button>
+                            </div>
                         </div>
                     </div>
 
