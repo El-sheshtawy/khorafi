@@ -53,7 +53,7 @@
   
     <div class="advs-hei" style="position: relative;">
         <img src="{{url('website/public/images/' . $config->header_image)}}" alt="">
-        <h2 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: black; font-size: 40px; margin: 0;">{{$config->number}}</h2>
+        <h2 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: black; font-size: 120px; font-weight: bold; margin: 0;">{{$config->number}}</h2>
     </div>
 
     <!-- pre loader area start -->
