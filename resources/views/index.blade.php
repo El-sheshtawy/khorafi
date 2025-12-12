@@ -291,11 +291,14 @@
     .advs-hei {
         position: relative;
         width: 100%;
+        max-height: none;
+        overflow: visible;
     }
     .advs-hei img {
         width: 100%;
         height: auto;
         display: block;
+        max-height: none;
     }
     @media (max-width: 768px) {
         .advs-hei h2 {
