@@ -51,19 +51,12 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         var video = document.getElementById('sliderVideo');
-        var videoDuration = 0;
-        
-        if (video) {
-            video.addEventListener('loadedmetadata', function() {
-                videoDuration = Math.ceil(video.duration * 1000);
-            });
-        }
         
         if (typeof Swiper !== 'undefined') {
-            new Swiper('.slider__wrapper', {
+            var swiper = new Swiper('.slider__wrapper', {
                 loop: true,
                 autoplay: {
-                    delay: videoDuration || 10000,
+                    delay: 71000,
                     disableOnInteraction: false,
                 },
                 navigation: {
