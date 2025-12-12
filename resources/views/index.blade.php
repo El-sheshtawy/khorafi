@@ -291,21 +291,24 @@
     .advs-hei {
         position: relative;
         width: 100%;
+        line-height: 0;
     }
     .advs-hei img {
         width: 100%;
         height: auto;
         display: block;
+        vertical-align: bottom;
     }
     @media (min-width: 769px) {
         .advs-hei {
-            aspect-ratio: 16/3;
+            max-height: 250px;
             overflow: hidden;
         }
         .advs-hei img {
+            width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center;
+            object-position: center top;
         }
     }
     @media (max-width: 768px) {
