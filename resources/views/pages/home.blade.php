@@ -65,18 +65,19 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
     </section>
 
 
+    <!-- الأنشطة -->
     <section class="cta__area gallerySec pb-150">
         <div class="container">
             <div class="row">
                 <div class="col-xxl-6 offset-xxl-3">
                     <div class="section__title-wrapper text-center mb-60">
-                        <h2 class="section__title">{{trans('web.gallery')}}</h2>
+                        <h2 class="section__title">الأنشطة</h2>
                     </div>
                 </div>
             </div>
             <div class="row">
-                @foreach(\App\Gallery::where('active', 'active')->orderBy('id', 'desc')->paginate(6) as $key => $val)
-                <a href="{{url('website/public/images/' . $val->image)}}" data-toggle="lightbox" data-gallery="gallery" class="col-md-4">
+                @foreach(\App\Gallery::where('active', 'active')->where('type', 'activity')->orderBy('id', 'desc')->paginate(6) as $key => $val)
+                <a href="{{url('website/public/images/' . $val->image)}}" data-toggle="lightbox" data-gallery="activity" class="col-md-4">
                     <img src="{{url('website/public/images/' . $val->image)}}" class="img-fluid rounded">
                 </a>
                 @endforeach
@@ -86,6 +87,55 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
             </div>
         </div>
     </section>
+
+    <!-- الفعاليات -->
+    <section class="cta__area pb-150">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-6 offset-xxl-3">
+                    <div class="section__title-wrapper text-center mb-60">
+                        <h2 class="section__title">الفعاليات</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="events-slider swiper-container">
+                <div class="swiper-wrapper">
+                    @foreach(\App\Gallery::where('active', 'active')->where('type', 'event')->orderBy('id', 'desc')->get() as $key => $val)
+                    <div class="swiper-slide">
+                        <a href="{{url('website/public/images/' . $val->image)}}" data-toggle="lightbox" data-gallery="events">
+                            <img src="{{url('website/public/images/' . $val->image)}}" class="img-fluid rounded" style="width: 100%; height: 400px; object-fit: cover;">
+                        </a>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </section>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof Swiper !== 'undefined') {
+            new Swiper('.events-slider', {
+                loop: true,
+                autoplay: {
+                    delay: 3000,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                slidesPerView: 3,
+                spaceBetween: 30,
+                breakpoints: {
+                    320: { slidesPerView: 1 },
+                    768: { slidesPerView: 2 },
+                    1024: { slidesPerView: 3 }
+                }
+            });
+        }
+    });
+    </script>
 
     <!-- blog area start -->
     <section class="blog__area pt-115 pb-130">
