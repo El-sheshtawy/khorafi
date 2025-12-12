@@ -17,8 +17,25 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 class Home extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
+        // Save filter to session if provided
+        if ($request->has('number')) {
+            session([
+                'admin_filter_number' => $request->number,
+                'admin_filter_from_date' => $request->from_date,
+                'admin_filter_to_date' => $request->to_date,
+            ]);
+        }
+        
+        // Redirect with saved filter if no parameters
+        if (!$request->has('number')) {
+            $number = session('admin_filter_number', 27);
+            $from_date = session('admin_filter_from_date', '');
+            $to_date = session('admin_filter_to_date', '');
+            return redirect()->to('/admin?number=' . $number . '&from_date=' . $from_date . '&to_date=' . $to_date);
+        }
+        
         return view("admin.pages.home");
     }
 
