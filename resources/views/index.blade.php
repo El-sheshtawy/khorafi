@@ -302,13 +302,12 @@
     @media (min-width: 769px) {
         .advs-hei {
             max-height: 150px;
-            overflow: hidden;
         }
         .advs-hei img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
+            height: 150px;
+            object-fit: contain;
+            background: #f5f5f5;
         }
     }
     @media (max-width: 768px) {
