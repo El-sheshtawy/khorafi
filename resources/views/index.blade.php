@@ -298,6 +298,7 @@
         height: 100%;
         display: block;
         object-fit: cover;
+        object-position: center;
     }
     @media (max-width: 768px) {
         .advs-hei {
