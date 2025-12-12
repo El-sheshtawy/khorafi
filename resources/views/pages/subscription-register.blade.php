@@ -13,6 +13,51 @@
     <main>
 
         <!-- sign up area start -->
+        <style>
+            .signup__area {
+                background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            }
+            .sign__input-wrapper h5 {
+                color: #667eea;
+                font-weight: 600;
+                margin-bottom: 10px;
+            }
+            .form-control, .form-select {
+                border: 2px solid #e0e6ed;
+                border-radius: 8px;
+                padding: 12px 15px;
+                transition: all 0.3s;
+            }
+            .form-control:focus, .form-select:focus {
+                border-color: #667eea;
+                box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+            }
+            .e-btn {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                border: none;
+                padding: 15px 40px;
+                border-radius: 8px;
+                font-weight: 600;
+                transition: all 0.3s;
+            }
+            .e-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            }
+            .alert {
+                border-radius: 8px;
+                border: none;
+            }
+            .row.justify-content-center > .col-md-8 {
+                background: white;
+                padding: 40px;
+                border-radius: 15px;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            }
+            .row.justify-content-center > .col-md-6:first-child {
+                margin-bottom: 20px;
+            }
+        </style>
         <section class="signup__area po-rel-z1 pt-100 pb-145">
             <div class="sign__shape">
                 <img class="circle" src="{{ url('web/') }}/img/icon/sign/circle.png" alt="">
@@ -23,7 +68,7 @@
                 <div class="row">
                     <div class="col-xxl-8 offset-xxl-2 col-xl-8 offset-xl-2">
                         <div class="section__title-wrapper text-center mb-55">
-                            <h2 class="section__title">{{ trans('web.year') }} {{ $config->year }}</h2>
+                            <h2 class="section__title" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold;">بيانات المشارك</h2>
                         </div>
                     </div>
                 </div>
