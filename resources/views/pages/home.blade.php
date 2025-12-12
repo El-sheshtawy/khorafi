@@ -16,7 +16,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
         <div class="slider__wrapper swiper-container">
             <div class="swiper-wrapper">
                 <div class="single-slider swiper-slide slider__height d-flex align-items-end justify-content-center" style="background: #000; position: relative; overflow: hidden;">
-                    <video id="sliderVideo" autoplay muted playsinline preload="auto" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
+                    <video id="sliderVideo" autoplay playsinline preload="auto" controls style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
                         <source src="{{url('website/public/videos/khorafi.mp4')}}" type="video/mp4">
                     </video>
                     <div class="container" style="position: relative; z-index: 2;">
