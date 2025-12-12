@@ -273,6 +273,24 @@
 
         });
     </script>
+    <style>
+    .slider__area .slider__nav,
+    .slider__area .slider__nav *,
+    .slider__nav-item,
+    .slider__nav-content,
+    .slider__nav-content h4,
+    .slider__nav-content span,
+    section .slider__nav {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        height: 0 !important;
+        max-height: 0 !important;
+        overflow: hidden !important;
+        position: absolute !important;
+        left: -9999px !important;
+    }
+    </style>
 
 </body>
 
