@@ -83,8 +83,8 @@
     <header>
         <div id="header-sticky" class="header__area header__transparent header__padding-2">
             <nav class="navbar navbar-expand-lg navbar-light bg-custom">
-                <div class="container-fluid">
-                    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <div class="container-fluid" style="justify-content: flex-end;">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
