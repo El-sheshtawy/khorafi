@@ -16,13 +16,13 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
     <style>
         .signup__area { background: #2c5282; min-height: 100vh; padding: 40px 0; }
         .section__title { color: white !important; font-weight: 800; font-size: 28px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-        .form-container { background: white; padding: 50px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); max-width: 1100px; margin: 0 auto; }
+        .form-container { background: #2c5282; padding: 50px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); max-width: 1100px; margin: 0 auto; }
         .user { background: #e8eef5; padding: 35px; border-radius: 16px; border: 2px solid #d1dce8; margin-bottom: 30px; }
         .user h2 { color: #667eea; font-weight: 700; margin-bottom: 25px; text-align: center; border-bottom: 3px solid #667eea; padding-bottom: 15px; }
         .user p { font-size: 16px; margin-bottom: 15px; padding: 12px; background: #f8fafc; border-radius: 8px; }
         .user p strong { color: #2d3748; font-weight: 700; }
         .user p span { color: #2563eb !important; font-weight: 700; }
-        .sign__input-wrapper h5 { color: #2d3748; font-weight: 700; margin-bottom: 8px; font-size: 16px; text-align: center; }
+        .sign__input-wrapper h5 { color: white; font-weight: 700; margin-bottom: 8px; font-size: 16px; text-align: center; }
         .form-select, .form-control { border: 2px solid #e2e8f0; border-radius: 12px; padding: 14px 16px; font-size: 15px; background: #fef3c7; height: 50px; width: 100%; color: #2563eb; font-weight: 700; transition: all 0.3s; }
         textarea.form-control { height: auto; min-height: 100px; }
         .form-select:focus, .form-control:focus { border-color: #667eea; box-shadow: 0 0 0 4px rgba(102,126,234,0.1); background: white; outline: none; }
