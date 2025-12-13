@@ -13,6 +13,33 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
 <main>
 
     <!-- sign up area start -->
+    <style>
+        .signup__area { background: #2c5282; min-height: 100vh; padding: 40px 0; }
+        .section__title { color: white !important; font-weight: 800; font-size: 28px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .user { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); margin-bottom: 30px; }
+        .user h2 { color: #667eea; font-weight: 700; margin-bottom: 25px; text-align: center; border-bottom: 3px solid #667eea; padding-bottom: 15px; }
+        .user p { font-size: 16px; margin-bottom: 15px; padding: 12px; background: #f8fafc; border-radius: 8px; }
+        .user p strong { color: #2d3748; font-weight: 700; }
+        .user p span { color: #2563eb !important; font-weight: 700; }
+        .sign__input-wrapper h5 { color: #2d3748; font-weight: 700; margin-bottom: 8px; font-size: 16px; text-align: center; }
+        .form-select, .form-control { border: 2px solid #e2e8f0; border-radius: 12px; padding: 14px 16px; font-size: 15px; background: #fef3c7; height: 50px; width: 100%; color: #2563eb; font-weight: 700; transition: all 0.3s; }
+        textarea.form-control { height: auto; min-height: 100px; }
+        .form-select:focus, .form-control:focus { border-color: #667eea; box-shadow: 0 0 0 4px rgba(102,126,234,0.1); background: white; outline: none; }
+        .e-btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; padding: 18px 60px; border-radius: 12px; font-weight: 700; font-size: 18px; transition: all 0.3s; color: white; box-shadow: 0 10px 25px rgba(102,126,234,0.3); display: inline-flex; align-items: center; justify-content: center; }
+        .e-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(102,126,234,0.4); }
+        .e-btn span { display: none; }
+        .alert { border-radius: 12px; border: none; padding: 18px 24px; margin-bottom: 30px; }
+        @media (max-width: 768px) {
+            .signup__area { padding: 20px 0; }
+            .section__title { font-size: 22px; }
+            .user { padding: 25px 20px; }
+            .user h2 { font-size: 20px; }
+            .user p { font-size: 14px; padding: 10px; }
+            .sign__input-wrapper h5 { font-size: 15px; }
+            .form-select, .form-control { padding: 12px 14px; font-size: 14px; height: 46px; }
+            .e-btn { padding: 14px 40px; font-size: 16px; width: 100%; }
+        }
+    </style>
     <section class="signup__area po-rel-z1 pt-100 pb-145">
         <div class="sign__shape">
             <img class="circle" src="{{url('web/')}}/img/icon/sign/circle.png" alt="">
