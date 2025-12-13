@@ -16,7 +16,8 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
     <style>
         .signup__area { background: #2c5282; min-height: 100vh; padding: 40px 0; }
         .section__title { color: white !important; font-weight: 800; font-size: 28px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-        .user { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); margin-bottom: 30px; }
+        .form-container { background: white; padding: 50px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); max-width: 1100px; margin: 0 auto; }
+        .user { background: #e8eef5; padding: 35px; border-radius: 16px; border: 2px solid #d1dce8; margin-bottom: 30px; }
         .user h2 { color: #667eea; font-weight: 700; margin-bottom: 25px; text-align: center; border-bottom: 3px solid #667eea; padding-bottom: 15px; }
         .user p { font-size: 16px; margin-bottom: 15px; padding: 12px; background: #f8fafc; border-radius: 8px; }
         .user p strong { color: #2d3748; font-weight: 700; }
@@ -50,13 +51,12 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
             <div class="row">
                 <div class="col-xxl-8 offset-xxl-2 col-xl-8 offset-xl-2">
                     <div class="section__title-wrapper text-center mb-55">
-                        <h2 class="section__title">{{trans('web.year')}} {{$config->number}}</h2>
+                        <h2 class="section__title">بيانات المشارك</h2>
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-md-10">
-                    <div class="user">
+            <div class="form-container">
+                <div class="user">
                         <h2>{{$user->username}}</h2>
                         <p>
                             <strong>{{trans('web.email')}}: </strong> <span style="color: blue;"> {{$user->email}}</span>
@@ -83,10 +83,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                             <strong>{{trans('web.mobile2')}}: </strong> <span style="color: blue;"> {{$user->mobile2}}</span>
                         </p>
 
-                    </div>
                 </div>
-                <div class="col-md-12"></div>
-                <div class="col-md-6">
                     @if (session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
@@ -105,11 +102,8 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                             @endforeach
                         </ul>
                     </div>
-                    @endif
-                </div>
-                <div class="col-md-12"></div>
-                <div class="col-md-6">
-    <form action="{{url('subscription/user')}}" method="POST">
+                @endif
+                <form action="{{url('subscription/user')}}" method="POST">
         {{csrf_field()}}
         <input class="user-identify" type="hidden" name="identify" value="{{request('identify')}}">
 
@@ -174,9 +168,10 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                 <textarea class="form-control" name="subscription_notes" cols="30" rows="7"></textarea>
             </div>
         </div>
-        <button class="e-btn w-100"> <span></span> {{ trans('web.subscription') }}</button>
-    </form>
-</div>
+                    <div class="text-center mt-4">
+                        <button class="e-btn"> <span></span> {{ trans('web.subscription') }}</button>
+                    </div>
+                </form>
                 <!--<div class="col-md-6">-->
                 <!--    <form action="{{url('subscription/user')}}" method="POST">-->
                 <!--        {{csrf_field()}}-->
