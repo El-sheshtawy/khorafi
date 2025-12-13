@@ -22,7 +22,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
         .user p { font-size: 16px; margin-bottom: 15px; padding: 12px; background: #f8fafc; border-radius: 8px; }
         .user p strong { color: #2d3748; font-weight: 700; }
         .user p span { color: #2563eb !important; font-weight: 700; }
-        .sign__input-wrapper h5 { color: #2d3748; font-weight: 700; margin-bottom: 8px; font-size: 16px; text-align: center; }
+        .sign__input-wrapper h5 { color: white; font-weight: 700; margin-bottom: 8px; font-size: 16px; text-align: center; }
         .form-select, .form-control { border: 2px solid #e2e8f0; border-radius: 12px; padding: 14px 16px; font-size: 15px; background: #fef3c7; height: 50px; width: 100%; color: #2563eb; font-weight: 700; transition: all 0.3s; }
         textarea.form-control { height: auto; min-height: 100px; }
         .form-select:focus, .form-control:focus { border-color: #667eea; box-shadow: 0 0 0 4px rgba(102,126,234,0.1); background: white; outline: none; }
