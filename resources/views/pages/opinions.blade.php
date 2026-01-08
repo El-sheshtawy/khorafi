@@ -104,8 +104,18 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                                         <th style="color:white;background-color:#369bdd">الاجمالي</th>
                                         <td></td>
                                         <td><strong style="color:white">{{$totalSubscribers}}</strong></td>
-                                        <td><strong style="color:white">{{$totalMales}}</strong></td>
-                                        <td><strong style="color:white">{{$totalFemales}}</strong></td>
+                                        <td>
+                                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                <strong style="color:white">{{$totalMales}}</strong>
+                                                <span style="color: #28a745; font-size: 11px;">ك/غ</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                <strong style="color:white">{{$totalFemales}}</strong>
+                                                <span style="color: #28a745; font-size: 11px;">ك/غ</span>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <?php $totalSubscribers = 0; $totalMales = 0; $totalFemales = 0; ?>
                                 @endif
