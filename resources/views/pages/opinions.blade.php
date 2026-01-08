@@ -110,16 +110,10 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th rowspan="2">{{trans('web.category')}}</th>
-                            <th rowspan="2">{{trans('web.subscriber')}}</th>
-                            <th colspan="2" style="text-align: center;">{{trans('web.male_short')}}</th>
-                            <th colspan="2" style="text-align: center;">{{trans('web.female_short')}}</th>
-                        </tr>
-                        <tr>
-                            <th style="font-size: 12px;">ك/غ</th>
+                            <th>{{trans('web.category')}}</th>
+                            <th>{{trans('web.subscriber')}}</th>
                             <th>{{trans('web.male_short')}}</th>
                             <th>{{trans('web.female_short')}}</th>
-                            <th style="font-size: 12px;">ك/غ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -127,19 +121,27 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                         <tr>
                             <td>{{$val->name_ar}}</td>
                             <td>{{\App\Subscription::where('name_id', $val->id)->where('number', $number)->count()}}</td>
-                            <td style="color: #28a745; font-weight: bold; font-size: 13px;">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'male')->where('users.nationality_id', 1)->count()}}/{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'male')->where('users.nationality_id', '!=', 1)->count()}}</td>
-                            <td style="color: #085d9e; font-weight: bold;">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'male')->count()}}</td>
-                            <td style="color: red; font-weight: bold;">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'female')->count()}}</td>
-                            <td style="color: #28a745; font-weight: bold; font-size: 13px;">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'female')->where('users.nationality_id', 1)->count()}}/{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'female')->where('users.nationality_id', '!=', 1)->count()}}</td>
+                            <td style="color: #085d9e; font-weight: bold;">
+                                {{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'male')->count()}}
+                                <br><span style="color: #28a745; font-size: 12px;">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'male')->where('users.nationality_id', 1)->count()}}/{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'male')->where('users.nationality_id', '!=', 1)->count()}}</span>
+                            </td>
+                            <td style="color: red; font-weight: bold;">
+                                {{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'female')->count()}}
+                                <br><span style="color: #28a745; font-size: 12px;">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'female')->where('users.nationality_id', 1)->count()}}/{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'female')->where('users.nationality_id', '!=', 1)->count()}}</span>
+                            </td>
                         </tr>
                         @endforeach
                         <tr style="background-color:#369bdd">
                             <th style="color:white">{{trans('web.grand_total')}}</th>
                             <td style="color:white">{{\App\Subscription::where('number', $number)->count()}}</td>
-                            <td style="color: #28a745; font-size: 13px;">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('users.gender', 'male')->where('subscriptions.number', $number)->where('users.nationality_id', 1)->count()}}/{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('users.gender', 'male')->where('subscriptions.number', $number)->where('users.nationality_id', '!=', 1)->count()}}</td>
-                            <td style="color:white">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('users.gender', 'male')->where('subscriptions.number', $number)->count()}}</td>
-                            <td style="color:white">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('users.gender', 'female')->where('subscriptions.number', $number)->count()}}</td>
-                            <td style="color: #28a745; font-size: 13px;">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('users.gender', 'female')->where('subscriptions.number', $number)->where('users.nationality_id', 1)->count()}}/{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('users.gender', 'female')->where('subscriptions.number', $number)->where('users.nationality_id', '!=', 1)->count()}}</td>
+                            <td style="color:white;">
+                                {{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('users.gender', 'male')->where('subscriptions.number', $number)->count()}}
+                                <br><span style="color: #28a745; font-size: 12px;">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('users.gender', 'male')->where('subscriptions.number', $number)->where('users.nationality_id', 1)->count()}}/{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('users.gender', 'male')->where('subscriptions.number', $number)->where('users.nationality_id', '!=', 1)->count()}}</span>
+                            </td>
+                            <td style="color:white;">
+                                {{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('users.gender', 'female')->where('subscriptions.number', $number)->count()}}
+                                <br><span style="color: #28a745; font-size: 12px;">{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('users.gender', 'female')->where('subscriptions.number', $number)->where('users.nationality_id', 1)->count()}}/{{\App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('users.gender', 'female')->where('subscriptions.number', $number)->where('users.nationality_id', '!=', 1)->count()}}</span>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
