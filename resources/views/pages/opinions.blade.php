@@ -73,14 +73,18 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $totalSubscribers = 0; $totalMales = 0; $totalFemales = 0; $rowCount = 0; ?>
+                        <?php $totalSubscribers = 0; $totalMales = 0; $totalFemales = 0; $totalKuwaitiMales = 0; $totalNonKuwaitiMales = 0; $totalKuwaitiFemales = 0; $totalNonKuwaitiFemales = 0; $rowCount = 0; ?>
                         @foreach(\App\SubscriptionsName::get() as $val)
                             @foreach(\App\City::get() as $city)
                                 <?php
                                 $subscribersCount = \App\Subscription::where('city_id', $city->id)->where('name_id', $val->id)->where('number', $number)->count();
                                 $maleCount = \App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.city_id', $city->id)->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'male')->count();
                                 $femaleCount = \App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.city_id', $city->id)->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'female')->count();
-                                $totalSubscribers += $subscribersCount; $totalMales += $maleCount; $totalFemales += $femaleCount; $rowCount++;
+                                $kuwaitiMales = \App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.city_id', $city->id)->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'male')->where('users.nationality_id', 1)->count();
+                                $nonKuwaitiMales = \App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.city_id', $city->id)->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'male')->where('users.nationality_id', '!=', 1)->count();
+                                $kuwaitiFemales = \App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.city_id', $city->id)->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'female')->where('users.nationality_id', 1)->count();
+                                $nonKuwaitiFemales = \App\Subscription::join('users', 'users.id', '=', 'subscriptions.user_id')->where('subscriptions.city_id', $city->id)->where('subscriptions.name_id', $val->id)->where('subscriptions.number', $number)->where('users.gender', 'female')->where('users.nationality_id', '!=', 1)->count();
+                                $totalSubscribers += $subscribersCount; $totalMales += $maleCount; $totalFemales += $femaleCount; $totalKuwaitiMales += $kuwaitiMales; $totalNonKuwaitiMales += $nonKuwaitiMales; $totalKuwaitiFemales += $kuwaitiFemales; $totalNonKuwaitiFemales += $nonKuwaitiFemales; $rowCount++;
                                 ?>
                                 <tr>
                                     <td>{{$val->name_ar}}</td>
@@ -107,17 +111,17 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                                         <td>
                                             <div style="display: flex; justify-content: space-between; align-items: center;">
                                                 <strong style="color:white">{{$totalMales}}</strong>
-                                                <span style="color: white; font-size: 11px;">ك/غ</span>
+                                                <span style="color: white; font-size: 11px;">{{$totalKuwaitiMales}}/{{$totalNonKuwaitiMales}}</span>
                                             </div>
                                         </td>
                                         <td>
                                             <div style="display: flex; justify-content: space-between; align-items: center;">
                                                 <strong style="color:white">{{$totalFemales}}</strong>
-                                                <span style="color: white; font-size: 11px;">ك/غ</span>
+                                                <span style="color: white; font-size: 11px;">{{$totalKuwaitiFemales}}/{{$totalNonKuwaitiFemales}}</span>
                                             </div>
                                         </td>
                                     </tr>
-                                    <?php $totalSubscribers = 0; $totalMales = 0; $totalFemales = 0; ?>
+                                    <?php $totalSubscribers = 0; $totalMales = 0; $totalFemales = 0; $totalKuwaitiMales = 0; $totalNonKuwaitiMales = 0; $totalKuwaitiFemales = 0; $totalNonKuwaitiFemales = 0; ?>
                                 @endif
                             @endforeach
                         @endforeach
