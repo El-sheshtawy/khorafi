@@ -107,13 +107,13 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                                         <td>
                                             <div style="display: flex; justify-content: space-between; align-items: center;">
                                                 <strong style="color:white">{{$totalMales}}</strong>
-                                                <span style="color: #28a745; font-size: 11px;">ك/غ</span>
+                                                <span style="color: white; font-size: 11px;">ك/غ</span>
                                             </div>
                                         </td>
                                         <td>
                                             <div style="display: flex; justify-content: space-between; align-items: center;">
                                                 <strong style="color:white">{{$totalFemales}}</strong>
-                                                <span style="color: #28a745; font-size: 11px;">ك/غ</span>
+                                                <span style="color: white; font-size: 11px;">ك/غ</span>
                                             </div>
                                         </td>
                                     </tr>
