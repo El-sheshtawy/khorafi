@@ -68,8 +68,8 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                             <th>{{trans('web.category')}}</th>
                             <th>المحافظة</th>
                             <th>{{trans('web.subscriber')}}</th>
-                            <th>{{trans('web.male_short')}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-size: 11px; color: #28a745;">(ك/غ)</span></th>
-                            <th>{{trans('web.female_short')}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-size: 11px; color: #28a745;">(ك/غ)</span></th>
+                            <th><div style="display: flex; justify-content: space-between; align-items: center;"><span>{{trans('web.male_short')}}</span><span style="font-size: 11px; color: #28a745;">(ك/غ)</span></div></th>
+                            <th><div style="display: flex; justify-content: space-between; align-items: center;"><span>{{trans('web.female_short')}}</span><span style="font-size: 11px; color: #28a745;">(ك/غ)</span></div></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -136,8 +136,8 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                         <tr>
                             <th>{{trans('web.category')}}</th>
                             <th>{{trans('web.subscriber')}}</th>
-                            <th>{{trans('web.male_short')}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-size: 11px; color: #28a745;">(ك/غ)</span></th>
-                            <th>{{trans('web.female_short')}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-size: 11px; color: #28a745;">(ك/غ)</span></th>
+                            <th><div style="display: flex; justify-content: space-between; align-items: center;"><span>{{trans('web.male_short')}}</span><span style="font-size: 11px; color: #28a745;">(ك/غ)</span></div></th>
+                            <th><div style="display: flex; justify-content: space-between; align-items: center;"><span>{{trans('web.female_short')}}</span><span style="font-size: 11px; color: #28a745;">(ك/غ)</span></div></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -216,8 +216,8 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                         <tr>
                             <th>المحافظة</th>
                             <th>{{trans('web.category')}}</th>
-                            <th>{{trans('web.male_short')}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-size: 11px; color: #28a745;">(ك/غ)</span></th>
-                            <th>{{trans('web.female_short')}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-size: 11px; color: #28a745;">(ك/غ)</span></th>
+                            <th><div style="display: flex; justify-content: space-between; align-items: center;"><span>{{trans('web.male_short')}}</span><span style="font-size: 11px; color: #28a745;">(ك/غ)</span></div></th>
+                            <th><div style="display: flex; justify-content: space-between; align-items: center;"><span>{{trans('web.female_short')}}</span><span style="font-size: 11px; color: #28a745;">(ك/غ)</span></div></th>
                             <th>{{trans('web.subscriber')}}</th>
                         </tr>
                     </thead>
