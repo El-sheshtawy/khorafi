@@ -12,6 +12,8 @@ class Subscription extends Authenticatable
 
     use SoftDeletes;
 
+    protected $fillable = ['participation_date'];
+
     public function user()
     {
         return $this->belongsTo('App\User');
