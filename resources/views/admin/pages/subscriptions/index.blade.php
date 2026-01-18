@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <td>${val.identify}</td>
                         <td><a href="https://wa.me/${val.mobile}" target="_blank">${val.mobile}</a></td>
                         <td class="text-center">${val.name_ar}</td>
-                        <td class="text-center">${val.created_at}</td>
+                        <td class="text-center" style="white-space: nowrap; font-size: 11px;">${val.created_at ? val.created_at.split(' ')[0] : '-'}</td>
                         <td class="text-center">${val.date}</td>
                         <td class="text-center">${val.number ?? '-'}</td>
                         <td class="text-center" style="white-space: nowrap;">${val.participation_date || '-'}</td>
@@ -571,7 +571,7 @@ $(document).ready(function() {
         <th style="border: none;color:white;">رقم الهاتف</th>
         <th class="text-center" style="font-size: 14px; border: none;color:white;">فئة</th>
         
-        <th class="text-center" style="white-space: nowrap; border: none;color:white; cursor: pointer;" onclick="toggleSort('created_at')">
+        <th class="text-center" style="white-space: nowrap; border: none;color:white; cursor: pointer; font-size: 12px;" onclick="toggleSort('created_at')">
             <span style="color:white;">تاريخ التسجيل</span>
         </th>
 
@@ -634,7 +634,7 @@ $(document).ready(function() {
                                                     </td>
                                                     <!--<td>{{ $val->user->mobile2 }}</td>-->
                                                     <td class="text-center" style="  font-size: 13px;">{{ $val->s_name->name_ar }}</td>
-                                                    <td class="created-at text-center">{{ $val->created_at }}</td>
+                                                    <td class="created-at text-center" style="white-space: nowrap; font-size: 11px;">{{ \Carbon\Carbon::parse($val->created_at)->format('Y-m-d') }}</td>
                                                     <td class="text-center">{{ $val->date }}</td>
                                                     <td class="text-center">{{ $val->number ?? '-' }}</td>
                                                     <td class="text-center" style="white-space: nowrap;">{{ $val->participation_date ?? '-' }}</td>
