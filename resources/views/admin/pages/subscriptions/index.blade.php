@@ -414,7 +414,7 @@ $(document).ready(function() {
                         <button id="deleteSelectedButton" style="display:none;" class="btn btn-danger">حذف المحدد</button>
                     </div>
                             <div class="table-responsive" style="overflow-x: visible;">
-                                <table class="table" id="dataTable" style="font-size: 13px;">
+                                <table class="table table-sm" id="dataTable" style="font-size: 13px;">
 <!--                                    <thead>-->
 <!--                                        <tr class="text-center">-->
 <!--                                            <th>-->
