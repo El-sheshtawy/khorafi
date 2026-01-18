@@ -397,18 +397,10 @@ $(document).ready(function() {
 </h4>
 
                                 <div class="col-md-4 mr-auto text-right" style="position: relative;">
-                                    <button type="button" class="btn btn-icon btn-warning" id="dateBtn" onclick="toggleCalendar()">
+                                    <input type="date" id="bigDateInput" style="position: absolute; opacity: 0; pointer-events: none;">
+                                    <button type="button" class="btn btn-icon btn-warning" onclick="openCalendarDirect()">
                                         <i class="mdi mdi-calendar-check"></i> تعيين تاريخ للجميع
                                     </button>
-                                    <div id="calendarPopup" style="display: none; position: absolute; top: 45px; right: 0; z-index: 9999; background: white; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); padding: 30px;">
-                                        <input type="date" id="bigDateInput" 
-                                               style="font-size: 28px; padding: 20px; border: 3px solid #667eea; border-radius: 10px; width: 350px; cursor: pointer;">
-                                        <div style="margin-top: 20px; text-align: center;">
-                                            <button type="button" class="btn btn-secondary" onclick="closeCalendar()">إلغاء</button>
-                                            <button type="button" class="btn btn-primary" onclick="assignBigDate()" 
-                                                    style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; padding: 10px 30px; margin-left: 10px;">تعيين</button>
-                                        </div>
-                                    </div>
                                     <a href="{{ url('admin/subscriptions/excel/export?' . $_SERVER['QUERY_STRING']) }}"
                                         class="btn btn-icon btn-info">
                                         <i class="fas fa-print"></i> تصدير اكسل
@@ -710,57 +702,37 @@ $(document).ready(function() {
 </style>
 
 <script>
-function toggleCalendar() {
-    const popup = document.getElementById('calendarPopup');
-    popup.style.display = popup.style.display === 'none' ? 'block' : 'none';
-    if (popup.style.display === 'block') {
-        setTimeout(function() {
-            document.getElementById('bigDateInput').showPicker();
-        }, 100);
-    }
+function openCalendarDirect() {
+    document.getElementById('bigDateInput').showPicker();
 }
 
-function closeCalendar() {
-    document.getElementById('calendarPopup').style.display = 'none';
-}
-
-function assignBigDate() {
-    const date = document.getElementById('bigDateInput').value;
-    if (!date) {
-        alert('الرجاء اختيار التاريخ');
-        return;
-    }
-
-    $.ajax({
-        url: '{{ url("/admin/subscriptions/assign-date-all") }}',
-        type: 'POST',
-        data: {
-            participation_date: date,
-            number: '{{ request("number") ?? "" }}'
-        },
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        success: function(response) {
-            if (response.success) {
-                alert(response.message);
-                closeCalendar();
-                location.reload();
+document.getElementById('bigDateInput').addEventListener('change', function() {
+    const date = this.value;
+    if (!date) return;
+    
+    if (confirm('هل تريد تعيين تاريخ ' + date + ' لجميع المشتركين؟')) {
+        $.ajax({
+            url: '{{ url("/admin/subscriptions/assign-date-all") }}',
+            type: 'POST',
+            data: {
+                participation_date: date,
+                number: '{{ request("number") ?? "" }}'
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                if (response.success) {
+                    alert(response.message);
+                    location.reload();
+                }
+            },
+            error: function(xhr) {
+                alert('حدث خطأ. الرجاء المحاولة مرة أخرى.');
             }
-        },
-        error: function(xhr) {
-            alert('حدث خطأ. الرجاء المحاولة مرة أخرى.');
-        }
-    });
-}
-
-// Close calendar when clicking outside
-document.addEventListener('click', function(event) {
-    const popup = document.getElementById('calendarPopup');
-    const btn = document.getElementById('dateBtn');
-    if (popup && btn && !popup.contains(event.target) && !btn.contains(event.target)) {
-        popup.style.display = 'none';
+        });
     }
+    this.value = '';
 });
 
 let sortOrders = {};
