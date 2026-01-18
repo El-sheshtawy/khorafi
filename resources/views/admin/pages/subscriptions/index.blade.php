@@ -177,6 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <td class="text-center">${val.number ?? '-'}</td>
                         <td class="text-center">${val.level}</td>
                         <td class="text-center">${val.degree}</td>
+                        <td class="text-center">${val.participation_date || '-'}</td>
                         <td class="text-center">
                             <a href="javascript:void(0);" onclick="deleteSubscription(${val.id})" class="btn btn-icon btn-danger" title="حذف الاشتراك">
                             <i class="mdi mdi-delete"></i>
@@ -614,6 +615,7 @@ $(document).ready(function() {
             </span>
         </th>
 
+        <th class="text-center" style="border: none;color:white;">تاريخ المشاركة</th>
         <th class="text-center" style="border: none;color:white;">التحكم</th>
     </tr>
 </thead>
@@ -660,6 +662,7 @@ $(document).ready(function() {
                                                     <td class="text-center">{{ $val->number ?? '-' }}</td>
                                                     <td class="text-center">{{ $val->level }}</td>
                                                     <td class="text-center">{{ $val->degree }}</td>
+                                                    <td class="text-center">{{ $val->participation_date ?? '-' }}</td>
 
 
                                                     <td class="text-center">
