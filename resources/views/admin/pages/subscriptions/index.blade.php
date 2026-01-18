@@ -396,10 +396,19 @@ $(document).ready(function() {
     عرض الاشتراكات (<span id="subscriptionCount">{{ $count }}</span>)
 </h4>
 
-                                <div class="col-md-4 mr-auto text-right">
-                                    <button type="button" class="btn btn-icon btn-warning" onclick="showBigCalendar()">
+                                <div class="col-md-4 mr-auto text-right" style="position: relative;">
+                                    <button type="button" class="btn btn-icon btn-warning" id="dateBtn" onclick="toggleCalendar()">
                                         <i class="mdi mdi-calendar-check"></i> تعيين تاريخ للجميع
                                     </button>
+                                    <div id="calendarPopup" style="display: none; position: absolute; top: 45px; right: 0; z-index: 9999; background: white; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); padding: 30px;">
+                                        <input type="date" id="bigDateInput" 
+                                               style="font-size: 28px; padding: 20px; border: 3px solid #667eea; border-radius: 10px; width: 350px; cursor: pointer;">
+                                        <div style="margin-top: 20px; text-align: center;">
+                                            <button type="button" class="btn btn-secondary" onclick="closeCalendar()">إلغاء</button>
+                                            <button type="button" class="btn btn-primary" onclick="assignBigDate()" 
+                                                    style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; padding: 10px 30px; margin-left: 10px;">تعيين</button>
+                                        </div>
+                                    </div>
                                     <a href="{{ url('admin/subscriptions/excel/export?' . $_SERVER['QUERY_STRING']) }}"
                                         class="btn btn-icon btn-info">
                                         <i class="fas fa-print"></i> تصدير اكسل
@@ -693,43 +702,26 @@ $(document).ready(function() {
         </div>
     </div>
 
-<!-- Big Calendar Modal -->
-<div class="modal fade" id="bigCalendarModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content" style="border-radius: 15px; overflow: hidden;">
-            <div class="modal-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
-                <h5 class="modal-title" style="color: white; font-size: 22px;">اختر تاريخ المشاركة</h5>
-                <button type="button" class="close" data-dismiss="modal" style="color: white; opacity: 1;">
-                    <span>&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" style="padding: 40px; text-align: center;">
-                <input type="date" id="bigDateInput" class="form-control" 
-                       style="font-size: 24px; padding: 20px; border: 3px solid #667eea; border-radius: 10px; text-align: center; cursor: pointer;">
-            </div>
-            <div class="modal-footer" style="border: none; padding: 20px 40px;">
-                <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">إلغاء</button>
-                <button type="button" class="btn btn-primary btn-lg" onclick="assignBigDate()" 
-                        style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; padding: 12px 40px;">تعيين</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <style>
 #bigDateInput::-webkit-calendar-picker-indicator {
-    font-size: 30px;
+    font-size: 35px;
     cursor: pointer;
 }
 </style>
 
 <script>
-function showBigCalendar() {
-    $('#bigCalendarModal').modal('show');
-    setTimeout(function() {
-        document.getElementById('bigDateInput').focus();
-        document.getElementById('bigDateInput').showPicker();
-    }, 300);
+function toggleCalendar() {
+    const popup = document.getElementById('calendarPopup');
+    popup.style.display = popup.style.display === 'none' ? 'block' : 'none';
+    if (popup.style.display === 'block') {
+        setTimeout(function() {
+            document.getElementById('bigDateInput').showPicker();
+        }, 100);
+    }
+}
+
+function closeCalendar() {
+    document.getElementById('calendarPopup').style.display = 'none';
 }
 
 function assignBigDate() {
@@ -752,7 +744,7 @@ function assignBigDate() {
         success: function(response) {
             if (response.success) {
                 alert(response.message);
-                $('#bigCalendarModal').modal('hide');
+                closeCalendar();
                 location.reload();
             }
         },
@@ -761,6 +753,15 @@ function assignBigDate() {
         }
     });
 }
+
+// Close calendar when clicking outside
+document.addEventListener('click', function(event) {
+    const popup = document.getElementById('calendarPopup');
+    const btn = document.getElementById('dateBtn');
+    if (popup && btn && !popup.contains(event.target) && !btn.contains(event.target)) {
+        popup.style.display = 'none';
+    }
+});
 
 let sortOrders = {};
 
