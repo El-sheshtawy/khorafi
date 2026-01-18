@@ -693,53 +693,74 @@ $(document).ready(function() {
         </div>
     </div>
 
+<!-- Big Calendar Modal -->
+<div class="modal fade" id="bigCalendarModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content" style="border-radius: 15px; overflow: hidden;">
+            <div class="modal-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                <h5 class="modal-title" style="color: white; font-size: 22px;">اختر تاريخ المشاركة</h5>
+                <button type="button" class="close" data-dismiss="modal" style="color: white; opacity: 1;">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="padding: 40px; text-align: center;">
+                <input type="date" id="bigDateInput" class="form-control" 
+                       style="font-size: 24px; padding: 20px; border: 3px solid #667eea; border-radius: 10px; text-align: center; cursor: pointer;">
+            </div>
+            <div class="modal-footer" style="border: none; padding: 20px 40px;">
+                <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">إلغاء</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="assignBigDate()" 
+                        style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; padding: 12px 40px;">تعيين</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <style>
-#hiddenDatePicker {
-    filter: hue-rotate(200deg) saturate(2) brightness(1.2);
-}
-#hiddenDatePicker::-webkit-calendar-picker-indicator {
-    width: 200px;
-    height: 200px;
-    font-size: 100px;
+#bigDateInput::-webkit-calendar-picker-indicator {
+    font-size: 30px;
     cursor: pointer;
-    filter: invert(0.5) sepia(1) saturate(5) hue-rotate(175deg);
 }
 </style>
 
 <script>
-function openDatePicker() {
-    const datePicker = document.getElementById('hiddenDatePicker');
-    datePicker.showPicker();
+function showBigCalendar() {
+    $('#bigCalendarModal').modal('show');
+    setTimeout(function() {
+        document.getElementById('bigDateInput').focus();
+        document.getElementById('bigDateInput').showPicker();
+    }, 300);
 }
 
-document.getElementById('hiddenDatePicker').addEventListener('change', function() {
-    const date = this.value;
-    if (!date) return;
-    
-    if (confirm('هل تريد تعيين تاريخ ' + date + ' لجميع المشتركين؟')) {
-        $.ajax({
-            url: '{{ url("/admin/subscriptions/assign-date-all") }}',
-            type: 'POST',
-            data: {
-                participation_date: date,
-                number: '{{ request("number") ?? "" }}'
-            },
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(response) {
-                if (response.success) {
-                    alert(response.message);
-                    location.reload();
-                }
-            },
-            error: function(xhr) {
-                alert('حدث خطأ. الرجاء المحاولة مرة أخرى.');
-            }
-        });
+function assignBigDate() {
+    const date = document.getElementById('bigDateInput').value;
+    if (!date) {
+        alert('الرجاء اختيار التاريخ');
+        return;
     }
-    this.value = '';
-});
+
+    $.ajax({
+        url: '{{ url("/admin/subscriptions/assign-date-all") }}',
+        type: 'POST',
+        data: {
+            participation_date: date,
+            number: '{{ request("number") ?? "" }}'
+        },
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(response) {
+            if (response.success) {
+                alert(response.message);
+                $('#bigCalendarModal').modal('hide');
+                location.reload();
+            }
+        },
+        error: function(xhr) {
+            alert('حدث خطأ. الرجاء المحاولة مرة أخرى.');
+        }
+    });
+}
 
 let sortOrders = {};
 
