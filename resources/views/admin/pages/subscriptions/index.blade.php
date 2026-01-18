@@ -405,18 +405,18 @@ $(document).ready(function() {
                                 <div class="col-md-4 mr-auto text-right" style="position: relative;">
                                     <input type="date" id="bigDateInput" style="position: absolute; opacity: 0; pointer-events: none;">
                                     <input type="date" id="bulkDateInput" style="position: absolute; opacity: 0; pointer-events: none;">
-                                    <button type="button" class="btn btn-icon btn-primary" id="bulkDateBtn" onclick="openBulkCalendar()">
+                                    <button type="button" class="btn btn-sm btn-primary" id="bulkDateBtn" onclick="openBulkCalendar()" style="border-radius: 20px; padding: 6px 15px; font-size: 12px;">
                                         <i class="mdi mdi-calendar-multiple"></i> تعيين تاريخ للمحدد
                                     </button>
-                                    <button type="button" class="btn btn-icon btn-warning" onclick="openCalendarDirect()">
+                                    <button type="button" class="btn btn-sm btn-warning" onclick="openCalendarDirect()" style="border-radius: 20px; padding: 6px 15px; font-size: 12px;">
                                         <i class="mdi mdi-calendar-check"></i> تعيين تاريخ للجميع
                                     </button>
                                     <a href="{{ url('admin/subscriptions/excel/export?' . $_SERVER['QUERY_STRING']) }}"
-                                        class="btn btn-icon btn-info">
+                                        class="btn btn-sm btn-info" style="border-radius: 20px; padding: 6px 15px; font-size: 12px;">
                                         <i class="fas fa-print"></i> تصدير اكسل
                                     </a>
                                     <a href="{{ url('admin/subscriptions/excel/import') }}"
-                                        class="btn btn-icon btn-success">
+                                        class="btn btn-sm btn-success" style="border-radius: 20px; padding: 6px 15px; font-size: 12px;">
                                         <i class="mdi mdi-plus"></i> استيراد اكسل
                                     </a>
                                 </div>
