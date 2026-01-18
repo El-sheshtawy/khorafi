@@ -712,4 +712,64 @@ $(document).ready(function() {
             </div>
         </div>
     </div>
+
+    <!-- Date Assignment Modal -->
+    <div class="modal fade" id="dateAssignmentModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">تعيين تاريخ المشاركة</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>تاريخ المشاركة</label>
+                        <input type="date" class="form-control" id="participationDate" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-primary" onclick="assignDate()">تعيين</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+function showDateModalAll() {
+    $('#dateAssignmentModal').modal('show');
+}
+
+function assignDate() {
+    const date = document.getElementById('participationDate').value;
+    if (!date) {
+        alert('الرجاء اختيار التاريخ');
+        return;
+    }
+
+    $.ajax({
+        url: '{{ url("/admin/subscriptions/assign-date-all") }}',
+        type: 'POST',
+        data: {
+            participation_date: date,
+            number: '{{ request("number") ?? "" }}'
+        },
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(response) {
+            if (response.success) {
+                alert(response.message);
+                $('#dateAssignmentModal').modal('hide');
+                location.reload();
+            }
+        },
+        error: function(xhr) {
+            alert('حدث خطأ. الرجاء المحاولة مرة أخرى.');
+        }
+    });
+}
+</script>
 @endsection
