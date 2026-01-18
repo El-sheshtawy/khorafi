@@ -405,7 +405,7 @@ $(document).ready(function() {
                                 <div class="col-md-4 mr-auto text-right" style="position: relative;">
                                     <input type="date" id="bigDateInput" style="position: absolute; opacity: 0; pointer-events: none;">
                                     <input type="date" id="bulkDateInput" style="position: absolute; opacity: 0; pointer-events: none;">
-                                    <button type="button" class="btn btn-icon btn-primary" id="bulkDateBtn" style="display: none;" onclick="openBulkCalendar()">
+                                    <button type="button" class="btn btn-icon btn-primary" id="bulkDateBtn" onclick="openBulkCalendar()">
                                         <i class="mdi mdi-calendar-multiple"></i> تعيين تاريخ للمحدد
                                     </button>
                                     <button type="button" class="btn btn-icon btn-warning" onclick="openCalendarDirect()">
