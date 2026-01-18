@@ -563,58 +563,34 @@ $(document).ready(function() {
 <thead style="background-color: #6c757d; font-weight: bold;">
     <tr class="text-center">
         <th style="border: none; color:white;">مسلسل</th>
-        <th class="text-center" style="white-space: nowrap; border: none;color:white;">
-            <span style="display: flex; align-items: center; gap: 4px;color:white;">
-                <button id="sortUsernameAsc" data-order="asc" class="sort-btn"><i class="fas fa-arrow-up"></i></button>
-                <button id="sortUsernameDesc" data-order="desc" class="sort-btn"><i class="fas fa-arrow-down"></i></button>
-                <span style="color:white;">اسم المستخدم</span>
-            </span>
+        <th class="text-center" style="white-space: nowrap; border: none;color:white; cursor: pointer;" onclick="toggleSort('username')">
+            <span style="color:white;">اسم المستخدم</span>
         </th>
         <th style="border: none;color:white;">الجنسية</th>
         <th style="border: none;color:white;">الرقم المدني</th>
         <th style="border: none;color:white;">رقم الهاتف</th>
         <th class="text-center" style="font-size: 14px; border: none;color:white;">فئة</th>
         
-        <th class="text-center" style="white-space: nowrap; border: none;color:white;">
-            <span style="display: flex; align-items: center; gap: 4px;color:white;">
-                <button id="sortAsc" data-order="asc" class="sort-btn"><i class="fas fa-arrow-up"></i></button>
-                <button id="sortDesc" data-order="desc" class="sort-btn"><i class="fas fa-arrow-down"></i></button>
-                <span style="color:white;">تاريخ التسجيل</span>
-            </span>
+        <th class="text-center" style="white-space: nowrap; border: none;color:white; cursor: pointer;" onclick="toggleSort('created_at')">
+            <span style="color:white;">تاريخ التسجيل</span>
         </th>
 
-        <th class="text-center" style="white-space: nowrap; border: none;color:white;">
-            <span style="display: flex; align-items: center; gap: 4px;color:white;">
-                <button id="sortYearAsc" data-order="asc" class="sort-btn"><i class="fas fa-arrow-up"></i></button>
-                <button id="sortYearDesc" data-order="desc" class="sort-btn"><i class="fas fa-arrow-down"></i></button>
-                <span style="color:white;">السنة</span>
-            </span>
+        <th class="text-center" style="white-space: nowrap; border: none;color:white; cursor: pointer;" onclick="toggleSort('date')">
+            <span style="color:white;">السنة</span>
         </th>
 
-        <th class="text-center" style="white-space: nowrap; border: none;color:white;">
-            <span style="display: flex; align-items: center; gap: 4px;color:white;">
-                <button id="sortCompetitionAsc" data-order="asc" class="sort-btn"><i class="fas fa-arrow-up"></i></button>
-                <button id="sortCompetitionDesc" data-order="desc" class="sort-btn"><i class="fas fa-arrow-down"></i></button>
-                <span style="color:white;">المسابقة</span>
-            </span>
+        <th class="text-center" style="white-space: nowrap; border: none;color:white; cursor: pointer;" onclick="toggleSort('number')">
+            <span style="color:white;">المسابقة</span>
         </th>
 
         <th class="text-center" style="border: none;color:white;white-space: nowrap;">تاريخ المشاركة</th>
 
-        <th class="text-center" style="white-space: nowrap; border: none;color:white;">
-            <span style="display: flex; align-items: center; gap: 4px;color:white;">
-                <button id="sortRankAsc" data-order="asc" class="sort-btn"><i class="fas fa-arrow-up"></i></button>
-                <button id="sortRankDesc" data-order="desc" class="sort-btn"><i class="fas fa-arrow-down"></i></button>
-                <span style="color:white;">المركز</span>
-            </span>
+        <th class="text-center" style="white-space: nowrap; border: none;color:white; cursor: pointer;" onclick="toggleSort('level')">
+            <span style="color:white;">المركز</span>
         </th>
 
-        <th class="text-center" style="white-space: nowrap; border: none;color:white;">
-            <span style="display: flex; align-items: center; gap: 4px;color:white;">
-                <button id="sortGradeAsc" data-order="asc" class="sort-btn"><i class="fas fa-arrow-up"></i></button>
-                <button id="sortGradeDesc" data-order="desc" class="sort-btn"><i class="fas fa-arrow-down"></i></button>
-                <span style="color:white;">الدرجة</span>
-            </span>
+        <th class="text-center" style="white-space: nowrap; border: none;color:white; cursor: pointer;" onclick="toggleSort('degree')">
+            <span style="color:white;">الدرجة</span>
         </th>
 
         <th class="text-center" style="border: none;color:white;">التحكم</th>
@@ -774,6 +750,19 @@ function assignDate() {
             alert('حدث خطأ. الرجاء المحاولة مرة أخرى.');
         }
     });
+}
+
+let sortOrders = {};
+
+function toggleSort(column) {
+    const currentOrder = sortOrders[column] || 'desc';
+    const newOrder = currentOrder === 'asc' ? 'desc' : 'asc';
+    sortOrders[column] = newOrder;
+    
+    const url = new URL(window.location.href);
+    url.searchParams.set('type', column);
+    url.searchParams.set('order_type', newOrder);
+    window.location.href = url.toString();
 }
 </script>
 @endsection
