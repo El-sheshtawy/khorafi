@@ -695,10 +695,15 @@ $(document).ready(function() {
     </div>
 
 <style>
+#hiddenDatePicker {
+    filter: hue-rotate(200deg) saturate(2) brightness(1.2);
+}
 #hiddenDatePicker::-webkit-calendar-picker-indicator {
-    width: 100%;
-    height: 100%;
-    font-size: 50px;
+    width: 200px;
+    height: 200px;
+    font-size: 100px;
+    cursor: pointer;
+    filter: invert(0.5) sepia(1) saturate(5) hue-rotate(175deg);
 }
 </style>
 
