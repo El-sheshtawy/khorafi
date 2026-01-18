@@ -739,7 +739,11 @@ function toggleSelectAll(checkbox) {
 
 function toggleBulkButton() {
     const selected = document.querySelectorAll('.row-checkbox:checked');
-    document.getElementById('bulkDateBtn').style.display = selected.length > 0 ? 'inline-block' : 'none';
+    const btn = document.getElementById('bulkDateBtn');
+    if (btn) {
+        btn.style.display = selected.length > 0 ? 'inline-block' : 'none';
+        console.log('Selected:', selected.length, 'Button display:', btn.style.display);
+    }
 }
 
 function getSelectedIds() {
