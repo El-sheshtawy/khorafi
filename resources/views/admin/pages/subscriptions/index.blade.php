@@ -163,7 +163,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     const row = document.createElement('tr');
                     
                     row.innerHTML = `
-                        
+                        <td class="text-center">
+                            <input type="checkbox" class="row-checkbox" value="${val.id}" onchange="toggleBulkButton()">
+                        </td>
                         <td class="text-center">
                                              ${index + 1}
                                             </td>
@@ -178,6 +180,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         <td class="text-center" style="white-space: nowrap;">${val.participation_date || '-'}</td>
                         <td class="text-center">${val.level}</td>
                         <td class="text-center">${val.degree}</td>
+                        <td class="text-center">
+                            <input type="date" class="form-control form-control-sm" style="font-size: 12px;" 
+                                   onchange="assignSingleDate(${val.id}, this.value)">
+                        </td>
                         <td class="text-center">
                             <a href="javascript:void(0);" onclick="deleteSubscription(${val.id})" class="btn btn-icon btn-danger" title="حذف الاشتراك">
                             <i class="mdi mdi-delete"></i>
@@ -398,8 +404,12 @@ $(document).ready(function() {
 
                                 <div class="col-md-4 mr-auto text-right" style="position: relative;">
                                     <input type="date" id="bigDateInput" style="position: absolute; opacity: 0; pointer-events: none;">
+                                    <input type="date" id="bulkDateInput" style="position: absolute; opacity: 0; pointer-events: none;">
                                     <button type="button" class="btn btn-icon btn-warning" onclick="openCalendarDirect()">
                                         <i class="mdi mdi-calendar-check"></i> تعيين تاريخ للجميع
+                                    </button>
+                                    <button type="button" class="btn btn-icon btn-primary" id="bulkDateBtn" style="display: none;" onclick="openBulkCalendar()">
+                                        <i class="mdi mdi-calendar-multiple"></i> تعيين تاريخ للمحدد
                                     </button>
                                     <a href="{{ url('admin/subscriptions/excel/export?' . $_SERVER['QUERY_STRING']) }}"
                                         class="btn btn-icon btn-info">
@@ -563,6 +573,9 @@ $(document).ready(function() {
 <!--</thead>-->
 <thead style="background-color: #6c757d; font-weight: bold;">
     <tr class="text-center" style="font-size: 13px;">
+        <th style="border: none; color:white; padding: 6px;">
+            <input type="checkbox" id="selectAll" onchange="toggleSelectAll(this)">
+        </th>
         <th style="border: none; color:white; padding: 6px;">مسلسل</th>
         <th class="text-center" style="white-space: nowrap; border: none;color:white; cursor: pointer; padding: 6px;" onclick="toggleSort('username')">
             <span style="color:white;">اسم المستخدم</span>
@@ -594,6 +607,7 @@ $(document).ready(function() {
             <span style="color:white;">الدرجة</span>
         </th>
 
+        <th class="text-center" style="border: none;color:white;">تعيين تاريخ</th>
         <th class="text-center" style="border: none;color:white;">التحكم</th>
     </tr>
 </thead>
@@ -603,6 +617,9 @@ $(document).ready(function() {
                                         @foreach ($data as $key => $val)
                                             @if (!empty($val->user->username))
                                                 <tr>
+                                                    <td class="text-center">
+                                                        <input type="checkbox" class="row-checkbox" value="{{ $val->id }}" onchange="toggleBulkButton()">
+                                                    </td>
                                                     <td class="text-center">
                                                         {{ $key + 1 }}
                                                     </td>
@@ -641,6 +658,10 @@ $(document).ready(function() {
                                                     <td class="text-center" style="white-space: nowrap;">{{ $val->participation_date ?? '-' }}</td>
                                                     <td class="text-center">{{ $val->level }}</td>
                                                     <td class="text-center">{{ $val->degree }}</td>
+                                                    <td class="text-center">
+                                                        <input type="date" class="form-control form-control-sm" style="font-size: 12px;" 
+                                                               onchange="assignSingleDate({{ $val->id }}, this.value)">
+                                                    </td>
 
 
                                                     <td class="text-center">
@@ -706,6 +727,26 @@ function openCalendarDirect() {
     document.getElementById('bigDateInput').showPicker();
 }
 
+function openBulkCalendar() {
+    document.getElementById('bulkDateInput').showPicker();
+}
+
+function toggleSelectAll(checkbox) {
+    const checkboxes = document.querySelectorAll('.row-checkbox');
+    checkboxes.forEach(cb => cb.checked = checkbox.checked);
+    toggleBulkButton();
+}
+
+function toggleBulkButton() {
+    const selected = document.querySelectorAll('.row-checkbox:checked');
+    document.getElementById('bulkDateBtn').style.display = selected.length > 0 ? 'inline-block' : 'none';
+}
+
+function getSelectedIds() {
+    const checkboxes = document.querySelectorAll('.row-checkbox:checked');
+    return Array.from(checkboxes).map(cb => cb.value);
+}
+
 document.getElementById('bigDateInput').addEventListener('change', function() {
     const date = this.value;
     if (!date) return;
@@ -734,6 +775,65 @@ document.getElementById('bigDateInput').addEventListener('change', function() {
     }
     this.value = '';
 });
+
+document.getElementById('bulkDateInput').addEventListener('change', function() {
+    const date = this.value;
+    if (!date) return;
+    
+    const selectedIds = getSelectedIds();
+    if (selectedIds.length === 0) {
+        alert('الرجاء تحديد مشترك واحد على الأقل');
+        return;
+    }
+    
+    if (confirm('هل تريد تعيين تاريخ ' + date + ' لـ ' + selectedIds.length + ' مشترك؟')) {
+        $.ajax({
+            url: '{{ url("/admin/subscriptions/assign-date-multiple") }}',
+            type: 'POST',
+            data: {
+                participation_date: date,
+                ids: selectedIds
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                if (response.success) {
+                    alert(response.message);
+                    location.reload();
+                }
+            },
+            error: function(xhr) {
+                alert('حدث خطأ. الرجاء المحاولة مرة أخرى.');
+            }
+        });
+    }
+    this.value = '';
+});
+
+function assignSingleDate(id, date) {
+    if (!date) return;
+    
+    $.ajax({
+        url: '{{ url("/admin/subscriptions/assign-date-single") }}/' + id,
+        type: 'POST',
+        data: {
+            participation_date: date
+        },
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(response) {
+            if (response.success) {
+                alert(response.message);
+                location.reload();
+            }
+        },
+        error: function(xhr) {
+            alert('حدث خطأ. الرجاء المحاولة مرة أخرى.');
+        }
+    });
+}
 
 let sortOrders = {};
 
