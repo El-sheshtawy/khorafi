@@ -695,23 +695,24 @@ $(document).ready(function() {
 
     <!-- Date Assignment Modal -->
     <div class="modal fade" id="dateAssignmentModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">تعيين تاريخ المشاركة</h5>
-                    <button type="button" class="close" data-dismiss="modal">
+                <div class="modal-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <h5 class="modal-title" style="color: white;">تعيين تاريخ المشاركة</h5>
+                    <button type="button" class="close" data-dismiss="modal" style="color: white;">
                         <span>&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" style="padding: 30px;">
                     <div class="form-group">
-                        <label>تاريخ المشاركة</label>
-                        <input type="date" class="form-control" id="participationDate" required>
+                        <label style="font-size: 16px; font-weight: bold; color: #333;">اختر تاريخ المشاركة</label>
+                        <input type="date" class="form-control" id="participationDate" required 
+                               style="font-size: 18px; padding: 15px; border: 2px solid #667eea; border-radius: 8px;">
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer" style="background-color: #f8f9fa;">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
-                    <button type="button" class="btn btn-primary" onclick="assignDate()">تعيين</button>
+                    <button type="button" class="btn btn-primary" onclick="assignDate()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; padding: 10px 30px;">تعيين</button>
                 </div>
             </div>
         </div>
@@ -720,6 +721,10 @@ $(document).ready(function() {
 <script>
 function showDateModalAll() {
     $('#dateAssignmentModal').modal('show');
+    setTimeout(function() {
+        document.getElementById('participationDate').focus();
+        document.getElementById('participationDate').showPicker();
+    }, 500);
 }
 
 function assignDate() {
