@@ -175,9 +175,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         <td class="text-center">${val.created_at}</td>
                         <td class="text-center">${val.date}</td>
                         <td class="text-center">${val.number ?? '-'}</td>
+                        <td class="text-center" style="white-space: nowrap;">${val.participation_date || '-'}</td>
                         <td class="text-center">${val.level}</td>
                         <td class="text-center">${val.degree}</td>
-                        <td class="text-center">${val.participation_date || '-'}</td>
                         <td class="text-center">
                             <a href="javascript:void(0);" onclick="deleteSubscription(${val.id})" class="btn btn-icon btn-danger" title="حذف الاشتراك">
                             <i class="mdi mdi-delete"></i>
@@ -599,6 +599,8 @@ $(document).ready(function() {
             </span>
         </th>
 
+        <th class="text-center" style="border: none;color:white;white-space: nowrap;">تاريخ المشاركة</th>
+
         <th class="text-center" style="white-space: nowrap; border: none;color:white;">
             <span style="display: flex; align-items: center; gap: 4px;color:white;">
                 <button id="sortRankAsc" data-order="asc" class="sort-btn"><i class="fas fa-arrow-up"></i></button>
@@ -615,7 +617,6 @@ $(document).ready(function() {
             </span>
         </th>
 
-        <th class="text-center" style="border: none;color:white;">تاريخ المشاركة</th>
         <th class="text-center" style="border: none;color:white;">التحكم</th>
     </tr>
 </thead>
@@ -660,9 +661,9 @@ $(document).ready(function() {
                                                     <td class="created-at text-center">{{ $val->created_at }}</td>
                                                     <td class="text-center">{{ $val->date }}</td>
                                                     <td class="text-center">{{ $val->number ?? '-' }}</td>
+                                                    <td class="text-center" style="white-space: nowrap;">{{ $val->participation_date ?? '-' }}</td>
                                                     <td class="text-center">{{ $val->level }}</td>
                                                     <td class="text-center">{{ $val->degree }}</td>
-                                                    <td class="text-center">{{ $val->participation_date ?? '-' }}</td>
 
 
                                                     <td class="text-center">
