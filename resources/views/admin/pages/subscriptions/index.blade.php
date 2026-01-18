@@ -290,11 +290,15 @@ $(document).ready(function() {
                         <div class="card-box">
                             <form action="">
                                 <div class="row">
-                                    <div class="col-md-3 mt-3">
+                                    <div class="col-md-2 mt-3">
                                         <input class="form-control" type="number" name="id"
                                             value="{{ request('id') }}" placeholder="الرقم المدني">
                                     </div>
-                                    <div class="col-md-3 mt-3">
+                                    <div class="col-md-2 mt-3">
+                                        <input class="form-control" type="number" placeholder="السنة" name="date"
+                                            value="{{ request('date') }}">
+                                    </div>
+                                    <div class="col-md-2 mt-3">
                                         <input class="form-control" type="text" name="username"
                                             value="{{ request('username') }}" placeholder="اسم المستخدم">
                                     </div>
@@ -367,7 +371,7 @@ $(document).ready(function() {
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-md-3 mt-3">
+                                    <div class="col-md-2 mt-3">
                                         <select class="form-control" name="order_type">
                                             <option value="">طريقة الترتيب</option>
                                             <option value="asc" {{ request('order_type') == 'asc' ? 'selected' : '' }}>
@@ -376,11 +380,7 @@ $(document).ready(function() {
                                                 تنازلي</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-3 mt-3">
-                                        <input class="form-control" type="number" placeholder="السنة" name="date"
-                                            value="{{ request('date') }}">
-                                    </div>
-                                    <div class="col-md-3 mt-3">
+                                    <div class="col-md-2 mt-3">
                                         <input type="text" class="form-control" name="number" placeholder="رقم المسابقة"
                                             value="{{ request('number') }}">
                                     </div>
