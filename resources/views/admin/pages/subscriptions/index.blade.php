@@ -396,6 +396,9 @@ $(document).ready(function() {
 </h4>
 
                                 <div class="col-md-4 mr-auto text-right">
+                                    <button type="button" class="btn btn-icon btn-warning" onclick="showDateModalAll()">
+                                        <i class="mdi mdi-calendar-check"></i> تعيين تاريخ للجميع
+                                    </button>
                                     <a href="{{ url('admin/subscriptions/excel/export?' . $_SERVER['QUERY_STRING']) }}"
                                         class="btn btn-icon btn-info">
                                         <i class="fas fa-print"></i> تصدير اكسل
