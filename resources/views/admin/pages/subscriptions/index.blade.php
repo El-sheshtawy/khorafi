@@ -397,7 +397,8 @@ $(document).ready(function() {
 </h4>
 
                                 <div class="col-md-4 mr-auto text-right">
-                                    <button type="button" class="btn btn-icon btn-warning" onclick="showDateModalAll()">
+                                    <input type="date" id="hiddenDatePicker" style="position: absolute; opacity: 0; pointer-events: none;">
+                                    <button type="button" class="btn btn-icon btn-warning" onclick="openDatePicker()">
                                         <i class="mdi mdi-calendar-check"></i> تعيين تاريخ للجميع
                                     </button>
                                     <a href="{{ url('admin/subscriptions/excel/export?' . $_SERVER['QUERY_STRING']) }}"
@@ -693,69 +694,48 @@ $(document).ready(function() {
         </div>
     </div>
 
-    <!-- Date Assignment Modal -->
-    <div class="modal fade" id="dateAssignmentModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
-                    <h5 class="modal-title" style="color: white;">تعيين تاريخ المشاركة</h5>
-                    <button type="button" class="close" data-dismiss="modal" style="color: white;">
-                        <span>&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" style="padding: 30px;">
-                    <div class="form-group">
-                        <label style="font-size: 16px; font-weight: bold; color: #333;">اختر تاريخ المشاركة</label>
-                        <input type="date" class="form-control" id="participationDate" required 
-                               style="font-size: 18px; padding: 15px; border: 2px solid #667eea; border-radius: 8px;">
-                    </div>
-                </div>
-                <div class="modal-footer" style="background-color: #f8f9fa;">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
-                    <button type="button" class="btn btn-primary" onclick="assignDate()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; padding: 10px 30px;">تعيين</button>
-                </div>
-            </div>
-        </div>
-    </div>
+<style>
+#hiddenDatePicker::-webkit-calendar-picker-indicator {
+    width: 100%;
+    height: 100%;
+    font-size: 50px;
+}
+</style>
 
 <script>
-function showDateModalAll() {
-    $('#dateAssignmentModal').modal('show');
-    setTimeout(function() {
-        document.getElementById('participationDate').focus();
-        document.getElementById('participationDate').showPicker();
-    }, 500);
+function openDatePicker() {
+    const datePicker = document.getElementById('hiddenDatePicker');
+    datePicker.showPicker();
 }
 
-function assignDate() {
-    const date = document.getElementById('participationDate').value;
-    if (!date) {
-        alert('الرجاء اختيار التاريخ');
-        return;
-    }
-
-    $.ajax({
-        url: '{{ url("/admin/subscriptions/assign-date-all") }}',
-        type: 'POST',
-        data: {
-            participation_date: date,
-            number: '{{ request("number") ?? "" }}'
-        },
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        success: function(response) {
-            if (response.success) {
-                alert(response.message);
-                $('#dateAssignmentModal').modal('hide');
-                location.reload();
+document.getElementById('hiddenDatePicker').addEventListener('change', function() {
+    const date = this.value;
+    if (!date) return;
+    
+    if (confirm('هل تريد تعيين تاريخ ' + date + ' لجميع المشتركين؟')) {
+        $.ajax({
+            url: '{{ url("/admin/subscriptions/assign-date-all") }}',
+            type: 'POST',
+            data: {
+                participation_date: date,
+                number: '{{ request("number") ?? "" }}'
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                if (response.success) {
+                    alert(response.message);
+                    location.reload();
+                }
+            },
+            error: function(xhr) {
+                alert('حدث خطأ. الرجاء المحاولة مرة أخرى.');
             }
-        },
-        error: function(xhr) {
-            alert('حدث خطأ. الرجاء المحاولة مرة أخرى.');
-        }
-    });
-}
+        });
+    }
+    this.value = '';
+});
 
 let sortOrders = {};
 
