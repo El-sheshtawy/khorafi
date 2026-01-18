@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <td class="text-center">
                                              ${index + 1}
                                             </td>
-                        <td style="color: ${val.gender === 'female' ? 'red' : '#085d9e'}; font-weight: bold;">${val.username}</td>
+                                    <td style="color: ${val.gender === 'female' ? 'red' : '#085d9e'}; font-weight: bold; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${val.username}">${val.username}</td>
                         <td>${val.gender === 'male' ? 'ذكر' : 'أنثى'}</td>
                         <td>${val.identify}</td>
                         <td><a href="https://wa.me/${val.mobile}" target="_blank">${val.mobile}</a></td>
@@ -413,7 +413,7 @@ $(document).ready(function() {
 <div>
                         <button id="deleteSelectedButton" style="display:none;" class="btn btn-danger">حذف المحدد</button>
                     </div>
-                            <div class="table-responsive">
+                            <div class="table-responsive" style="overflow-x: visible;">
                                 <table class="table "id="dataTable">
 <!--                                    <thead>-->
 <!--                                        <tr class="text-center">-->
@@ -639,8 +639,8 @@ $(document).ready(function() {
 <!--    onclick="window.location='{{ url('/') }}/admin/subscriptions/edit/{{ $val->id }}'">-->
 <!--    {{ $val->user->username }}-->
 <!--</td>-->
-<td style="color: {{ $val->user->gender == 'female' ? 'red' : '#085d9e' }}; font-weight: bold; cursor: pointer;" 
-    onclick="window.location='{{ url('/') }}/admin/subscriptions/edit/{{ $val->id }}'">
+<td style="color: {{ $val->user->gender == 'female' ? 'red' : '#085d9e' }}; font-weight: bold; cursor: pointer; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" 
+    onclick="window.location='{{ url('/') }}/admin/subscriptions/edit/{{ $val->id }}'" title="{{ $val->user->username }}">
     {{ $val->user->username }}
 </td>
 
