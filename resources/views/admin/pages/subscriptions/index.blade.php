@@ -741,7 +741,12 @@ function toggleBulkButton() {
     const selected = document.querySelectorAll('.row-checkbox:checked');
     const btn = document.getElementById('bulkDateBtn');
     if (btn) {
-        btn.style.display = selected.length > 0 ? 'inline-block' : 'none';
+        if (selected.length > 0) {
+            btn.style.display = 'inline-block';
+            btn.style.visibility = 'visible';
+        } else {
+            btn.style.display = 'none';
+        }
         console.log('Selected:', selected.length, 'Button display:', btn.style.display);
     }
 }
