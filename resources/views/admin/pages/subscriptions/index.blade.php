@@ -396,34 +396,28 @@ $(document).ready(function() {
                     <div class="col-12">
                         <div class="card-box">
 
-                            <div class="row" style="margin-bottom: 15px">
-                                <!--<h4 class="header-title col-md-8">عرض الاشتراكات ({{ $count }})</h4>-->
-                                <h4 class="header-title col-md-8">
-    عرض الاشتراكات (<span id="subscriptionCount">{{ $count }}</span>)
-</h4>
-
-                                <div class="col-md-4 mr-auto text-right" style="position: relative;">
+                            <div class="row" style="margin-bottom: 15px; align-items: center;">
+                                <div class="col-md-4">
+                                    <h4 class="header-title">عرض الاشتراكات (<span id="subscriptionCount">{{ $count }}</span>)</h4>
+                                </div>
+                                <div class="col-md-8 text-right" style="position: relative;">
                                     <input type="date" id="bigDateInput" style="position: absolute; opacity: 0; pointer-events: none;">
                                     <input type="date" id="bulkDateInput" style="position: absolute; opacity: 0; pointer-events: none;">
-                                    <button type="button" class="btn btn-sm btn-primary" id="bulkDateBtn" onclick="openBulkCalendar()" style="border-radius: 20px; padding: 6px 15px; font-size: 12px;">
+                                    <button type="button" class="btn btn-sm btn-primary" id="bulkDateBtn" onclick="openBulkCalendar()" style="border-radius: 20px; padding: 6px 15px; font-size: 12px; display: inline-block;">
                                         <i class="mdi mdi-calendar-multiple"></i> تعيين تاريخ للمحدد
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-warning" onclick="openCalendarDirect()" style="border-radius: 20px; padding: 6px 15px; font-size: 12px;">
+                                    <button type="button" class="btn btn-sm btn-warning" onclick="openCalendarDirect()" style="border-radius: 20px; padding: 6px 15px; font-size: 12px; display: inline-block;">
                                         <i class="mdi mdi-calendar-check"></i> تعيين تاريخ للجميع
                                     </button>
-                                    <a href="{{ url('admin/subscriptions/excel/export?' . $_SERVER['QUERY_STRING']) }}"
-                                        class="btn btn-sm btn-info" style="border-radius: 20px; padding: 6px 15px; font-size: 12px;">
+                                    <a href="{{ url('admin/subscriptions/excel/export?' . $_SERVER['QUERY_STRING']) }}" class="btn btn-sm btn-info" style="border-radius: 20px; padding: 6px 15px; font-size: 12px; display: inline-block;">
                                         <i class="fas fa-print"></i> تصدير اكسل
                                     </a>
-                                    <a href="{{ url('admin/subscriptions/excel/import') }}"
-                                        class="btn btn-sm btn-success" style="border-radius: 20px; padding: 6px 15px; font-size: 12px;">
+                                    <a href="{{ url('admin/subscriptions/excel/import') }}" class="btn btn-sm btn-success" style="border-radius: 20px; padding: 6px 15px; font-size: 12px; display: inline-block;">
                                         <i class="mdi mdi-plus"></i> استيراد اكسل
                                     </a>
+                                    <button id="deleteSelectedButton" style="display:none; border-radius: 20px; padding: 6px 15px; font-size: 12px;" class="btn btn-sm btn-danger">حذف المحدد</button>
                                 </div>
                             </div>
-<div>
-                        <button id="deleteSelectedButton" style="display:none;" class="btn btn-danger">حذف المحدد</button>
-                    </div>
                             <div class="table-responsive" style="overflow-x: visible;">
                                 <table class="table table-sm" id="dataTable" style="font-size: 13px;">
 <!--                                    <thead>-->
