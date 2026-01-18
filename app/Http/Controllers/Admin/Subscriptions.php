@@ -782,6 +782,60 @@ $sheet->setCellValue('AB' . ($key + 2), $addressParts[1] ?? '');
         }
         return view('admin.pages.subscriptions.get-subscription', ['id' => $id, 'user' => $user]);
     }
+
+    // Assign participation date to all subscriptions
+    public function assignDateToAll(Request $request)
+    {
+        $request->validate([
+            'participation_date' => 'required|date',
+            'number' => 'required'
+        ]);
+
+        $updated = Subscription::where('number', $request->number)
+            ->update(['participation_date' => $request->participation_date]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'تم تعيين التاريخ لجميع المشتركين بنجاح',
+            'count' => $updated
+        ]);
+    }
+
+    // Assign participation date to multiple selected subscriptions
+    public function assignDateToMultiple(Request $request)
+    {
+        $request->validate([
+            'participation_date' => 'required|date',
+            'ids' => 'required|array',
+            'ids.*' => 'exists:subscriptions,id'
+        ]);
+
+        $updated = Subscription::whereIn('id', $request->ids)
+            ->update(['participation_date' => $request->participation_date]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'تم تعيين التاريخ للمشتركين المحددين بنجاح',
+            'count' => $updated
+        ]);
+    }
+
+    // Assign participation date to single subscription
+    public function assignDateToSingle(Request $request, $id)
+    {
+        $request->validate([
+            'participation_date' => 'required|date'
+        ]);
+
+        $subscription = Subscription::findOrFail($id);
+        $subscription->participation_date = $request->participation_date;
+        $subscription->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'تم تعيين التاريخ بنجاح'
+        ]);
+    }
   
 
 }

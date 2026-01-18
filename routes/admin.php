@@ -107,11 +107,13 @@ Route::group(["prefix" => "admin", "namespace" => 'Admin'], function () {
         Route::post("/subscriptions/excel/import", "Subscriptions@DoImportExcel");
         Route::get("/subscriptions/get/{id}", "Subscriptions@GetSubscription");
         Route::get('/subscriptions/fetch', "Subscriptions@fetchSubscriptions");
- Route::delete('/subscriptions/delete/{id}', "Subscriptions@deleteSubscription");
- 
- //here i add the multiple selection for the deletion
- 
- Route::post('/subscriptions/delete-selected/{ids}', "Subscriptions@deleteSubscriptiontotal");
+        Route::delete('/subscriptions/delete/{id}', "Subscriptions@deleteSubscription");
+        Route::post('/subscriptions/delete-selected/{ids}', "Subscriptions@deleteSubscriptiontotal");
+        
+        // Participation date assignment routes
+        Route::post('/subscriptions/assign-date-all', "Subscriptions@assignDateToAll");
+        Route::post('/subscriptions/assign-date-multiple', "Subscriptions@assignDateToMultiple");
+        Route::post('/subscriptions/assign-date-single/{id}', "Subscriptions@assignDateToSingle");
         Route::get("/contact", "ContactController@index");
         Route::get("/contact/reply/{id}", "ContactController@reply");
         Route::post("/contact/reply/{id}", "ContactController@update");
