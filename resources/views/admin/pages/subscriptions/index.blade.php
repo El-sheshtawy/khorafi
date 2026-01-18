@@ -397,8 +397,7 @@ $(document).ready(function() {
 </h4>
 
                                 <div class="col-md-4 mr-auto text-right">
-                                    <input type="date" id="hiddenDatePicker" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(3); z-index: 9999; opacity: 0; pointer-events: none;">
-                                    <button type="button" class="btn btn-icon btn-warning" onclick="openDatePicker()">
+                                    <button type="button" class="btn btn-icon btn-warning" onclick="showBigCalendar()">
                                         <i class="mdi mdi-calendar-check"></i> تعيين تاريخ للجميع
                                     </button>
                                     <a href="{{ url('admin/subscriptions/excel/export?' . $_SERVER['QUERY_STRING']) }}"
