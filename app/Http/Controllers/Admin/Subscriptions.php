@@ -543,6 +543,14 @@ public function index()
             }
             $data = $data->whereIn('user_id', $id);
         }
+        
+        if (!empty(request('number'))) {
+            $data = $data->where('number', 'LIKE', '%' . request('number') . '%');
+        }
+        
+        if (!empty(request('subscrition'))) {
+            $data = $data->where('degree', '>', 0);
+        }
 
         if (!empty(request('id'))) {
             $users = User::where('identify', 'LIKE', '%' . request('id') . '%')->get();
@@ -561,8 +569,6 @@ public function index()
             }
             $data = $data->whereIn('user_id', $id);
         }
-        
-        
 
         if (!empty(request('gender'))) {
             $users = User::where('gender', request('gender'))->get();
@@ -594,13 +600,14 @@ public function index()
         if (!empty(request('name_id'))) {
             $data = $data->where('name_id', request('name_id'));
         }
-  if (!empty(request('number'))) {
-            $data = $data->where('number', request('number'));
-        }
+
         if (!empty(request('date'))) {
             $data = $data->where('date', 'LIKE', '%' . request('date') . '%');
         } else {
-            $data = $data->where('number', 'LIKE', '%' . $config->number . '%');
+            $data = $data->where(function($query) use ($config) {
+                $query->where('date', 'LIKE', '%' . $config->year . '%')
+                      ->orWhere('date', 'LIKE', '%' . ($config->year - 1) . '%');
+            });
         }
 
         if (!empty(request('winner'))) {
@@ -608,18 +615,37 @@ public function index()
             $data = $data->where('winner', $winner);
         }
 
-        if (!empty(request('type')) and in_array(request('type'), ['winner', 'name_id', 'degree', 'level']) and !empty(request('order_type')) and in_array(request('order_type'), ['asc', 'desc'])) {
-            $data = $data->orderBy(request('type'), request('order_type'));
-        } else {
-            $data->orderBy('degree', 'desc')->orderBy('level', 'asc');
+        if (!empty(request('participation_date'))) {
+            $data = $data->where('participation_date', request('participation_date'));
         }
 
-        $count = $data->count();
+        if (!empty(request('date_status'))) {
+            if (request('date_status') == 'assigned') {
+                $data = $data->whereNotNull('participation_date');
+            } elseif (request('date_status') == 'not_assigned') {
+                $data = $data->whereNull('participation_date');
+            }
+        }
 
-        if (!empty(request('username')) or !empty(request('winner')) or !empty(request('id')) or !empty(request('email')) or !empty(request('gender')) or !empty(request('city_id')) or !empty(request('nationality_id')) or !empty(request('name_id')) or !empty(request('date')) or !empty(request('type'))) {
+        if (!empty(request('type')) and in_array(request('type'), ['winner', 'name_id', 'degree', 'level', 'created_at', 'date', 'number', 'participation_date']) and !empty(request('order_type')) and in_array(request('order_type'), ['asc', 'desc'])) {
+            if (request('type') == 'participation_date') {
+                if (request('order_type') == 'asc') {
+                    $data = $data->orderByRaw('participation_date IS NULL ASC, participation_date ASC');
+                } else {
+                    $data = $data->orderByRaw('participation_date IS NULL ASC, participation_date DESC');
+                }
+            } else {
+                $data = $data->orderBy(request('type'), request('order_type'));
+            }
+        } elseif (empty(request('type')) && empty(request('order_type'))) {
+            $data = $data->orderBy('created_at', 'desc');
+        }
+
+        if (!empty(request('username')) or !empty(request('number')) or !empty(request('id')) or !empty(request('email')) or !empty(request('gender')) or !empty(request('city_id')) or !empty(request('nationality_id')) or !empty(request('name_id')) or !empty(request('date')) or !empty(request('type')) or !empty(request('order_type'))) {
             $data = $data->get();
         } else {
-            $data = $data->get();
+            $filterNumber = $config->filter_number ?? $config->number;
+            $data = $data->where('number', $filterNumber)->get();
         }
 
         $spreadsheet = new Spreadsheet();
@@ -854,17 +880,115 @@ $sheet->setCellValue('AB' . ($key + 2), $addressParts[1] ?? '');
 
     public function printSchedule()
     {
-        $currentMonth = date('Y-m');
-        $dates = [];
-        for ($day = 25; $day <= 30; $day++) {
-            $dates[] = $currentMonth . '-' . str_pad($day, 2, '0', STR_PAD_LEFT);
+        $config = DB::table('config')->first();
+        $data = Subscription::with('user');
+
+        if (!empty(request('username'))) {
+            $users = User::where('username', 'LIKE', '%' . request('username') . '%')->get();
+            $id = [];
+            foreach ($users as $val) {
+                $id[] = $val->id;
+            }
+            $data = $data->whereIn('user_id', $id);
         }
         
+        if (!empty(request('number'))) {
+            $data = $data->where('number', 'LIKE', '%' . request('number') . '%');
+        }
+        
+        if (!empty(request('subscrition'))) {
+            $data = $data->where('degree', '>', 0);
+        }
+
+        if (!empty(request('id'))) {
+            $users = User::where('identify', 'LIKE', '%' . request('id') . '%')->get();
+            $id = [];
+            foreach ($users as $val) {
+                $id[] = $val->id;
+            }
+            $data = $data->whereIn('user_id', $id);
+        }
+
+        if (!empty(request('gender'))) {
+            $users = User::where('gender', request('gender'))->get();
+            $id = [];
+            foreach ($users as $val) {
+                $id[] = $val->id;
+            }
+            $data = $data->whereIn('user_id', $id);
+        }
+
+        if (!empty(request('city_id'))) {
+            $users = User::where('city_id', request('city_id'))->get();
+            $id = [];
+            foreach ($users as $val) {
+                $id[] = $val->id;
+            }
+            $data = $data->whereIn('user_id', $id);
+        }
+
+        if (!empty(request('nationality_id'))) {
+            $users = User::where('nationality_id', request('nationality_id'))->get();
+            $id = [];
+            foreach ($users as $val) {
+                $id[] = $val->id;
+            }
+            $data = $data->whereIn('user_id', $id);
+        }
+
+        if (!empty(request('name_id'))) {
+            $data = $data->where('name_id', request('name_id'));
+        }
+
+        if (!empty(request('date'))) {
+            $data = $data->where('date', 'LIKE', '%' . request('date') . '%');
+        } else {
+            $data = $data->where(function($query) use ($config) {
+                $query->where('date', 'LIKE', '%' . $config->year . '%')
+                      ->orWhere('date', 'LIKE', '%' . ($config->year - 1) . '%');
+            });
+        }
+
+        if (!empty(request('winner'))) {
+            $winner = request('winner') == 2 ? 0 : request('winner');
+            $data = $data->where('winner', $winner);
+        }
+
+        if (!empty(request('participation_date'))) {
+            $data = $data->where('participation_date', request('participation_date'));
+        }
+
+        if (!empty(request('date_status'))) {
+            if (request('date_status') == 'assigned') {
+                $data = $data->whereNotNull('participation_date');
+            } elseif (request('date_status') == 'not_assigned') {
+                $data = $data->whereNull('participation_date');
+            }
+        }
+
+        if (!empty(request('type')) and in_array(request('type'), ['winner', 'name_id', 'degree', 'level', 'created_at', 'date', 'number', 'participation_date']) and !empty(request('order_type')) and in_array(request('order_type'), ['asc', 'desc'])) {
+            if (request('type') == 'participation_date') {
+                if (request('order_type') == 'asc') {
+                    $data = $data->orderByRaw('participation_date IS NULL ASC, participation_date ASC');
+                } else {
+                    $data = $data->orderByRaw('participation_date IS NULL ASC, participation_date DESC');
+                }
+            } else {
+                $data = $data->orderBy(request('type'), request('order_type'));
+            }
+        } elseif (empty(request('type')) && empty(request('order_type'))) {
+            $data = $data->orderBy('created_at', 'desc');
+        }
+
+        if (!empty(request('username')) or !empty(request('number')) or !empty(request('id')) or !empty(request('email')) or !empty(request('gender')) or !empty(request('city_id')) or !empty(request('nationality_id')) or !empty(request('name_id')) or !empty(request('date')) or !empty(request('type')) or !empty(request('order_type'))) {
+            $data = $data->whereHas('user')->get();
+        } else {
+            $filterNumber = $config->filter_number ?? $config->number;
+            $data = $data->where('number', $filterNumber)->whereHas('user')->get();
+        }
+        
+        $dates = $data->pluck('participation_date')->unique()->filter()->sort()->values()->toArray();
         $cities = \App\City::where('active', 'active')->orderBy('name_ar')->get();
-        $data = Subscription::with('user')
-            ->whereIn('participation_date', $dates)
-            ->whereHas('user')
-            ->get();
         
         return view('admin.pages.subscriptions.print', compact('dates', 'cities', 'data'));
     }
