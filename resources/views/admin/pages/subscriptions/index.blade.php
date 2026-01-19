@@ -660,7 +660,7 @@ $(document).ready(function() {
                                                       <td>  
                                                        @php
                                                            $natId = $val->user->nationality_id;
-                                                           $natName = $natId > 0 ? DB::table('nationalities')->where('id', $natId)->value('name_ar') : 'غير محدد';
+                                                           $natName = $natId > 0 ? DB::table('nationalities')->where('id', $natId)->value('name_ar') : '-';
                                                            $natName = str_replace(['الجنسية - وأخرى', ' - وأخرى'], '', $natName ?? '-');
                                                        @endphp
                                                        {{ $natName }}
