@@ -335,6 +335,14 @@ public function index()
             $data = $data->where('participation_date', request('participation_date'));
         }
 
+        if (!empty(request('date_status'))) {
+            if (request('date_status') == 'assigned') {
+                $data = $data->whereNotNull('participation_date');
+            } elseif (request('date_status') == 'not_assigned') {
+                $data = $data->whereNull('participation_date');
+            }
+        }
+
         // Apply ordering
         if (!empty(request('type')) and in_array(request('type'), ['winner', 'name_id', 'degree', 'level', 'created_at', 'date', 'number', 'participation_date']) and !empty(request('order_type')) and in_array(request('order_type'), ['asc', 'desc'])) {
             if (request('type') == 'participation_date') {

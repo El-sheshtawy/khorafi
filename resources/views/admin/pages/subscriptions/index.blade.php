@@ -402,6 +402,13 @@ $(document).ready(function() {
                                         <input class="form-control" type="date" name="participation_date"
                                             value="{{ request('participation_date') }}" placeholder="تاريخ المشاركة" title="تاريخ المشاركة" style="font-weight: bold;">
                                     </div>
+                                    <div class="col-md-2 mt-3">
+                                        <select class="form-control" name="date_status" style="font-weight: bold;">
+                                            <option value="">حالة التاريخ</option>
+                                            <option value="assigned" {{ request('date_status') == 'assigned' ? 'selected' : '' }}>معين</option>
+                                            <option value="not_assigned" {{ request('date_status') == 'not_assigned' ? 'selected' : '' }}>غير معين</option>
+                                        </select>
+                                    </div>
                                     <div class="col-md-1 mt-3">
                                         <a href="{{ url('admin/subscriptions/excel/import') }}" class="btn btn-sm" style="width: 100%; background: #10b981; color: white; border: none; padding: 8px;">
                                             <i class="mdi mdi-plus"></i> استيراد
