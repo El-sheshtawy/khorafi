@@ -860,9 +860,10 @@ $sheet->setCellValue('AB' . ($key + 2), $addressParts[1] ?? '');
             $dates[] = $currentMonth . '-' . str_pad($day, 2, '0', STR_PAD_LEFT);
         }
         
-        $cities = \App\City::where('active', 'active')->get();
+        $cities = \App\City::where('active', 'active')->orderBy('name_ar')->get();
         $data = Subscription::with('user')
             ->whereIn('participation_date', $dates)
+            ->whereHas('user')
             ->get();
         
         return view('admin.pages.subscriptions.print', compact('dates', 'cities', 'data'));
