@@ -56,13 +56,13 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                             $config = DB::table('config')->first();
                             $subscription = \App\Subscription::where('user_id', $user->id)->where('number', $config->number)->first();
                         @endphp
-                        @if($subscription)
+                        @if($subscription && $subscription->participation_date)
                             <p style="color: white; font-size: 18px; margin-top: 15px;">
-                                تاريخ الاشتراك: {{ $subscription->participation_date ?? $subscription->created_at->format('Y-m-d') }}
+                                تاريخ الاشتراك: {{ $subscription->participation_date }}
                             </p>
                         @else
                             <p style="color: white; font-size: 18px; margin-top: 15px;">
-                                لم يتم التعيين بعد
+                                تاريخ الاشتراك: لم يتم التعيين بعد
                             </p>
                         @endif
                     </div>
