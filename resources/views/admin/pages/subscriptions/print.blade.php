@@ -5,11 +5,10 @@
     <title>طباعة المشاركين</title>
     <style>
         body { font-family: Arial, sans-serif; direction: rtl; margin: 10px; font-size: 12px; }
-        .date-section { page-break-before: always; margin-bottom: 15px; }
-        .date-section:first-child { page-break-before: auto; }
+        .date-section { margin-bottom: 15px; }
         .date-header { font-size: 18px; font-weight: bold; margin-bottom: 10px; text-align: center; }
         .city-section { margin-bottom: 15px; page-break-before: always; }
-        .city-section:first-child { page-break-before: auto; }
+        .date-section .city-section:first-child { page-break-before: auto; }
         .city-header { font-size: 16px; font-weight: bold; margin-bottom: 5px; background: #f0f0f0; padding: 5px; }
         .gender-tables { display: flex; gap: 10px; }
         .gender-table { flex: 1; }
