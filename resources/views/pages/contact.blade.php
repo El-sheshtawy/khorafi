@@ -20,6 +20,11 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
         color: #ed09b1;
         background: rgb(233 30 99 / 22%);
     }
+
+    .contact__social ul li a.tg:hover {
+        color: #ffffff;
+        background: #0088cc;
+    }
 </style>
 <main>
 
