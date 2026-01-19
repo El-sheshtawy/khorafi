@@ -413,13 +413,13 @@ $(document).ready(function() {
                                 <div class="col-md-8 text-right" style="position: relative;">
                                     <input type="date" id="bulkDateInput" style="position: absolute; opacity: 0; pointer-events: none;">
                                     <button type="button" class="btn btn-sm btn-primary" id="bulkDateBtn" onclick="openBulkCalendar()" style="display:none; border-radius: 20px; padding: 6px 15px; font-size: 12px; margin-left: 5px;">
-                                        <i class="mdi mdi-calendar-multiple"></i> تعيين تاريخ للمحدد
+                                        <i class="mdi mdi-calendar-multiple"></i> تعيين
                                     </button>
                                     <button type="button" class="btn btn-sm btn-success" id="applyBulkDateBtn" onclick="applyBulkDate()" style="display:none; border-radius: 20px; padding: 6px 15px; font-size: 12px; margin-left: 5px;">
                                         <i class="mdi mdi-check"></i> تطبيق
                                     </button>
                                     <button type="button" class="btn btn-sm btn-warning" id="clearBulkDateBtn" onclick="clearBulkDate()" style="display:none; border-radius: 20px; padding: 6px 15px; font-size: 12px; margin-left: 5px;">
-                                        <i class="mdi mdi-close"></i> مسح التاريخ
+                                        <i class="mdi mdi-close"></i> مسح
                                     </button>
                                     <button id="deleteSelectedButton" style="display:none; border-radius: 20px; padding: 6px 15px; font-size: 12px;" class="btn btn-sm btn-danger">حذف المحدد</button>
                                 </div>
