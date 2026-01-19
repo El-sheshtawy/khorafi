@@ -126,6 +126,12 @@
                                                                         name="ig" placeholder="ig"
                                                                         value="{{ $data->ig }}" />
                                                                 </div>
+                                                                <div class="col-md-12">
+                                                                    <label class="control-label">Telegram</label>
+                                                                    <input class="form-control" type="text"
+                                                                        name="telegram" placeholder="Telegram"
+                                                                        value="{{ $data->telegram ?? '' }}" />
+                                                                </div>
                                                             </div>
                                                         </div>
 

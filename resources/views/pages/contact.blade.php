@@ -161,6 +161,9 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                                     <li><a href="{{$config->fb}}" class="fb"><i class="social_facebook"></i></a></li>
                                     <li><a href="{{$config->tw}}" class="tw"><i class="social_twitter"></i></a></li>
                                     <li><a href="{{$config->ig}}" class="ig"><i class="social_instagram"></i></a></li>
+                                    @if(!empty($config->telegram))
+                                    <li><a href="{{$config->telegram}}" class="tg" style="color: #0088cc; background: rgb(0 136 204 / 22%);"><i class="fab fa-telegram"></i></a></li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>

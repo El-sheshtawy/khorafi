@@ -386,7 +386,7 @@ $(document).ready(function() {
                                     </div>
                                     <div class="col-md-2 mt-3">
                                         <input class="form-control" type="date" name="participation_date"
-                                            value="{{ request('participation_date') }}" placeholder="تاريخ المشاركة">
+                                            value="{{ request('participation_date') }}" placeholder="تاريخ المشاركة" title="تاريخ المشاركة">
                                     </div>
                                     <div class="col-md-1 mt-3">
                                         <input class="btn btn-info btn-sm" type="submit" value="فلترة" style="width: 100%;">
