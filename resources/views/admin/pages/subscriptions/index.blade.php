@@ -654,7 +654,12 @@ $(document).ready(function() {
 </td>
 
                                                       <td>  
-                                                       {{ str_replace(['الجنسية - وأخرى', ' - وأخرى'], '', DB::table('nationalities')->where('id', $val->user->nationality_id)->value('name_ar') ?? '-') }}
+                                                       @php
+                                                           $natId = $val->user->nationality_id;
+                                                           $natName = $natId > 0 ? DB::table('nationalities')->where('id', $natId)->value('name_ar') : 'غير محدد';
+                                                           $natName = str_replace(['الجنسية - وأخرى', ' - وأخرى'], '', $natName ?? '-');
+                                                       @endphp
+                                                       {{ $natName }}
                                              </td>
                                                     <td>{{ $val->user->identify }}</td>
                                                     <td>

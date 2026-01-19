@@ -147,7 +147,7 @@
                                         <h5>{{ trans('web.nationality') }}</h5>
                                         <div class="">
                                             <select class="form-control" name="nationality" required>
-                                                <option value="">...</option>
+                                                <option value="" disabled selected>...</option>
                                                 @foreach (\App\Nationality::where('active', 'active')->get() as $val)
                                                     <option value="{{ $val->id }}"
                                                         {{ old('nationality') == $val->id ? 'selected' : '' }}>
