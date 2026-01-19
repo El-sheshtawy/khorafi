@@ -398,8 +398,9 @@ $(document).ready(function() {
                                             <i class="fas fa-print"></i> تصدير
                                         </a>
                                     </div>
-                                    <div class="col-md-12 mt-3">
-                                        <input class="btn btn-sm" type="submit" value="فلترة" style="width: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 10px;">
+                                    <div class="col-md-12"></div>
+                                    <div class="col-md-2 mt-3">
+                                        <input class="btn btn-sm" type="submit" value="فلترة" style="width: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 8px;">
                                     </div>
                                 </div>
                             </form>
