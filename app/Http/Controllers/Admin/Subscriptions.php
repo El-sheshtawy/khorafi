@@ -337,7 +337,11 @@ public function index()
 
         // Apply ordering
         if (!empty(request('type')) and in_array(request('type'), ['winner', 'name_id', 'degree', 'level', 'created_at', 'date', 'number', 'participation_date']) and !empty(request('order_type')) and in_array(request('order_type'), ['asc', 'desc'])) {
-            $data = $data->orderBy(request('type'), request('order_type'));
+            if (request('type') == 'participation_date') {
+                $data = $data->orderByRaw('participation_date IS NULL, participation_date ' . request('order_type'));
+            } else {
+                $data = $data->orderBy(request('type'), request('order_type'));
+            }
         } elseif (empty(request('type')) && empty(request('order_type'))) {
             $data = $data->orderBy('created_at', 'desc');
         }
