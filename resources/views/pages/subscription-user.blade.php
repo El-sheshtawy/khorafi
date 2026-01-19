@@ -58,11 +58,11 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                         @endphp
                         @if($subscription && $subscription->participation_date)
                             <p style="color: white; font-size: 18px; margin-top: 15px;">
-                                تاريخ الاشتراك: {{ $subscription->participation_date }}
+                                تاريخ الاشتراك: <span style="color: #fbbf24; font-weight: bold;">{{ $subscription->participation_date }}</span>
                             </p>
                         @else
                             <p style="color: white; font-size: 18px; margin-top: 15px;">
-                                تاريخ الاشتراك: لم يتم التعيين بعد
+                                تاريخ الاشتراك: <span style="color: #fbbf24; font-weight: bold;">لم يتم التعيين بعد</span>
                             </p>
                         @endif
                     </div>
