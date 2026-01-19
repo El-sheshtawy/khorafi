@@ -25,6 +25,13 @@
     <button class="no-print" onclick="window.print()" style="margin: 10px; padding: 8px 15px; background: #667eea; color: white; border: none; cursor: pointer;">طباعة</button>
 
     @foreach($dates as $date)
+        @php
+            $dateHasData = $data->where('participation_date', $date)->filter(function($item) {
+                return $item->user;
+            })->count() > 0;
+        @endphp
+        
+        @if($dateHasData)
         <div class="date-section">
             <div class="date-header">يوم {{ $date }}</div>
             
@@ -78,6 +85,7 @@
                 @endif
             @endforeach
         </div>
+        @endif
     @endforeach
 </body>
 </html>
