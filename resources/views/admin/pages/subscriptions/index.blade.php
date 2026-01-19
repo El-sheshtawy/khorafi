@@ -418,6 +418,9 @@ $(document).ready(function() {
                                     <button type="button" class="btn btn-sm btn-success" id="applyBulkDateBtn" onclick="applyBulkDate()" style="display:none; border-radius: 20px; padding: 6px 15px; font-size: 12px; margin-left: 5px;">
                                         <i class="mdi mdi-check"></i> تطبيق
                                     </button>
+                                    <button type="button" class="btn btn-sm btn-warning" id="clearBulkDateBtn" onclick="clearBulkDate()" style="display:none; border-radius: 20px; padding: 6px 15px; font-size: 12px; margin-left: 5px;">
+                                        <i class="mdi mdi-close"></i> مسح التاريخ
+                                    </button>
                                     <button id="deleteSelectedButton" style="display:none; border-radius: 20px; padding: 6px 15px; font-size: 12px;" class="btn btn-sm btn-danger">حذف المحدد</button>
                                 </div>
                             </div>
@@ -570,8 +573,8 @@ $(document).ready(function() {
 <!--</thead>-->
 <thead style="background-color: #6c757d; font-weight: bold;">
     <tr class="text-center" style="font-size: 13px;">
-        <th style="border: none; color:white; padding: 6px; cursor: pointer;" onclick="document.getElementById('selectAll').click();">
-            <input type="checkbox" id="selectAll" onchange="toggleSelectAll(this)" onclick="event.stopPropagation();">
+        <th style="border: none; color:white; padding: 6px;">
+            <input type="checkbox" id="selectAll" onchange="toggleSelectAll(this)">
         </th>
         <th style="border: none; color:white; padding: 6px;">مسلسل</th>
         <th class="text-center" style="white-space: nowrap; border: none;color:white; cursor: pointer; padding: 6px;" onclick="toggleSort('username')">
@@ -747,10 +750,12 @@ function toggleBulkButton() {
     const selected = document.querySelectorAll('.row-checkbox:checked');
     const bulkBtn = document.getElementById('bulkDateBtn');
     const applyBtn = document.getElementById('applyBulkDateBtn');
+    const clearBtn = document.getElementById('clearBulkDateBtn');
     const deleteBtn = document.getElementById('deleteSelectedButton');
     
     if (selected.length > 0) {
         bulkBtn.style.display = 'inline-block';
+        clearBtn.style.display = 'inline-block';
         if (deleteBtn) deleteBtn.style.display = 'inline-block';
         const dateValue = document.getElementById('bulkDateInput').value;
         if (dateValue) {
@@ -759,6 +764,7 @@ function toggleBulkButton() {
     } else {
         bulkBtn.style.display = 'none';
         applyBtn.style.display = 'none';
+        clearBtn.style.display = 'none';
         if (deleteBtn) deleteBtn.style.display = 'none';
     }
 }
@@ -858,6 +864,37 @@ function clearSingleDate(id) {
             alert('حدث خطأ. الرجاء المحاولة مرة أخرى.');
         }
     });
+}
+
+function clearBulkDate() {
+    const selectedIds = getSelectedIds();
+    if (selectedIds.length === 0) {
+        alert('الرجاء تحديد مشترك واحد على الأقل');
+        return;
+    }
+    
+    if (confirm('هل تريد مسح التاريخ لـ ' + selectedIds.length + ' مشترك؟')) {
+        $.ajax({
+            url: '{{ url("/admin/subscriptions/assign-date-multiple") }}',
+            type: 'POST',
+            data: {
+                participation_date: null,
+                ids: selectedIds
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                if (response.success) {
+                    alert(response.message);
+                    location.reload();
+                }
+            },
+            error: function(xhr) {
+                alert('حدث خطأ. الرجاء المحاولة مرة أخرى.');
+            }
+        });
+    }
 }
 
 let sortOrders = {};
