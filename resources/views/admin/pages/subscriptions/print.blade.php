@@ -32,7 +32,7 @@
         @endphp
         
         @if($dateHasData)
-        <div class="date-section">
+        <div class="date-section" style="{{ $dateIndex > 0 ? 'page-break-before: always;' : '' }}">
             <div class="date-header">يوم {{ $date }}</div>
             
             @foreach($cities as $cityIndex => $city)
