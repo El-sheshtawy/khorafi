@@ -51,7 +51,11 @@
                 @endphp
                 
                 @if($totalCount > 0)
-                    <div class="city-section" style="{{ ($dateIndex == 0 && $loop->first) ? 'page-break-before: auto;' : '' }}">
+                    @php
+                        $isFirstCityOfDate = $loop->first;
+                        $isFirstDate = $dateIndex == 0;
+                    @endphp
+                    <div class="city-section" style="{{ ($isFirstDate && $isFirstCityOfDate) ? 'page-break-before: auto;' : ($isFirstCityOfDate ? 'page-break-before: auto;' : 'page-break-before: always;') }}">
                         <div class="city-header">{{ $city->name_ar }} - الإجمالي: {{ $totalCount }}</div>
                         
                         <div class="gender-tables">
