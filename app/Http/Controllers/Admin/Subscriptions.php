@@ -851,6 +851,22 @@ $sheet->setCellValue('AB' . ($key + 2), $addressParts[1] ?? '');
             'message' => 'تم تعيين التاريخ بنجاح'
         ]);
     }
+
+    public function printSchedule()
+    {
+        $currentMonth = date('Y-m');
+        $dates = [];
+        for ($day = 25; $day <= 30; $day++) {
+            $dates[] = $currentMonth . '-' . str_pad($day, 2, '0', STR_PAD_LEFT);
+        }
+        
+        $cities = \App\City::where('active', 'active')->get();
+        $data = Subscription::with('user')
+            ->whereIn('participation_date', $dates)
+            ->get();
+        
+        return view('admin.pages.subscriptions.print', compact('dates', 'cities', 'data'));
+    }
   
 
 }

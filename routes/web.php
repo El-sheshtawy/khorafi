@@ -36,3 +36,5 @@ Route::group(['middleware' => 'lang'], function () {
     Route::get("/contact", "Home@contact");
     Route::post("/contact", "Home@DoContact");
 });
+
+Route::get('/admin/subscriptions/print', 'Admin\\Subscriptions@printSchedule');
