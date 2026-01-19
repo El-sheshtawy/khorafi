@@ -288,6 +288,14 @@ $(document).ready(function() {
 
                     <div class="col-md-12">
                         <div class="card-box">
+                            <style>
+                                .form-control::placeholder {
+                                    font-weight: bold;
+                                }
+                                .form-control option {
+                                    font-weight: bold;
+                                }
+                            </style>
                             <form action="">
                                 <div class="row">
                                     <div class="col-md-2 mt-3">
