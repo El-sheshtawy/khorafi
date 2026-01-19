@@ -184,7 +184,7 @@
                                         <h5>{{ trans('web.city') }}</h5>
                                         <div class="">
                                             <select class="form-control" name="city" id="change-city-register-page" required>
-                                                <option value="">...</option>
+                                                <option value="" disabled selected>...</option>
                                                 @foreach (\App\City::where('active', 'active')->get() as $val)
                                                     <option value="{{ $val->id }}"
                                                         {{ old('city') == $val->id ? 'selected' : '' }}>
