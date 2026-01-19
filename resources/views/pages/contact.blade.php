@@ -48,9 +48,9 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                                 </ol>
                             </nav>
                         </div>
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center" style="gap: 30px;">
                             <h5 class="page__title-3 mb-0">{{trans('web.contact')}}</h5>
-                            <img src="{{url('website/public/images/QRCode.jpg')}}" alt="QR Code" style="max-width: 100px; margin-left: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <img src="{{url('website/public/images/QRCode.jpg')}}" alt="QR Code" style="max-width: 100px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                         </div>
                     </div>
                 </div>
