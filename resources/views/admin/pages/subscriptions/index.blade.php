@@ -384,8 +384,18 @@ $(document).ready(function() {
                                         <input type="text" class="form-control" name="number" placeholder="رقم المسابقة"
                                             value="{{ request('number') }}">
                                     </div>
-                                    <div class="col-md-3 mt-3">
+                                    <div class="col-md-2 mt-3">
                                         <input class="btn btn-info" type="submit" value="فلترة">
+                                    </div>
+                                    <div class="col-md-2 mt-3">
+                                        <a href="{{ url('admin/subscriptions/excel/export?' . $_SERVER['QUERY_STRING']) }}" class="btn btn-info" style="width: 100%;">
+                                            <i class="fas fa-print"></i> تصدير اكسل
+                                        </a>
+                                    </div>
+                                    <div class="col-md-2 mt-3">
+                                        <a href="{{ url('admin/subscriptions/excel/import') }}" class="btn btn-success" style="width: 100%;">
+                                            <i class="mdi mdi-plus"></i> استيراد اكسل
+                                        </a>
                                     </div>
                                 </div>
                             </form>
@@ -402,18 +412,12 @@ $(document).ready(function() {
                                 </div>
                                 <div class="col-md-8 text-right" style="position: relative;">
                                     <input type="date" id="bulkDateInput" style="position: absolute; opacity: 0; pointer-events: none;">
-                                    <button type="button" class="btn btn-sm btn-primary" id="bulkDateBtn" onclick="openBulkCalendar()" style="display:none; border-radius: 20px; padding: 6px 15px; font-size: 12px;">
+                                    <button type="button" class="btn btn-sm btn-primary" id="bulkDateBtn" onclick="openBulkCalendar()" style="display:none; border-radius: 20px; padding: 6px 15px; font-size: 12px; margin-left: 5px;">
                                         <i class="mdi mdi-calendar-multiple"></i> تعيين تاريخ للمحدد
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-success" id="applyBulkDateBtn" onclick="applyBulkDate()" style="display:none; border-radius: 20px; padding: 6px 15px; font-size: 12px;">
+                                    <button type="button" class="btn btn-sm btn-success" id="applyBulkDateBtn" onclick="applyBulkDate()" style="display:none; border-radius: 20px; padding: 6px 15px; font-size: 12px; margin-left: 5px;">
                                         <i class="mdi mdi-check"></i> تطبيق
                                     </button>
-                                    <a href="{{ url('admin/subscriptions/excel/export?' . $_SERVER['QUERY_STRING']) }}" class="btn btn-sm btn-info" style="border-radius: 20px; padding: 6px 15px; font-size: 12px; display: inline-block;">
-                                        <i class="fas fa-print"></i> تصدير اكسل
-                                    </a>
-                                    <a href="{{ url('admin/subscriptions/excel/import') }}" class="btn btn-sm btn-success" style="border-radius: 20px; padding: 6px 15px; font-size: 12px; display: inline-block;">
-                                        <i class="mdi mdi-plus"></i> استيراد اكسل
-                                    </a>
                                     <button id="deleteSelectedButton" style="display:none; border-radius: 20px; padding: 6px 15px; font-size: 12px;" class="btn btn-sm btn-danger">حذف المحدد</button>
                                 </div>
                             </div>
@@ -575,8 +579,8 @@ $(document).ready(function() {
         </th>
         <th style="border: none;color:white; padding: 6px; width: 80px;">الجنسية</th>
         <th style="border: none;color:white; padding: 6px; width: 100px;">الرقم المدني</th>
-        <th style="border: none;color:white; padding: 6px;">رقم الهاتف</th>
-        <th class="text-center" style="font-size: 13px; border: none;color:white; padding: 6px;">فئة</th>
+        <th style="border: none;color:white; padding: 6px; width: 100px;">رقم الهاتف</th>
+        <th class="text-center" style="font-size: 13px; border: none;color:white; padding: 6px; width: 80px;">فئة</th>
         
         <th class="text-center" style="white-space: nowrap; border: none;color:white; cursor: pointer; padding: 6px;" onclick="toggleSort('created_at')">
             <span style="color:white;">تاريخ التسجيل</span>
