@@ -412,7 +412,7 @@ $(document).ready(function() {
                                 </div>
                                 <div class="col-md-8 text-right" style="position: relative;">
                                     <input type="date" id="bulkDateInput" style="position: absolute; opacity: 0; pointer-events: none;">
-                                    <button type="button" class="btn btn-sm btn-primary" id="bulkDateBtn" onclick="openBulkCalendar()" style="border-radius: 20px; padding: 6px 15px; font-size: 12px; display: inline-block; margin-left: 5px;">
+                                    <button type="button" class="btn btn-sm btn-primary" id="bulkDateBtn" onclick="openBulkCalendar()" style="display:none; border-radius: 20px; padding: 6px 15px; font-size: 12px; margin-left: 5px;">
                                         <i class="mdi mdi-calendar-multiple"></i> تعيين تاريخ للمحدد
                                     </button>
                                     <button type="button" class="btn btn-sm btn-success" id="applyBulkDateBtn" onclick="applyBulkDate()" style="display:none; border-radius: 20px; padding: 6px 15px; font-size: 12px; margin-left: 5px;">
@@ -651,13 +651,18 @@ $(document).ready(function() {
                                                     <td class="text-center">{{ $val->date }}</td>
                                                     <td class="text-center">{{ $val->number ?? '-' }}</td>
                                                     <td class="text-center">
-                                                        <input type="date" class="form-control form-control-sm" 
-                                                               value="{{ $val->participation_date }}" 
-                                                               placeholder="لم يتم التعيين بعد"
-                                                               style="font-size: 12px;" 
-                                                               onchange="assignSingleDate({{ $val->id }}, this.value)">
-                                                        @if(empty($val->participation_date))
-                                                            <small class="text-muted" style="font-size: 10px;">لم يتم التعيين بعد</small>
+                                                        @if(!empty($val->participation_date))
+                                                            <input type="date" class="form-control form-control-sm" 
+                                                                   value="{{ $val->participation_date }}" 
+                                                                   style="font-size: 12px;" 
+                                                                   onchange="assignSingleDate({{ $val->id }}, this.value)">
+                                                        @else
+                                                            <div style="font-size: 11px; color: #999; cursor: pointer;" onclick="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                                                لم يتم التعيين بعد
+                                                            </div>
+                                                            <input type="date" class="form-control form-control-sm" 
+                                                                   style="font-size: 12px; display: none;" 
+                                                                   onchange="assignSingleDate({{ $val->id }}, this.value)">
                                                         @endif
                                                     </td>
                                                     <td class="text-center">{{ $val->level }}</td>
@@ -737,9 +742,11 @@ function toggleBulkButton() {
     const selected = document.querySelectorAll('.row-checkbox:checked');
     const bulkBtn = document.getElementById('bulkDateBtn');
     const applyBtn = document.getElementById('applyBulkDateBtn');
+    const deleteBtn = document.getElementById('deleteSelectedButton');
     
     if (selected.length > 0) {
         bulkBtn.style.display = 'inline-block';
+        if (deleteBtn) deleteBtn.style.display = 'inline-block';
         const dateValue = document.getElementById('bulkDateInput').value;
         if (dateValue) {
             applyBtn.style.display = 'inline-block';
@@ -747,6 +754,7 @@ function toggleBulkButton() {
     } else {
         bulkBtn.style.display = 'none';
         applyBtn.style.display = 'none';
+        if (deleteBtn) deleteBtn.style.display = 'none';
     }
 }
 
