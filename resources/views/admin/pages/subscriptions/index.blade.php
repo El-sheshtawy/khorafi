@@ -409,13 +409,11 @@ $(document).ready(function() {
                                             <option value="not_assigned" {{ request('date_status') == 'not_assigned' ? 'selected' : '' }}>غير معين</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-1 mt-3">
-                                        <a href="{{ url('admin/subscriptions/excel/import') }}" class="btn btn-sm" style="width: 100%; background: #10b981; color: white; border: none; padding: 8px;">
+                                    <div class="col-md-6 mt-3">
+                                        <a href="{{ url('admin/subscriptions/excel/import') }}" class="btn btn-sm" style="background: #10b981; color: white; border: none; padding: 8px 20px; margin-right: 5px;">
                                             <i class="mdi mdi-plus"></i> استيراد
                                         </a>
-                                    </div>
-                                    <div class="col-md-1 mt-3">
-                                        <a href="{{ url('admin/subscriptions/excel/export?' . $_SERVER['QUERY_STRING']) }}" class="btn btn-sm" style="width: 100%; background: #3b82f6; color: white; border: none; padding: 8px;">
+                                        <a href="{{ url('admin/subscriptions/excel/export?' . $_SERVER['QUERY_STRING']) }}" class="btn btn-sm" style="background: #3b82f6; color: white; border: none; padding: 8px 20px;">
                                             <i class="fas fa-print"></i> تصدير
                                         </a>
                                     </div>
