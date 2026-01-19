@@ -276,7 +276,7 @@
                                     <input class="btn btn-primary form-control" type="submit" name=""
                                         value="تعديل" />
                                     <br><br>
-                                    <button type="button" class="btn btn-danger btn-block" onclick="deleteSubscription({{ $data->id }})">حذف الاشتراك</button>
+                                    <button type="button" class="btn btn-danger btn-block" onclick="deleteSubscription({{ $data->id }})">حذف</button>
                                     <br>
                                     <a class="btn btn-secondary btn-block"
                                         href="{{ url('/') }}/admin/subscriptions">رجوع</a>
