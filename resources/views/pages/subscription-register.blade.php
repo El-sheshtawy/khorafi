@@ -83,9 +83,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="sign__input-wrapper mb-25">
-                                        <h5>تاريخ المشاركة</h5>
+                                        <h5 style="color: #dc2626;">تاريخ المشاركة</h5>
                                         <div class="">
-                                            <input class="form-control" type="text" value="لم يتم التعيين بعد" readonly style="background: #fef3c7; color: #2563eb; font-weight: 700;">
+                                            <input class="form-control" type="text" value="لم يتم التعيين بعد" disabled style="background: #fee2e2; color: #dc2626; font-weight: 700; cursor: not-allowed;">
                                         </div>
                                     </div>
                                 </div>
