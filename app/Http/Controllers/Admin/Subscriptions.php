@@ -805,7 +805,6 @@ $sheet->setCellValue('AB' . ($key + 2), $addressParts[1] ?? '');
     public function assignDateToMultiple(Request $request)
     {
         $request->validate([
-            'participation_date' => 'required|date',
             'ids' => 'required|array',
             'ids.*' => 'exists:subscriptions,id'
         ]);
@@ -823,10 +822,6 @@ $sheet->setCellValue('AB' . ($key + 2), $addressParts[1] ?? '');
     // Assign participation date to single subscription
     public function assignDateToSingle(Request $request, $id)
     {
-        $request->validate([
-            'participation_date' => 'required|date'
-        ]);
-
         $subscription = Subscription::findOrFail($id);
         $subscription->participation_date = $request->participation_date;
         $subscription->save();
