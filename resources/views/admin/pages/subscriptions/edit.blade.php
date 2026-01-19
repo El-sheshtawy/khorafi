@@ -1,5 +1,7 @@
 @extends('admin.index')
 @section('content')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Page Content Start -->
     <div class="content-page">
@@ -274,7 +276,9 @@
                                     <input class="btn btn-primary form-control" type="submit" name=""
                                         value="تعديل" />
                                     <br><br>
-                                    <a class="btn btn-danger btn-block"
+                                    <button type="button" class="btn btn-danger btn-block" onclick="deleteSubscription({{ $data->id }})">حذف الاشتراك</button>
+                                    <br>
+                                    <a class="btn btn-secondary btn-block"
                                         href="{{ url('/') }}/admin/subscriptions">رجوع</a>
                                 </div>
                             </div>
@@ -285,4 +289,26 @@
             </div><!-- end container-fluid-->
         </div><!-- end contant-->
     </div><!-- End Page Content-->
+
+<script>
+function deleteSubscription(id) {
+    if (!confirm('هل أنت متأكد من حذف هذا الاشتراك؟')) return;
+    
+    $.ajax({
+        url: '{{ url("/admin/subscriptions/delete") }}/' + id,
+        type: 'DELETE',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(response) {
+            if (response.success) {
+                window.location.href = '{{ url("/admin/subscriptions") }}';
+            }
+        },
+        error: function(xhr) {
+            alert('حدث خطأ. الرجاء المحاولة مرة أخرى.');
+        }
+    });
+}
+</script>
 @endsection

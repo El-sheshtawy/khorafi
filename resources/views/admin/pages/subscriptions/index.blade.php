@@ -412,6 +412,7 @@ $(document).ready(function() {
                                 </div>
                                 <div class="col-md-8 text-right" style="position: relative;">
                                     <input type="date" id="bulkDateInput" style="position: absolute; opacity: 0; pointer-events: none;">
+                                    <span id="selectedCount" style="display:none; margin-left: 10px; font-weight: bold; color: #333;"></span>
                                     <button type="button" class="btn btn-sm btn-primary" id="bulkDateBtn" onclick="openBulkCalendar()" style="display:none; border-radius: 20px; padding: 6px 15px; font-size: 12px; margin-left: 5px;">
                                         <i class="mdi mdi-calendar-multiple"></i> تعيين
                                     </button>
@@ -421,7 +422,6 @@ $(document).ready(function() {
                                     <button type="button" class="btn btn-sm btn-warning" id="clearBulkDateBtn" onclick="clearBulkDate()" style="display:none; border-radius: 20px; padding: 6px 15px; font-size: 12px; margin-left: 5px;">
                                         <i class="mdi mdi-close"></i> مسح
                                     </button>
-                                    <button id="deleteSelectedButton" style="display:none; border-radius: 20px; padding: 6px 15px; font-size: 12px;" class="btn btn-sm btn-danger">حذف المحدد</button>
                                 </div>
                             </div>
                             <div class="table-responsive" style="overflow-x: visible;">
@@ -607,7 +607,6 @@ $(document).ready(function() {
         <th class="text-center" style="white-space: nowrap; border: none;color:white; cursor: pointer;" onclick="toggleSort('degree')">
             <span style="color:white;">الدرجة</span>
         </th>
-        <th class="text-center" style="border: none;color:white;">التحكم</th>
     </tr>
 </thead>
 
@@ -657,16 +656,6 @@ $(document).ready(function() {
                                                     </td>
                                                     <td class="text-center">{{ $val->level }}</td>
                                                     <td class="text-center">{{ $val->degree }}</td>
-
-
-                                                    <td class="text-center">
-
-                                                        <a href="{{ url('/') }}/admin/subscriptions/edit/{{ $val->id }}"
-                                                            class="btn btn-icon btn-info" title="تعديل">
-                                                            <i class="mdi mdi-square-edit-outline"></i>
-                                                        </a>
-
-                                                    </td>
                                                 </tr>
                                             @endif
                                         @endforeach
@@ -733,21 +722,22 @@ function toggleBulkButton() {
     const bulkBtn = document.getElementById('bulkDateBtn');
     const applyBtn = document.getElementById('applyBulkDateBtn');
     const clearBtn = document.getElementById('clearBulkDateBtn');
-    const deleteBtn = document.getElementById('deleteSelectedButton');
+    const countSpan = document.getElementById('selectedCount');
     
     if (selected.length > 0) {
+        countSpan.textContent = 'محدد: ' + selected.length;
+        countSpan.style.display = 'inline-block';
         bulkBtn.style.display = 'inline-block';
         clearBtn.style.display = 'inline-block';
-        if (deleteBtn) deleteBtn.style.display = 'inline-block';
         const dateValue = document.getElementById('bulkDateInput').value;
         if (dateValue) {
             applyBtn.style.display = 'inline-block';
         }
     } else {
+        countSpan.style.display = 'none';
         bulkBtn.style.display = 'none';
         applyBtn.style.display = 'none';
         clearBtn.style.display = 'none';
-        if (deleteBtn) deleteBtn.style.display = 'none';
     }
 }
 
