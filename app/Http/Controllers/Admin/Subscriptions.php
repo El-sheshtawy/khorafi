@@ -339,9 +339,9 @@ public function index()
         if (!empty(request('type')) and in_array(request('type'), ['winner', 'name_id', 'degree', 'level', 'created_at', 'date', 'number', 'participation_date']) and !empty(request('order_type')) and in_array(request('order_type'), ['asc', 'desc'])) {
             if (request('type') == 'participation_date') {
                 if (request('order_type') == 'asc') {
-                    $data = $data->orderByRaw('participation_date IS NULL, participation_date ASC');
+                    $data = $data->orderByRaw('CASE WHEN participation_date IS NULL THEN 0 ELSE 1 END DESC, participation_date ASC');
                 } else {
-                    $data = $data->orderByRaw('participation_date IS NOT NULL DESC, participation_date DESC');
+                    $data = $data->orderByRaw('CASE WHEN participation_date IS NULL THEN 0 ELSE 1 END DESC, participation_date DESC');
                 }
             } else {
                 $data = $data->orderBy(request('type'), request('order_type'));
