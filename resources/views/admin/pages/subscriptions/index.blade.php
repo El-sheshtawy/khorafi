@@ -388,12 +388,12 @@ $(document).ready(function() {
                                         <input class="form-control" type="date" name="participation_date"
                                             value="{{ request('participation_date') }}" placeholder="تاريخ المشاركة" title="تاريخ المشاركة">
                                     </div>
-                                    <div class="col-md-2 mt-3">
+                                    <div class="col-md-1 mt-3">
                                         <a href="{{ url('admin/subscriptions/excel/import') }}" class="btn btn-sm" style="width: 100%; background: #10b981; color: white; border: none; padding: 8px;">
                                             <i class="mdi mdi-plus"></i> استيراد
                                         </a>
                                     </div>
-                                    <div class="col-md-2 mt-3">
+                                    <div class="col-md-1 mt-3">
                                         <a href="{{ url('admin/subscriptions/excel/export?' . $_SERVER['QUERY_STRING']) }}" class="btn btn-sm" style="width: 100%; background: #3b82f6; color: white; border: none; padding: 8px;">
                                             <i class="fas fa-print"></i> تصدير
                                         </a>
