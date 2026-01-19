@@ -122,7 +122,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <img src="{{url('website/public/images/QRCode.jpg')}}" alt="QR Code" style="width: 40px; height: 40px; border-radius: 4px; cursor: pointer;">
+                                <img src="{{url('website/public/images/QRCode.jpg')}}" alt="QR Code" style="width: 40px; height: 40px; border-radius: 4px; cursor: pointer; margin-left: 15px;">
                             </li>
                         </ul>
                         <div class="header__right d-flex justify-content-end align-items-center">
