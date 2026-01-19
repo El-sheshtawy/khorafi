@@ -84,6 +84,13 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                         </p>
 
                 </div>
+                @if(!empty($config->telegram))
+                <div class="text-center mb-4">
+                    <p style="color: white; font-size: 16px; font-weight: 600;">
+                        انضم لجروب <a href="{{ $config->telegram }}" target="_blank" style="color: #0088cc; text-decoration: underline;">التليجرام</a> للاستفسار ومعرفة تاريخ مشاركتك
+                    </p>
+                </div>
+                @endif
                     @if (session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
