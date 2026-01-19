@@ -295,6 +295,11 @@ $(document).ready(function() {
                                 }
                                 .form-control option {
                                     font-weight: bold;
+                                    color: #000;
+                                }
+                                .form-control {
+                                    font-weight: bold;
+                                    color: #000;
                                 }
                             </style>
                             <form action="">
