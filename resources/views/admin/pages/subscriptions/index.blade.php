@@ -617,7 +617,9 @@ $(document).ready(function() {
             <input type="checkbox" id="selectAll" onchange="toggleSelectAll(this)">
         </th>
 
-        <th class="text-center" style="border: none;color:white;white-space: nowrap;">تاريخ المشاركة</th>
+        <th class="text-center" style="border: none; color:white;white-space: nowrap; cursor: pointer;" onclick="toggleSort('participation_date')">
+            <span style="color:white;">تاريخ المشاركة</span>
+        </th>
 
         <th class="text-center" style="white-space: nowrap; border: none;color:white; cursor: pointer;" onclick="toggleSort('level')">
             <span style="color:white;">المركز</span>
