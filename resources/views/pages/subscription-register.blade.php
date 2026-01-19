@@ -81,6 +81,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="sign__input-wrapper mb-25">
+                                        <h5>تاريخ المشاركة</h5>
+                                        <div class="">
+                                            <input class="form-control" type="text" value="لم يتم التعيين بعد" readonly style="background: #fef3c7; color: #2563eb; font-weight: 700;">
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-md-12"></div>
                                 <div class="col-md-3">
                                     <div class="sign__input-wrapper mb-25">
@@ -240,12 +248,6 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="sign__input-wrapper">
-                                    <h5>تاريخ المشاركة</h5>
-                                    <input class="form-control" type="date" name="participation_date" disabled style="background: #e2e8f0; cursor: not-allowed;">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
                                 <div class="sign__input-wrapper">
                                     <h5>{{ trans('web.subscription_notes') }}</h5>
                                     <textarea class="form-control" name="subscription_notes" rows="3"></textarea>
