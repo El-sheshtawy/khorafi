@@ -384,6 +384,10 @@ $(document).ready(function() {
                                         <input type="text" class="form-control" name="number" placeholder="رقم المسابقة"
                                             value="{{ request('number') }}">
                                     </div>
+                                    <div class="col-md-2 mt-3">
+                                        <input class="form-control" type="date" name="participation_date"
+                                            value="{{ request('participation_date') }}" placeholder="تاريخ المشاركة">
+                                    </div>
                                     <div class="col-md-1 mt-3">
                                         <input class="btn btn-info btn-sm" type="submit" value="فلترة" style="width: 100%;">
                                     </div>
@@ -414,13 +418,13 @@ $(document).ready(function() {
                                     <input type="date" id="bulkDateInput" style="position: absolute; opacity: 0; pointer-events: none;">
                                     <span id="selectedCount" style="display:none; margin-left: 10px; font-weight: bold; color: #333;"></span>
                                     <button type="button" class="btn btn-sm btn-primary" id="bulkDateBtn" onclick="openBulkCalendar()" style="display:none; border-radius: 20px; padding: 6px 15px; font-size: 12px; margin-left: 5px;">
-                                        <i class="mdi mdi-calendar-multiple"></i> تعيين
+                                        <i class="mdi mdi-calendar-multiple"></i> <span id="dateLabel">تاريخ المشاركة</span>
                                     </button>
                                     <button type="button" class="btn btn-sm btn-success" id="applyBulkDateBtn" onclick="applyBulkDate()" style="display:none; border-radius: 20px; padding: 6px 15px; font-size: 12px; margin-left: 5px;">
-                                        <i class="mdi mdi-check"></i> تطبيق
+                                        <i class="mdi mdi-check"></i> تعيين
                                     </button>
                                     <button type="button" class="btn btn-sm btn-warning" id="clearBulkDateBtn" onclick="clearBulkDate()" style="display:none; border-radius: 20px; padding: 6px 15px; font-size: 12px; margin-left: 5px;">
-                                        <i class="mdi mdi-close"></i> مسح
+                                        <i class="mdi mdi-close"></i> حذف ت.المشاركة
                                     </button>
                                 </div>
                             </div>
@@ -749,6 +753,7 @@ function getSelectedIds() {
 document.getElementById('bulkDateInput').addEventListener('change', function() {
     const date = this.value;
     if (date) {
+        document.getElementById('dateLabel').textContent = date;
         document.getElementById('applyBulkDateBtn').style.display = 'inline-block';
     }
 });
