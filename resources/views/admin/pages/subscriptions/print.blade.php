@@ -24,7 +24,7 @@
 <body>
     <button class="no-print" onclick="window.print()" style="margin: 10px; padding: 8px 15px; background: #667eea; color: white; border: none; cursor: pointer;">طباعة</button>
 
-    @foreach($dates as $date)
+    @foreach($dates as $dateIndex => $date)
         @php
             $dateHasData = $data->where('participation_date', $date)->filter(function($item) {
                 return $item->user;
@@ -35,7 +35,7 @@
         <div class="date-section">
             <div class="date-header">يوم {{ $date }}</div>
             
-            @foreach($cities as $city)
+            @foreach($cities as $cityIndex => $city)
                 @php
                     $maleData = $data->where('participation_date', $date)
                                      ->filter(function($item) use ($city) {
@@ -51,7 +51,7 @@
                 @endphp
                 
                 @if($totalCount > 0)
-                    <div class="city-section" style="{{ $loop->first ? 'page-break-before: auto;' : '' }}">
+                    <div class="city-section" style="{{ ($dateIndex == 0 && $loop->first) ? 'page-break-before: auto;' : '' }}">
                         <div class="city-header">{{ $city->name_ar }} - الإجمالي: {{ $totalCount }}</div>
                         
                         <div class="gender-tables">
