@@ -655,15 +655,10 @@ $(document).ready(function() {
                                                     <td class="text-center">{{ $val->number ?? '-' }}</td>
                                                     <td class="text-center">
                                                         @if(!empty($val->participation_date))
-                                                            <div style="display: flex; align-items: center; gap: 5px;">
-                                                                <input type="date" class="form-control form-control-sm" 
-                                                                       value="{{ $val->participation_date }}" 
-                                                                       style="font-size: 12px; flex: 1;" 
-                                                                       onchange="assignSingleDate({{ $val->id }}, this.value)">
-                                                                <button type="button" class="btn btn-sm btn-danger" onclick="clearSingleDate({{ $val->id }})" title="مسح">
-                                                                    <i class="mdi mdi-close"></i>
-                                                                </button>
-                                                            </div>
+                                                            <input type="date" class="form-control form-control-sm" 
+                                                                   value="{{ $val->participation_date }}" 
+                                                                   style="font-size: 12px;" 
+                                                                   onchange="assignSingleDate({{ $val->id }}, this.value)">
                                                         @else
                                                             <div style="font-size: 11px; color: #999; cursor: pointer;" onclick="this.style.display='none'; this.nextElementSibling.style.display='block';">
                                                                 لم يتم التعيين بعد
@@ -794,28 +789,25 @@ function applyBulkDate() {
         return;
     }
     
-    if (confirm('هل تريد تعيين تاريخ ' + date + ' لـ ' + selectedIds.length + ' مشترك؟')) {
-        $.ajax({
-            url: '{{ url("/admin/subscriptions/assign-date-multiple") }}',
-            type: 'POST',
-            data: {
-                participation_date: date,
-                ids: selectedIds
-            },
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(response) {
-                if (response.success) {
-                    alert(response.message);
-                    location.reload();
-                }
-            },
-            error: function(xhr) {
-                alert('حدث خطأ. الرجاء المحاولة مرة أخرى.');
+    $.ajax({
+        url: '{{ url("/admin/subscriptions/assign-date-multiple") }}',
+        type: 'POST',
+        data: {
+            participation_date: date,
+            ids: selectedIds
+        },
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(response) {
+            if (response.success) {
+                location.reload();
             }
-        });
-    }
+        },
+        error: function(xhr) {
+            alert('حدث خطأ. الرجاء المحاولة مرة أخرى.');
+        }
+    });
 }
 
 function assignSingleDate(id, date) {
@@ -832,7 +824,6 @@ function assignSingleDate(id, date) {
         },
         success: function(response) {
             if (response.success) {
-                alert(response.message);
                 location.reload();
             }
         },
@@ -843,8 +834,6 @@ function assignSingleDate(id, date) {
 }
 
 function clearSingleDate(id) {
-    if (!confirm('هل تريد مسح التاريخ؟')) return;
-    
     $.ajax({
         url: '{{ url("/admin/subscriptions/assign-date-single") }}/' + id,
         type: 'POST',
@@ -856,7 +845,6 @@ function clearSingleDate(id) {
         },
         success: function(response) {
             if (response.success) {
-                alert(response.message);
                 location.reload();
             }
         },
@@ -873,28 +861,25 @@ function clearBulkDate() {
         return;
     }
     
-    if (confirm('هل تريد مسح التاريخ لـ ' + selectedIds.length + ' مشترك؟')) {
-        $.ajax({
-            url: '{{ url("/admin/subscriptions/assign-date-multiple") }}',
-            type: 'POST',
-            data: {
-                participation_date: null,
-                ids: selectedIds
-            },
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(response) {
-                if (response.success) {
-                    alert(response.message);
-                    location.reload();
-                }
-            },
-            error: function(xhr) {
-                alert('حدث خطأ. الرجاء المحاولة مرة أخرى.');
+    $.ajax({
+        url: '{{ url("/admin/subscriptions/assign-date-multiple") }}',
+        type: 'POST',
+        data: {
+            participation_date: null,
+            ids: selectedIds
+        },
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(response) {
+            if (response.success) {
+                location.reload();
             }
-        });
-    }
+        },
+        error: function(xhr) {
+            alert('حدث خطأ. الرجاء المحاولة مرة أخرى.');
+        }
+    });
 }
 
 let sortOrders = {};
