@@ -422,7 +422,11 @@ $(document).ready(function() {
                                             <div>
                                                 <input class="btn btn-sm" type="submit" value="فلترة" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 8px 40px;">
                                             </div>
-                                            <div style="width: 200px;"></div>
+                                            <div>
+                                                <a href="{{ url('admin/subscriptions/print') }}" class="btn btn-sm" style="background: #dc3545; color: white; border: none; padding: 8px 20px;" target="_blank">
+                                                    <i class="fas fa-print"></i> طباعة
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
