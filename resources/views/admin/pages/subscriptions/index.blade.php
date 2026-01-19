@@ -669,11 +669,11 @@ $(document).ready(function() {
                                                     <td class="text-center">
                                                         <input type="checkbox" class="row-checkbox" value="{{ $val->id }}" onchange="toggleBulkButton()">
                                                     </td>
-                                                    <td class="text-center">
+                                                    <td class="text-center" style="{{ !empty($val->participation_date) ? 'background-color: #d4edda;' : '' }}">
                                                         @if(!empty($val->participation_date))
                                                             <input type="date" class="form-control form-control-sm" 
                                                                    value="{{ $val->participation_date }}" 
-                                                                   style="font-size: 12px;" 
+                                                                   style="font-size: 12px; background-color: #d4edda;" 
                                                                    onchange="assignSingleDate({{ $val->id }}, this.value)">
                                                         @else
                                                             <div style="font-size: 11px; color: #999; cursor: pointer;" onclick="this.style.display='none'; this.nextElementSibling.style.display='block';">
