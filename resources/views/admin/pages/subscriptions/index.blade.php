@@ -570,8 +570,8 @@ $(document).ready(function() {
 <!--</thead>-->
 <thead style="background-color: #6c757d; font-weight: bold;">
     <tr class="text-center" style="font-size: 13px;">
-        <th style="border: none; color:white; padding: 6px;">
-            <input type="checkbox" id="selectAll" onchange="toggleSelectAll(this)">
+        <th style="border: none; color:white; padding: 6px; cursor: pointer;" onclick="document.getElementById('selectAll').click();">
+            <input type="checkbox" id="selectAll" onchange="toggleSelectAll(this)" onclick="event.stopPropagation();">
         </th>
         <th style="border: none; color:white; padding: 6px;">مسلسل</th>
         <th class="text-center" style="white-space: nowrap; border: none;color:white; cursor: pointer; padding: 6px;" onclick="toggleSort('username')">
@@ -652,10 +652,15 @@ $(document).ready(function() {
                                                     <td class="text-center">{{ $val->number ?? '-' }}</td>
                                                     <td class="text-center">
                                                         @if(!empty($val->participation_date))
-                                                            <input type="date" class="form-control form-control-sm" 
-                                                                   value="{{ $val->participation_date }}" 
-                                                                   style="font-size: 12px;" 
-                                                                   onchange="assignSingleDate({{ $val->id }}, this.value)">
+                                                            <div style="display: flex; align-items: center; gap: 5px;">
+                                                                <input type="date" class="form-control form-control-sm" 
+                                                                       value="{{ $val->participation_date }}" 
+                                                                       style="font-size: 12px; flex: 1;" 
+                                                                       onchange="assignSingleDate({{ $val->id }}, this.value)">
+                                                                <button type="button" class="btn btn-sm btn-danger" onclick="clearSingleDate({{ $val->id }})" title="مسح">
+                                                                    <i class="mdi mdi-close"></i>
+                                                                </button>
+                                                            </div>
                                                         @else
                                                             <div style="font-size: 11px; color: #999; cursor: pointer;" onclick="this.style.display='none'; this.nextElementSibling.style.display='block';">
                                                                 لم يتم التعيين بعد
@@ -815,6 +820,30 @@ function assignSingleDate(id, date) {
         type: 'POST',
         data: {
             participation_date: date
+        },
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(response) {
+            if (response.success) {
+                alert(response.message);
+                location.reload();
+            }
+        },
+        error: function(xhr) {
+            alert('حدث خطأ. الرجاء المحاولة مرة أخرى.');
+        }
+    });
+}
+
+function clearSingleDate(id) {
+    if (!confirm('هل تريد مسح التاريخ؟')) return;
+    
+    $.ajax({
+        url: '{{ url("/admin/subscriptions/assign-date-single") }}/' + id,
+        type: 'POST',
+        data: {
+            participation_date: null
         },
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
