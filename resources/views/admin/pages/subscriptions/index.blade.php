@@ -654,7 +654,7 @@ $(document).ready(function() {
 </td>
 
                                                       <td>  
-                                                       {{ DB::table('nationalities')->where('id', $val->user->nationality_id)->value('name_ar') ?? '-' }}
+                                                       {{ str_replace(['الجنسية - وأخرى', ' - وأخرى'], '', DB::table('nationalities')->where('id', $val->user->nationality_id)->value('name_ar') ?? '-') }}
                                              </td>
                                                     <td>{{ $val->user->identify }}</td>
                                                     <td>
