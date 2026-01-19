@@ -384,17 +384,17 @@ $(document).ready(function() {
                                         <input type="text" class="form-control" name="number" placeholder="رقم المسابقة"
                                             value="{{ request('number') }}">
                                     </div>
-                                    <div class="col-md-2 mt-3">
-                                        <input class="btn btn-info" type="submit" value="فلترة">
+                                    <div class="col-md-1 mt-3">
+                                        <input class="btn btn-info btn-sm" type="submit" value="فلترة" style="width: 100%;">
                                     </div>
                                     <div class="col-md-2 mt-3">
-                                        <a href="{{ url('admin/subscriptions/excel/export?' . $_SERVER['QUERY_STRING']) }}" class="btn btn-info" style="width: 100%;">
-                                            <i class="fas fa-print"></i> تصدير اكسل
+                                        <a href="{{ url('admin/subscriptions/excel/export?' . $_SERVER['QUERY_STRING']) }}" class="btn btn-info btn-sm" style="width: 100%;">
+                                            <i class="fas fa-print"></i> تصدير
                                         </a>
                                     </div>
                                     <div class="col-md-2 mt-3">
-                                        <a href="{{ url('admin/subscriptions/excel/import') }}" class="btn btn-success" style="width: 100%;">
-                                            <i class="mdi mdi-plus"></i> استيراد اكسل
+                                        <a href="{{ url('admin/subscriptions/excel/import') }}" class="btn btn-success btn-sm" style="width: 100%;">
+                                            <i class="mdi mdi-plus"></i> استيراد
                                         </a>
                                     </div>
                                 </div>
@@ -412,7 +412,7 @@ $(document).ready(function() {
                                 </div>
                                 <div class="col-md-8 text-right" style="position: relative;">
                                     <input type="date" id="bulkDateInput" style="position: absolute; opacity: 0; pointer-events: none;">
-                                    <button type="button" class="btn btn-sm btn-primary" id="bulkDateBtn" onclick="openBulkCalendar()" style="display:none; border-radius: 20px; padding: 6px 15px; font-size: 12px; margin-left: 5px;">
+                                    <button type="button" class="btn btn-sm btn-primary" id="bulkDateBtn" onclick="openBulkCalendar()" style="border-radius: 20px; padding: 6px 15px; font-size: 12px; display: inline-block; margin-left: 5px;">
                                         <i class="mdi mdi-calendar-multiple"></i> تعيين تاريخ للمحدد
                                     </button>
                                     <button type="button" class="btn btn-sm btn-success" id="applyBulkDateBtn" onclick="applyBulkDate()" style="display:none; border-radius: 20px; padding: 6px 15px; font-size: 12px; margin-left: 5px;">
