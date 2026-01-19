@@ -128,7 +128,7 @@
                         <div class="header__right d-flex justify-content-end align-items-center">
                             @if(!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2)
                             <div class="nav-item dropdown me-3">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
                                     En
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -137,7 +137,7 @@
                             </div>
                             @else
                             <div class="nav-item dropdown me-3">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
                                     Ar
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
