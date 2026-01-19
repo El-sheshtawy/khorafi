@@ -52,6 +52,19 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                 <div class="col-xxl-8 offset-xxl-2 col-xl-8 offset-xl-2">
                     <div class="section__title-wrapper text-center mb-55">
                         <h2 class="section__title">بيانات المشارك</h2>
+                        @php
+                            $config = DB::table('config')->first();
+                            $subscription = \App\Subscription::where('user_id', $user->id)->where('number', $config->number)->first();
+                        @endphp
+                        @if($subscription)
+                            <p style="color: white; font-size: 18px; margin-top: 15px;">
+                                تاريخ الاشتراك: {{ $subscription->participation_date ?? $subscription->created_at->format('Y-m-d') }}
+                            </p>
+                        @else
+                            <p style="color: white; font-size: 18px; margin-top: 15px;">
+                                لم يتم التعيين بعد
+                            </p>
+                        @endif
                     </div>
                 </div>
             </div>
