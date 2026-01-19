@@ -573,9 +573,6 @@ $(document).ready(function() {
 <!--</thead>-->
 <thead style="background-color: #6c757d; font-weight: bold;">
     <tr class="text-center" style="font-size: 13px;">
-        <th style="border: none; color:white; padding: 6px;">
-            <input type="checkbox" id="selectAll" onchange="toggleSelectAll(this)">
-        </th>
         <th style="border: none; color:white; padding: 6px;">مسلسل</th>
         <th class="text-center" style="white-space: nowrap; border: none;color:white; cursor: pointer; padding: 6px;" onclick="toggleSort('username')">
             <span style="color:white;">اسم المستخدم</span>
@@ -597,6 +594,10 @@ $(document).ready(function() {
             <span style="color:white;">المسابقة</span>
         </th>
 
+        <th style="border: none; color:white; padding: 6px;">
+            <input type="checkbox" id="selectAll" onchange="toggleSelectAll(this)">
+        </th>
+
         <th class="text-center" style="border: none;color:white;white-space: nowrap;">تاريخ المشاركة</th>
 
         <th class="text-center" style="white-space: nowrap; border: none;color:white; cursor: pointer;" onclick="toggleSort('level')">
@@ -616,43 +617,29 @@ $(document).ready(function() {
                                             @if (!empty($val->user->username))
                                                 <tr>
                                                     <td class="text-center">
-                                                        <input type="checkbox" class="row-checkbox" value="{{ $val->id }}" onchange="toggleBulkButton()">
-                                                    </td>
-                                                    <td class="text-center">
                                                         {{ $key + 1 }}
                                                     </td>
-                                                        
-                                                    <!--<td style="color: {{ $val->user->gender == 'female' ? 'red' : '#085d9e' }}; font-weight: bold;">-->
-                                                        
-                                                    <!--{{ $val->user->username }}-->
-                                                    
-                                                    <!--</td>-->
-<!--                                                    <td style="color: {{ $val->user->gender == 'female' ? 'red' : '#085d9e' }}; font-weight: bold;" -->
-<!--    onclick="window.location='{{ url('/') }}/admin/subscriptions/edit/{{ $val->id }}'">-->
-<!--    {{ $val->user->username }}-->
-<!--</td>-->
 <td style="color: {{ $val->user->gender == 'female' ? 'red' : '#085d9e' }}; font-weight: bold; cursor: pointer; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" 
     onclick="window.location='{{ url('/') }}/admin/subscriptions/edit/{{ $val->id }}'" title="{{ $val->user->username }}">
     {{ $val->user->username }}
 </td>
 
-                                                    <!--<td>{{ $val->user->gender == 'male' ? 'ذكر' : 'أنثى' }}</td>-->
-                                                        <!--<td>{{ $val->user->nationality->name_ar ?? '-' }}</td>-->
                                                       <td>  
                                                        {{ DB::table('nationalities')->where('id', $val->user->nationality_id)->value('name_ar') ?? '-' }}
                                              </td>
                                                     <td>{{ $val->user->identify }}</td>
-                                                    <!--<td>{{ $val->user->mobile }}</td>-->
                                                     <td>
                                                     <a href="https://wa.me/{{ $val->user->mobile }}" target="_blank">
                                                     {{ $val->user->mobile }}
                                                      </a>
                                                     </td>
-                                                    <!--<td>{{ $val->user->mobile2 }}</td>-->
                                                     <td class="text-center" style="  font-size: 13px;">{{ $val->s_name->name_ar }}</td>
                                                     <td class="created-at text-center" style="white-space: nowrap;">{{ \Carbon\Carbon::parse($val->created_at)->format('Y-m-d') }}</td>
                                                     <td class="text-center">{{ $val->date }}</td>
                                                     <td class="text-center">{{ $val->number ?? '-' }}</td>
+                                                    <td class="text-center">
+                                                        <input type="checkbox" class="row-checkbox" value="{{ $val->id }}" onchange="toggleBulkButton()">
+                                                    </td>
                                                     <td class="text-center">
                                                         @if(!empty($val->participation_date))
                                                             <input type="date" class="form-control form-control-sm" 
