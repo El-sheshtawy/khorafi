@@ -290,7 +290,8 @@ $(document).ready(function() {
                         <div class="card-box">
                             <style>
                                 .form-control::placeholder {
-                                    font-weight: bold;
+                                    font-weight: bold !important;
+                                    color: #000 !important;
                                 }
                                 .form-control option {
                                     font-weight: bold;
