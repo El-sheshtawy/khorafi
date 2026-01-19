@@ -409,19 +409,14 @@ $(document).ready(function() {
                                             <option value="not_assigned" {{ request('date_status') == 'not_assigned' ? 'selected' : '' }}>غير معين</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-1 mt-3">
-                                        <a href="{{ url('admin/subscriptions/excel/import') }}" class="btn btn-sm" style="width: 100%; background: #10b981; color: white; border: none; padding: 8px;">
+                                    <div class="col-md-12 mt-3 text-center">
+                                        <a href="{{ url('admin/subscriptions/excel/import') }}" class="btn btn-sm" style="background: #10b981; color: white; border: none; padding: 8px 30px; margin: 0 5px;">
                                             <i class="mdi mdi-plus"></i> استيراد
                                         </a>
-                                    </div>
-                                    <div class="col-md-1 mt-3">
-                                        <a href="{{ url('admin/subscriptions/excel/export?' . $_SERVER['QUERY_STRING']) }}" class="btn btn-sm" style="width: 100%; background: #3b82f6; color: white; border: none; padding: 8px;">
+                                        <input class="btn btn-sm" type="submit" value="فلترة" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 8px 30px; margin: 0 5px;">
+                                        <a href="{{ url('admin/subscriptions/excel/export?' . $_SERVER['QUERY_STRING']) }}" class="btn btn-sm" style="background: #3b82f6; color: white; border: none; padding: 8px 30px; margin: 0 5px;">
                                             <i class="fas fa-print"></i> تصدير
                                         </a>
-                                    </div>
-                                    <div class="col-md-12"></div>
-                                    <div class="col-md-12 mt-3 text-center">
-                                        <input class="btn btn-sm" type="submit" value="فلترة" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 8px 40px;">
                                     </div>
                                 </div>
                             </form>
