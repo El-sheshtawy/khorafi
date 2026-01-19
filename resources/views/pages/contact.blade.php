@@ -171,6 +171,9 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                                     @endif
                                 </ul>
                             </div>
+                            <div class="mt-4 text-center">
+                                <img src="{{url('images/QRCode.jpg')}}" alt="QR Code" style="max-width: 200px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                            </div>
                         </div>
                     </div>
                 </div>

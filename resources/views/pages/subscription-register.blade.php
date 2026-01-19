@@ -241,6 +241,12 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="sign__input-wrapper">
+                                    <h5>تاريخ المشاركة</h5>
+                                    <input class="form-control" type="date" name="participation_date" disabled style="background: #e2e8f0; cursor: not-allowed;">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="sign__input-wrapper">
                                     <h5>{{ trans('web.subscription_notes') }}</h5>
                                     <textarea class="form-control" name="subscription_notes" rows="3"></textarea>
                                 </div>
@@ -253,6 +259,13 @@
                             <div class="col-md-12 text-center mt-4">
                                 <button class="e-btn">{{ trans('web.subscription') }}</button>
                             </div>
+                            @if(!empty($config->telegram))
+                            <div class="col-md-12 text-center mt-3">
+                                <p style="color: #2d3748; font-size: 16px; font-weight: 600;">
+                                    انضم لجروب <a href="{{ $config->telegram }}" target="_blank" style="color: #0088cc; text-decoration: underline;">التليجرام</a> للاستفسار ومعرفة تاريخ مشاركتك
+                                </p>
+                            </div>
+                            @endif
                         </div>
                     </div>
 

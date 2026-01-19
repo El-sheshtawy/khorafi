@@ -128,15 +128,16 @@ class Home extends Controller
 
     public function subscription()
     {
+        $config = DB::table('config')->first();
         if (!empty(request('identify'))) {
             $user = User::where('identify', request('identify'))->where('active', 'active')->first();
             if (!empty($user)) {
-                return view('pages.subscription-user', ['user' => $user]);
+                return view('pages.subscription-user', ['user' => $user, 'config' => $config]);
             } else {
-                return view('pages.subscription-register');
+                return view('pages.subscription-register', ['config' => $config]);
             }
         }
-        return view('pages.subscription');
+        return view('pages.subscription', ['config' => $config]);
     }
 
     public function GetSubscription($id)
