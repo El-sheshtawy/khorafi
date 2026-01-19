@@ -161,7 +161,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                                 </li>
                             </ul>
                             <div class="contact__social pl-30">
-                                <div class="d-flex align-items-start justify-content-between">
+                                <div class="d-flex align-items-center">
                                     <div>
                                         <h4>{{trans('web.follow_us')}}</h4>
                                         <ul>
@@ -173,7 +173,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                                             @endif
                                         </ul>
                                     </div>
-                                    <div>
+                                    <div style="margin-left: 20px;">
                                         <img src="{{url('website/public/images/QRCode.jpg')}}" alt="QR Code" style="max-width: 120px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                                     </div>
                                 </div>
