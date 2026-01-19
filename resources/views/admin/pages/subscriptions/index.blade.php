@@ -401,13 +401,12 @@ $(document).ready(function() {
                                     <h4 class="header-title">عرض الاشتراكات (<span id="subscriptionCount">{{ $count }}</span>)</h4>
                                 </div>
                                 <div class="col-md-8 text-right" style="position: relative;">
-                                    <input type="date" id="bigDateInput" style="position: absolute; opacity: 0; pointer-events: none;">
                                     <input type="date" id="bulkDateInput" style="position: absolute; opacity: 0; pointer-events: none;">
-                                    <button type="button" class="btn btn-sm btn-primary" id="bulkDateBtn" onclick="openBulkCalendar()" style="border-radius: 20px; padding: 6px 15px; font-size: 12px; display: inline-block;">
+                                    <button type="button" class="btn btn-sm btn-primary" id="bulkDateBtn" onclick="openBulkCalendar()" style="display:none; border-radius: 20px; padding: 6px 15px; font-size: 12px;">
                                         <i class="mdi mdi-calendar-multiple"></i> تعيين تاريخ للمحدد
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-warning" onclick="openCalendarDirect()" style="border-radius: 20px; padding: 6px 15px; font-size: 12px; display: inline-block;">
-                                        <i class="mdi mdi-calendar-check"></i> تعيين تاريخ للجميع
+                                    <button type="button" class="btn btn-sm btn-success" id="applyBulkDateBtn" onclick="applyBulkDate()" style="display:none; border-radius: 20px; padding: 6px 15px; font-size: 12px;">
+                                        <i class="mdi mdi-check"></i> تطبيق
                                     </button>
                                     <a href="{{ url('admin/subscriptions/excel/export?' . $_SERVER['QUERY_STRING']) }}" class="btn btn-sm btn-info" style="border-radius: 20px; padding: 6px 15px; font-size: 12px; display: inline-block;">
                                         <i class="fas fa-print"></i> تصدير اكسل
@@ -574,8 +573,8 @@ $(document).ready(function() {
         <th class="text-center" style="white-space: nowrap; border: none;color:white; cursor: pointer; padding: 6px;" onclick="toggleSort('username')">
             <span style="color:white;">اسم المستخدم</span>
         </th>
-        <th style="border: none;color:white; padding: 6px;">الجنسية</th>
-        <th style="border: none;color:white; padding: 6px;">الرقم المدني</th>
+        <th style="border: none;color:white; padding: 6px; width: 80px;">الجنسية</th>
+        <th style="border: none;color:white; padding: 6px; width: 100px;">الرقم المدني</th>
         <th style="border: none;color:white; padding: 6px;">رقم الهاتف</th>
         <th class="text-center" style="font-size: 13px; border: none;color:white; padding: 6px;">فئة</th>
         
@@ -600,8 +599,6 @@ $(document).ready(function() {
         <th class="text-center" style="white-space: nowrap; border: none;color:white; cursor: pointer;" onclick="toggleSort('degree')">
             <span style="color:white;">الدرجة</span>
         </th>
-
-        <th class="text-center" style="border: none;color:white;">تعيين تاريخ</th>
         <th class="text-center" style="border: none;color:white;">التحكم</th>
     </tr>
 </thead>
@@ -649,13 +646,18 @@ $(document).ready(function() {
                                                     <td class="created-at text-center" style="white-space: nowrap;">{{ \Carbon\Carbon::parse($val->created_at)->format('Y-m-d') }}</td>
                                                     <td class="text-center">{{ $val->date }}</td>
                                                     <td class="text-center">{{ $val->number ?? '-' }}</td>
-                                                    <td class="text-center" style="white-space: nowrap;">{{ $val->participation_date ?? '-' }}</td>
+                                                    <td class="text-center">
+                                                        <input type="date" class="form-control form-control-sm" 
+                                                               value="{{ $val->participation_date }}" 
+                                                               placeholder="لم يتم التعيين بعد"
+                                                               style="font-size: 12px;" 
+                                                               onchange="assignSingleDate({{ $val->id }}, this.value)">
+                                                        @if(empty($val->participation_date))
+                                                            <small class="text-muted" style="font-size: 10px;">لم يتم التعيين بعد</small>
+                                                        @endif
+                                                    </td>
                                                     <td class="text-center">{{ $val->level }}</td>
                                                     <td class="text-center">{{ $val->degree }}</td>
-                                                    <td class="text-center">
-                                                        <input type="date" class="form-control form-control-sm" style="font-size: 12px;" 
-                                                               onchange="assignSingleDate({{ $val->id }}, this.value)">
-                                                    </td>
 
 
                                                     <td class="text-center">
@@ -717,10 +719,6 @@ $(document).ready(function() {
 </style>
 
 <script>
-function openCalendarDirect() {
-    document.getElementById('bigDateInput').showPicker();
-}
-
 function openBulkCalendar() {
     document.getElementById('bulkDateInput').showPicker();
 }
@@ -733,15 +731,18 @@ function toggleSelectAll(checkbox) {
 
 function toggleBulkButton() {
     const selected = document.querySelectorAll('.row-checkbox:checked');
-    const btn = document.getElementById('bulkDateBtn');
-    if (btn) {
-        if (selected.length > 0) {
-            btn.style.display = 'inline-block';
-            btn.style.visibility = 'visible';
-        } else {
-            btn.style.display = 'none';
+    const bulkBtn = document.getElementById('bulkDateBtn');
+    const applyBtn = document.getElementById('applyBulkDateBtn');
+    
+    if (selected.length > 0) {
+        bulkBtn.style.display = 'inline-block';
+        const dateValue = document.getElementById('bulkDateInput').value;
+        if (dateValue) {
+            applyBtn.style.display = 'inline-block';
         }
-        console.log('Selected:', selected.length, 'Button display:', btn.style.display);
+    } else {
+        bulkBtn.style.display = 'none';
+        applyBtn.style.display = 'none';
     }
 }
 
@@ -750,38 +751,19 @@ function getSelectedIds() {
     return Array.from(checkboxes).map(cb => cb.value);
 }
 
-document.getElementById('bigDateInput').addEventListener('change', function() {
-    const date = this.value;
-    if (!date) return;
-    
-    if (confirm('هل تريد تعيين تاريخ ' + date + ' لجميع المشتركين؟')) {
-        $.ajax({
-            url: '{{ url("/admin/subscriptions/assign-date-all") }}',
-            type: 'POST',
-            data: {
-                participation_date: date,
-                number: '{{ request("number") ?? "" }}'
-            },
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(response) {
-                if (response.success) {
-                    alert(response.message);
-                    location.reload();
-                }
-            },
-            error: function(xhr) {
-                alert('حدث خطأ. الرجاء المحاولة مرة أخرى.');
-            }
-        });
-    }
-    this.value = '';
-});
-
 document.getElementById('bulkDateInput').addEventListener('change', function() {
     const date = this.value;
-    if (!date) return;
+    if (date) {
+        document.getElementById('applyBulkDateBtn').style.display = 'inline-block';
+    }
+});
+
+function applyBulkDate() {
+    const date = document.getElementById('bulkDateInput').value;
+    if (!date) {
+        alert('الرجاء اختيار تاريخ');
+        return;
+    }
     
     const selectedIds = getSelectedIds();
     if (selectedIds.length === 0) {
@@ -811,8 +793,7 @@ document.getElementById('bulkDateInput').addEventListener('change', function() {
             }
         });
     }
-    this.value = '';
-});
+}
 
 function assignSingleDate(id, date) {
     if (!date) return;
