@@ -4,24 +4,25 @@
     <meta charset="UTF-8">
     <title>طباعة المشاركين</title>
     <style>
-        body { font-family: Arial, sans-serif; direction: rtl; }
-        .date-section { page-break-before: always; margin-bottom: 30px; }
+        body { font-family: Arial, sans-serif; direction: rtl; margin: 10px; font-size: 12px; }
+        .date-section { page-break-before: always; margin-bottom: 15px; }
         .date-section:first-child { page-break-before: auto; }
-        .date-header { font-size: 24px; font-weight: bold; margin-bottom: 20px; text-align: center; }
-        .city-section { margin-bottom: 30px; }
-        .city-header { font-size: 20px; font-weight: bold; margin-bottom: 10px; background: #f0f0f0; padding: 10px; }
-        .gender-tables { display: flex; gap: 20px; }
+        .date-header { font-size: 18px; font-weight: bold; margin-bottom: 10px; text-align: center; }
+        .city-section { margin-bottom: 15px; }
+        .city-header { font-size: 16px; font-weight: bold; margin-bottom: 5px; background: #f0f0f0; padding: 5px; }
+        .gender-tables { display: flex; gap: 10px; }
         .gender-table { flex: 1; }
-        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-        th { background: #667eea; color: white; padding: 8px; text-align: center; }
-        td { border: 1px solid #ddd; padding: 8px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 11px; }
+        th { background: #667eea; color: white; padding: 4px; text-align: center; }
+        td { border: 1px solid #ddd; padding: 3px 5px; }
         @media print {
             .no-print { display: none; }
+            body { margin: 5px; }
         }
     </style>
 </head>
 <body>
-    <button class="no-print" onclick="window.print()" style="margin: 20px; padding: 10px 20px; background: #667eea; color: white; border: none; cursor: pointer;">طباعة</button>
+    <button class="no-print" onclick="window.print()" style="margin: 10px; padding: 8px 15px; background: #667eea; color: white; border: none; cursor: pointer;">طباعة</button>
 
     @foreach($dates as $date)
         <div class="date-section">
@@ -30,22 +31,27 @@
             @foreach($cities as $city)
                 @php
                     $maleData = $data->where('participation_date', $date)
-                                     ->where('user.city_id', $city->id)
-                                     ->where('user.gender', 'male');
+                                     ->filter(function($item) use ($city) {
+                                         return $item->user && $item->user->city_id == $city->id && $item->user->gender == 'male';
+                                     });
                     $femaleData = $data->where('participation_date', $date)
-                                       ->where('user.city_id', $city->id)
-                                       ->where('user.gender', 'female');
+                                       ->filter(function($item) use ($city) {
+                                           return $item->user && $item->user->city_id == $city->id && $item->user->gender == 'female';
+                                       });
+                    $maleCount = $maleData->count();
+                    $femaleCount = $femaleData->count();
+                    $totalCount = $maleCount + $femaleCount;
                 @endphp
                 
-                @if($maleData->count() > 0 || $femaleData->count() > 0)
+                @if($totalCount > 0)
                     <div class="city-section">
-                        <div class="city-header">{{ $city->name_ar }}</div>
+                        <div class="city-header">{{ $city->name_ar }} - الإجمالي: {{ $totalCount }}</div>
                         
                         <div class="gender-tables">
                             <div class="gender-table">
                                 <table>
                                     <thead>
-                                        <tr><th>رجال</th></tr>
+                                        <tr><th>رجال ({{ $maleCount }})</th></tr>
                                     </thead>
                                     <tbody>
                                         @foreach($maleData as $item)
@@ -58,7 +64,7 @@
                             <div class="gender-table">
                                 <table>
                                     <thead>
-                                        <tr><th>نساء</th></tr>
+                                        <tr><th>نساء ({{ $femaleCount }})</th></tr>
                                     </thead>
                                     <tbody>
                                         @foreach($femaleData as $item)
