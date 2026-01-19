@@ -120,6 +120,10 @@
                             <li>
                                 <a href="{{url('/contact')}}" class="nav-link">{{trans('web.contact')}}</a>
                             </li>
+
+                            <li class="nav-item">
+                                <img src="{{url('website/public/images/QRCode.jpg')}}" alt="QR Code" style="width: 40px; height: 40px; border-radius: 4px; cursor: pointer;">
+                            </li>
                         </ul>
                         <div class="header__right d-flex justify-content-end align-items-center">
                             @if(!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2)
