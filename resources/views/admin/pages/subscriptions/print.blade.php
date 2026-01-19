@@ -51,7 +51,7 @@
                 @endphp
                 
                 @if($totalCount > 0)
-                    <div class="city-section">
+                    <div class="city-section" style="{{ $loop->first ? 'page-break-before: auto;' : '' }}">
                         <div class="city-header">{{ $city->name_ar }} - الإجمالي: {{ $totalCount }}</div>
                         
                         <div class="gender-tables">
