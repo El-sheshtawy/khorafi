@@ -292,21 +292,21 @@ $(document).ready(function() {
                                 <div class="row">
                                     <div class="col-md-2 mt-3">
                                         <input class="form-control" type="number" name="id"
-                                            value="{{ request('id') }}" placeholder="الرقم المدني">
+                                            value="{{ request('id') }}" placeholder="الرقم المدني" style="font-weight: bold;">
                                     </div>
                                     <div class="col-md-2 mt-3">
                                         <input class="form-control" type="number" placeholder="السنة" name="date"
-                                            value="{{ request('date') }}">
+                                            value="{{ request('date') }}" style="font-weight: bold;">
                                     </div>
                                     <div class="col-md-2 mt-3">
                                         <input class="form-control" type="text" name="username"
-                                            value="{{ request('username') }}" placeholder="اسم المستخدم">
+                                            value="{{ request('username') }}" placeholder="اسم المستخدم" style="font-weight: bold;">
                                     </div>
                                     <!-- <div class="col-md-3 mt-3">
                                             <input class="form-control" type="email" name="email" value="{{ request('email') }}" placeholder="البريد الالكتروني">
                                         </div> -->
                                     <div class="col-md-3 mt-3">
-                                        <select class="form-control" name="nationality_id">
+                                        <select class="form-control" name="nationality_id" style="font-weight: bold;">
                                             <option value="">اختر الجنسية</option>
                                             @foreach (\App\Nationality::get() as $val)
                                                 <option value="{{ $val->id }}"
@@ -316,7 +316,7 @@ $(document).ready(function() {
                                         </select>
                                     </div>
                                     <div class="col-md-3 mt-3">
-                                        <select class="form-control" name="name_id">
+                                        <select class="form-control" name="name_id" style="font-weight: bold;">
                                             <option value="">اختر الفئة</option>
                                             @foreach (\App\SubscriptionsName::get() as $val)
                                                 <option value="{{ $val->id }}"
@@ -326,7 +326,7 @@ $(document).ready(function() {
                                         </select>
                                     </div>
                                     <div class="col-md-3 mt-3">
-                                        <select class="form-control" name="type">
+                                        <select class="form-control" name="type" style="font-weight: bold;">
                                             <option value="">نوع الترتيب</option>
                                             <option value="winner" {{ request('type') == 'winner' ? 'selected' : '' }}>
                                                 الفائزون</option>
@@ -340,7 +340,7 @@ $(document).ready(function() {
                                     </div>
 
                                     <div class="col-md-3 mt-3">
-                                        <select class="form-control" name="winner">
+                                        <select class="form-control" name="winner" style="font-weight: bold;">
                                             <option value="">اختر نوع الفائزون</option>
                                             <option value="1" {{ request('winner') == '1' ? 'selected' : '' }}>
                                                 الفائزون</option>
@@ -350,10 +350,10 @@ $(document).ready(function() {
                                     </div>
                                     <div class="col-md-3 mt-3 pt-2">
                                         <input name='subscrition' type='checkbox' {{!empty(request('subscrition')) ? 'checked' : ''}} />
-                                        المشاركون
+                                        <span style="font-weight: bold;">المشاركون</span>
                                     </div>
                                     <div class="col-md-3 mt-3">
-                                        <select class="form-control" name="gender">
+                                        <select class="form-control" name="gender" style="font-weight: bold;">
                                             <option value="">اخترا الجنس</option>
                                             <option value="male" {{ request('gender') == 'male' ? 'selected' : '' }}>ذكر
                                             </option>
@@ -362,7 +362,7 @@ $(document).ready(function() {
                                         </select>
                                     </div>
                                     <div class="col-md-3 mt-3">
-                                        <select class="form-control" name="city_id">
+                                        <select class="form-control" name="city_id" style="font-weight: bold;">
                                             <option value="">اخترا المحافظة</option>
                                             @foreach (\App\City::get() as $val)
                                                 <option value="{{ $val->id }}"
@@ -372,7 +372,7 @@ $(document).ready(function() {
                                         </select>
                                     </div>
                                     <div class="col-md-2 mt-3">
-                                        <select class="form-control" name="order_type">
+                                        <select class="form-control" name="order_type" style="font-weight: bold;">
                                             <option value="">طريقة الترتيب</option>
                                             <option value="asc" {{ request('order_type') == 'asc' ? 'selected' : '' }}>
                                                 تصاعدي</option>
@@ -382,11 +382,11 @@ $(document).ready(function() {
                                     </div>
                                     <div class="col-md-2 mt-3">
                                         <input type="text" class="form-control" name="number" placeholder="رقم المسابقة"
-                                            value="{{ request('number') }}">
+                                            value="{{ request('number') }}" style="font-weight: bold;">
                                     </div>
                                     <div class="col-md-2 mt-3">
                                         <input class="form-control" type="date" name="participation_date"
-                                            value="{{ request('participation_date') }}" placeholder="تاريخ المشاركة" title="تاريخ المشاركة">
+                                            value="{{ request('participation_date') }}" placeholder="تاريخ المشاركة" title="تاريخ المشاركة" style="font-weight: bold;">
                                     </div>
                                     <div class="col-md-1 mt-3">
                                         <a href="{{ url('admin/subscriptions/excel/import') }}" class="btn btn-sm" style="width: 100%; background: #10b981; color: white; border: none; padding: 8px;">
@@ -399,7 +399,7 @@ $(document).ready(function() {
                                         </a>
                                     </div>
                                     <div class="col-md-12"></div>
-                                    <div class="col-md-2 mt-3">
+                                    <div class="col-md-2 mt-3 offset-md-5">
                                         <input class="btn btn-sm" type="submit" value="فلترة" style="width: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 8px;">
                                     </div>
                                 </div>
