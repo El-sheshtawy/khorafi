@@ -38,3 +38,4 @@ Route::group(['middleware' => 'lang'], function () {
 });
 
 Route::get('/admin/subscriptions/print', 'Admin\\Subscriptions@printSchedule');
+Route::get('/admin/subscriptions/print2', 'Admin\\Subscriptions@printSchedule2');
