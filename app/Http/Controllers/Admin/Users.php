@@ -295,66 +295,83 @@ class Users extends Controller
 
     public function update($id, Request $request)
     {
+        $data = User::where('id', $id)->where('id', '!=', 1)->first();
+        if (empty($data)) {
+            return redirect("/admin/users")->with("error", "فشلت العملية.");
+        }
 
         $validatedData = $request->validate([
-            'email' => 'required|email',
-            'first_name' => 'required|string',
-            'second_name' => 'required|string',
-            'third_name' => 'required|string',
-            'last_name' => 'required|string',
-            'birthday' => 'required|string',
-            'nationality' => 'required|numeric',
-            'city' => 'required|numeric',
-            'region' => 'required|numeric',
-            'identify' => 'required|numeric',
-            'mobile' => 'required|numeric',
-            'mobile2' => 'numeric',
-            'type' => 'required|in:admin,user',
-            'gender' => 'required|in:male,female',
-            'image' => 'image|mimes:jpg,jpeg,png',
+            'email' => 'nullable|email',
+            'first_name' => 'nullable|string',
+            'second_name' => 'nullable|string',
+            'third_name' => 'nullable|string',
+            'last_name' => 'nullable|string',
+            'birthday' => 'nullable|string',
+            'nationality' => 'nullable|numeric',
+            'city' => 'nullable|numeric',
+            'region' => 'nullable|numeric',
+            'identify' => 'nullable|numeric',
+            'mobile' => 'nullable|numeric',
+            'mobile2' => 'nullable|numeric',
+            'type' => 'nullable|in:admin,user',
+            'gender' => 'nullable|in:male,female',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png',
         ]);
 
-        $active = request('active') ? "active" : "deactive";
-
-        if (!empty(request()->file('image'))) {
-            $file = request()->file('image');
+        $updateData = [];
+        
+        if ($request->filled('email')) $updateData['email'] = $request->email;
+        if ($request->filled('type')) $updateData['type'] = $request->type;
+        if ($request->filled('gender')) $updateData['gender'] = $request->gender;
+        if ($request->filled('identify')) $updateData['identify'] = $request->identify;
+        if ($request->filled('mobile')) $updateData['mobile'] = $request->mobile;
+        if ($request->filled('mobile2')) $updateData['mobile2'] = $request->mobile2;
+        if ($request->filled('birthday')) $updateData['birthday'] = $request->birthday;
+        if ($request->filled('password')) $updateData['password'] = $request->password;
+        
+        if ($request->filled('first_name') || $request->filled('second_name') || $request->filled('third_name') || $request->filled('last_name')) {
+            $updateData['first_name'] = $request->filled('first_name') ? $request->first_name : $data->first_name;
+            $updateData['second_name'] = $request->filled('second_name') ? $request->second_name : $data->second_name;
+            $updateData['third_name'] = $request->filled('third_name') ? $request->third_name : $data->third_name;
+            $updateData['last_name'] = $request->filled('last_name') ? $request->last_name : $data->last_name;
+            $updateData['username'] = $updateData['first_name'] . ' ' . $updateData['second_name'] . ' ' . $updateData['third_name'] . ' ' . $updateData['last_name'];
+        }
+        
+        if ($request->filled('nationality')) {
+            $nationality = \App\Nationality::where('id', $request->nationality)->first();
+            if ($nationality) {
+                $updateData['nationality'] = $nationality->code;
+                $updateData['nationality_id'] = $request->nationality;
+            }
+        }
+        
+        if ($request->filled('city') || $request->filled('region')) {
+            $cityId = $request->filled('city') ? $request->city : $data->city_id;
+            $regionId = $request->filled('region') ? $request->region : $data->region_id;
+            
+            $city = \App\City::where('id', $cityId)->first();
+            $region = \App\Region::where('id', $regionId)->first();
+            
+            if ($city) {
+                $updateData['city_id'] = $cityId;
+                $updateData['address'] = $city->name_ar . ($region ? ' - ' . $region->name_ar : '');
+            }
+            if ($region) {
+                $updateData['region_id'] = $regionId;
+            }
+        }
+        
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
             $image = Str::Random(40) . "." . $ext;
             $file->move(public_path('images'), $image);
-        } else {
-            $image = request('old_image');
+            $updateData['image'] = $image;
         }
-
-        $user = DB::table('users')->where(['id' => $id])->first();
-
-        $password = empty(request('password')) ? $user->password : request('password');
-
-        $nationality = \App\Nationality::where('id', request('nationality'))->first()->code;
-        $city = \App\City::where('id', request('city'))->first()->name_ar;
-        $region = !empty(\App\Region::where('id', request('region'))->first()) ? \App\Region::where('id', request('region'))->first()->name_ar : 0;
-
-        User::where("id", $id)->update([
-            "email" => request('email'),
-            'username' => request('first_name') . ' ' . request('second_name') . ' ' . request('third_name') . ' ' . request('last_name'),
-            'first_name' => request('first_name'),
-            'second_name' => request('second_name'),
-            'third_name' => request('third_name'),
-            'last_name' => request('last_name'),
-            "mobile" => request('mobile'),
-            "mobile2" => request('mobile2'),
-            "type" => request('type'),
-            "nationality" => $nationality,
-            'nationality_id' => request('nationality'),
-            "birthday" => request('birthday'),
-            "address" => $city . " - " . $region,
-            'city_id' => request('city'),
-            'region_id' => request('region'),
-            "identify" => request('identify'),
-            "gender" => request('gender'),
-            "password" => request('password'),
-            "image" => $image,
-            "active" => $active,
-        ]);
+        
+        $updateData['active'] = $request->has('active') ? 'active' : 'deactive';
+        
+        User::where("id", $id)->update($updateData);
 
         return redirect("/admin/users")->with("success", "تم التعديل بنجاح.");
     }
