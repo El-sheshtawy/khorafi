@@ -161,15 +161,10 @@ class Home extends Controller
 
         $config = DB::table('config')->first();
         $check = Subscription::where('user_id', $user->id)->where('number', $config->number)->first();
-        if (!empty($check)) {
-            return back()->with('error', trans('web.registerd_bedore'));
-        }
-
+        
         if (!in_array(request('subscription_type'), [1, 2, 3, 4])) {
             return back()->withInput()->with('error', trans('web.error_select_subscription'));
         }
-
-
 
         if (request('subscription_type') == 1) {
 
@@ -259,24 +254,29 @@ class Home extends Controller
 
         $notes = !empty(request('notes')) ? filter_var(request('notes'), FILTER_SANITIZE_STRING) : '';
 
-        
-        
-        try {
-            $subscription_id = Subscription::insertGetId([
-                'user_id' => $user->id,
-                'city_id' => $user->city_id,
-                'name_id' => request('subscription_type'),
-                'number' => $config->number,
-                'active' => 'active',
-                'notes' => $notes,
-                'date' => date('Y'),
-            ]);
-        } catch(\Illuminate\Database\QueryException $e){
+        if (!empty($check)) {
+            $check->name_id = request('subscription_type');
+            $check->notes = $notes;
+            $check->save();
             
+            Selection::where('subscription_id', $check->id)->delete();
+            $subscription = $check;
+        } else {
+            try {
+                $subscription_id = Subscription::insertGetId([
+                    'user_id' => $user->id,
+                    'city_id' => $user->city_id,
+                    'name_id' => request('subscription_type'),
+                    'number' => $config->number,
+                    'active' => 'active',
+                    'notes' => $notes,
+                    'date' => date('Y'),
+                ]);
+            } catch(\Illuminate\Database\QueryException $e){
+                
+            }
+            $subscription = Subscription::where('user_id', $user->id)->orderBy('id', 'desc')->first();
         }
-
-        $subscription = Subscription::where('user_id', $user->id)->orderBy('id', 'desc')->first();
-
 
         if (request('subscription_type') == 1) {
             Selection::insert([

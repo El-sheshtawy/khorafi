@@ -57,12 +57,12 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                             $subscription = \App\Subscription::where('user_id', $user->id)->where('number', $config->number)->first();
                         @endphp
                         @if($subscription && $subscription->participation_date)
-                            <p style="color: white; font-size: 18px; margin-top: 15px;">
-                                تاريخ الاشتراك: <span style="color: #fbbf24; font-weight: bold;">{{ $subscription->participation_date }}</span>
+                            <p style="color: white; font-size: 24px; margin-top: 20px; font-weight: bold;">
+                                تاريخ الحضور والتسميع: <span style="color: #fbbf24; font-weight: bold;">{{ $subscription->participation_date }}</span>
                             </p>
                         @else
-                            <p style="color: white; font-size: 18px; margin-top: 15px;">
-                                تاريخ الاشتراك: <span style="color: #fbbf24; font-weight: bold;">لم يتم التعيين بعد</span>
+                            <p style="color: white; font-size: 24px; margin-top: 20px; font-weight: bold;">
+                                تاريخ الحضور والتسميع: <span style="color: #fbbf24; font-weight: bold;">لم يتم التعيين بعد</span>
                             </p>
                         @endif
                     </div>
