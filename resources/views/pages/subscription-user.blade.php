@@ -143,7 +143,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                 <select name="nationality" class="form-select">
                     <option value="">{{ trans('web.nationality') }}</option>
                     @foreach (\App\Nationality::where('active', 'active')->get() as $val)
-                        <option value="{{ $val->id }}" {{ old('nationality') == $val->id ? 'selected' : '' }}>
+                        <option value="{{ $val->id }}" {{ ($user->nationality_id == $val->id) ? 'selected' : '' }}>
                             {{ $val->$name }}
                         </option>
                     @endforeach
@@ -158,7 +158,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                 <select name="city" id="change-city-register-page" class="form-select">
                     <option value="0">{{ trans('web.city') }}</option>
                     @foreach (\App\City::where('active', 'active')->get() as $val)
-                        <option value="{{ $val->id }}" {{ old('city') == $val->id ? 'selected' : '' }}>
+                        <option value="{{ $val->id }}" {{ ($user->city_id == $val->id) ? 'selected' : '' }}>
                             {{ $val->$name }}
                         </option>
                     @endforeach
@@ -172,7 +172,11 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
             <div class="sign__input">
                 <select name="region" id="result-change-city-register-page" class="form-select">
                     <option value="">{{ trans('web.state') }}</option>
-                    <!-- Populate dynamically based on city selection -->
+                    @foreach (\App\Region::where('city_id', $user->city_id)->get() as $val)
+                        <option value="{{ $val->id }}" {{ ($user->region_id == $val->id) ? 'selected' : '' }}>
+                            {{ $val->$name }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
         </div>
@@ -184,7 +188,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                 <select name="subscription_type" class="form-select change-select-subscription-type1">
                     <option value="0">{{ trans('web.select_subscription_type') }}</option>
                     @foreach(\App\SubscriptionsName::get() as $val)
-                        <option value="{{ $val->id }}">{{ $val->$name }}</option>
+                        <option value="{{ $val->id }}" {{ ($subscription && $subscription->name_id == $val->id) ? 'selected' : '' }}>{{ $val->$name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -194,7 +198,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
         <div class="sign__input-wrapper mb-10">
             <h5>{{ trans('web.subscription_notes') }}</h5>
             <div class="sign__input">
-                <textarea class="form-control" name="subscription_notes" cols="30" rows="7"></textarea>
+                <textarea class="form-control" name="subscription_notes" cols="30" rows="7">{{ $subscription ? $subscription->notes : '' }}</textarea>
             </div>
         </div>
                     <div class="text-center mt-4">
