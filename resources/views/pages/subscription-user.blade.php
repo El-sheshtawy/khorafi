@@ -16,7 +16,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
     <style>
         .signup__area { background: #2c5282; min-height: 100vh; padding: 40px 0; }
         .section__title { color: white !important; font-weight: 800; font-size: 28px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-        .form-container { background: #2c5282; padding: 50px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); max-width: 1100px; margin: 0 auto; }
+        .form-container { background: #2c5282; padding: 50px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); max-width: 100%; margin: 0 auto; }
         .user { background: #e8eef5; padding: 35px; border-radius: 16px; border: 2px solid #d1dce8; margin-bottom: 30px; }
         .user h2 { color: #667eea; font-weight: 700; margin-bottom: 25px; text-align: center; border-bottom: 3px solid #667eea; padding-bottom: 15px; }
         .user p { font-size: 16px; margin-bottom: 15px; padding: 12px; background: #f8fafc; border-radius: 8px; }
@@ -49,7 +49,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-xxl-10 offset-xxl-1 col-xl-10 offset-xl-1 col-lg-12">
+                <div class="col-xxl-12 col-xl-12 col-lg-12">
                     <div class="section__title-wrapper text-center mb-55">
                         <h2 class="section__title">بيانات المشارك</h2>
                         @php
