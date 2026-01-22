@@ -162,8 +162,46 @@ class Home extends Controller
         $config = DB::table('config')->first();
         $check = Subscription::where('user_id', $user->id)->where('number', $config->number)->first();
         
-        if (!in_array(request('subscription_type'), [1, 2, 3, 4])) {
-            return back()->withInput()->with('error', trans('web.error_select_subscription'));
+        // Update user fields if provided
+        if (request('nationality')) {
+            $nationality = \App\Nationality::where('id', request('nationality'))->first();
+            if ($nationality) {
+                $user->nationality_id = request('nationality');
+                $user->nationality = $nationality->code;
+            }
+        }
+        
+        if (request('city') && request('city') != '0') {
+            $user->city_id = request('city');
+        }
+        
+        if (request('region')) {
+            $user->region_id = request('region');
+        }
+        
+        // Update address if city or region changed
+        if (request('city') || request('region')) {
+            $cityId = request('city') ?: $user->city_id;
+            $regionId = request('region') ?: $user->region_id;
+            
+            if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
+                $name = "name_en";
+            } else {
+                $name = "name_ar";
+            }
+            
+            $city = \App\City::where('id', $cityId)->first();
+            $region = \App\Region::where('id', $regionId)->first();
+            
+            if ($city) {
+                $user->address = $city->$name . ($region ? ' - ' . $region->$name : '');
+            }
+        }
+        
+        $user->save();
+        
+        if (!request('subscription_type') || !in_array(request('subscription_type'), [1, 2, 3, 4])) {
+            return back()->with('success', 'تم تحديث البيانات بنجاح');
         }
 
         if (request('subscription_type') == 1) {
