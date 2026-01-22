@@ -49,7 +49,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-xxl-8 offset-xxl-2 col-xl-8 offset-xl-2">
+                <div class="col-xxl-10 offset-xxl-1 col-xl-10 offset-xl-1 col-lg-12">
                     <div class="section__title-wrapper text-center mb-55">
                         <h2 class="section__title">بيانات المشارك</h2>
                         @php
@@ -58,11 +58,11 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                         @endphp
                         @if($subscription && $subscription->participation_date)
                             <p style="color: white; font-size: 24px; margin-top: 20px; font-weight: bold;">
-                                تاريخ الحضور والتسميع: <span style="color: #fbbf24; font-weight: bold;">{{ $subscription->participation_date }}</span>
+                                موعد التسميع: <span style="color: #fbbf24; font-weight: bold;">{{ $subscription->participation_date }}</span>
                             </p>
                         @else
                             <p style="color: white; font-size: 24px; margin-top: 20px; font-weight: bold;">
-                                تاريخ الحضور والتسميع: <span style="color: #fbbf24; font-weight: bold;">لم يتم التعيين بعد</span>
+                                موعد التسميع: <span style="color: #fbbf24; font-weight: bold;">لم يتم التعيين بعد</span>
                             </p>
                         @endif
                     </div>
