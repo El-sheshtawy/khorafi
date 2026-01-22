@@ -16,11 +16,11 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
     <style>
         .signup__area { background: #2c5282; min-height: 100vh; padding: 40px 0; }
         .section__title { color: white !important; font-weight: 800; font-size: 28px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-        .container { max-width: 100% !important; padding: 0 15px !important; }
+        .container { max-width: 1400px !important; padding: 0 15px !important; }
         .form-container { background: transparent !important; padding: 0 !important; border-radius: 0 !important; box-shadow: none !important; width: 100% !important; margin: 0 !important; max-width: none !important; }
         .user { background: #e8eef5; padding: 25px; border-radius: 16px; border: 2px solid #d1dce8; margin-bottom: 30px; width: 100% !important; max-width: none !important; }
         .user h2 { color: #667eea; font-weight: 700; margin-bottom: 25px; text-align: center; border-bottom: 3px solid #667eea; padding-bottom: 15px; }
-        .user p { font-size: 16px; margin-bottom: 15px; padding: 12px; background: #f8fafc; border-radius: 8px; }
+        .user p { font-size: 16px; margin-bottom: 15px; padding: 12px; background: #f8fafc; border-radius: 8px; text-align: center; }
         .user p strong { color: #2d3748; font-weight: 700; }
         .user p span { color: #2563eb !important; font-weight: 700; }
         .sign__input-wrapper h5 { color: white; font-weight: 700; margin-bottom: 8px; font-size: 16px; text-align: center; }
