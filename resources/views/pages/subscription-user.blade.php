@@ -61,11 +61,17 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                         @endphp
                         @if($subscription && $subscription->participation_date)
                             <p style="color: white; font-size: 24px; margin-top: 20px; font-weight: bold;">
-                                موعد التسميع: <span style="color: #fbbf24; font-weight: bold;">{{ $subscription->participation_date }}</span>
+                                موعد التسميع:
+                            </p>
+                            <p style="color: #fbbf24; font-size: 28px; font-weight: bold; margin-top: 10px;">
+                                {{ $subscription->participation_date }}
                             </p>
                         @else
                             <p style="color: white; font-size: 24px; margin-top: 20px; font-weight: bold;">
-                                موعد التسميع: <span style="color: #fbbf24; font-weight: bold;">لم يتم التعيين بعد</span>
+                                موعد التسميع:
+                            </p>
+                            <p style="color: #fbbf24; font-size: 28px; font-weight: bold; margin-top: 10px;">
+                                لم يتم التعيين بعد
                             </p>
                         @endif
                     </div>
