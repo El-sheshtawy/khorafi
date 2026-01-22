@@ -98,7 +98,7 @@
                             </li>
 
                             <li>
-                                <a href="{{url('/subscription')}}" class="nav-link">{{trans('web.subscription1')}}</a>
+                                <a href="{{url('/subscription')}}" class="nav-link" style="background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); color: white !important; padding: 10px 20px; border-radius: 8px; font-weight: bold; box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4); transition: all 0.3s;">{{trans('web.subscription1')}}</a>
                             </li>
 
                             <li>
@@ -385,6 +385,13 @@
         #navbarSupportedContent .navbar-nav .nav-link:hover {
             background: rgba(255,255,255,0.1);
             padding-right: 20px;
+        }
+        #navbarSupportedContent .navbar-nav li:nth-child(2) .nav-link {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+            color: white !important;
+            font-weight: bold !important;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4) !important;
+            margin: 10px 0 !important;
         }
         #navbarSupportedContent .dropdown-menu {
             background: rgba(255,255,255,0.95);
