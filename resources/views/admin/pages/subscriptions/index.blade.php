@@ -624,8 +624,8 @@ $(document).ready(function() {
             <span style="color:white;">تاريخ التسجيل</span>
         </th>
 
-        <th class="text-center" style="white-space: nowrap; border: none;color:white; cursor: pointer;" onclick="toggleSort('date')">
-            <span style="color:white;">السنة</span>
+        <th class="text-center" style="white-space: nowrap; border: none;color:white; cursor: pointer;" onclick="toggleSort('city_id')">
+            <span style="color:white;">المحافظة</span>
         </th>
 
         <th class="text-center" style="white-space: nowrap; border: none;color:white; cursor: pointer;" onclick="toggleSort('number')">
@@ -679,7 +679,7 @@ $(document).ready(function() {
                                                     </td>
                                                     <td class="text-center" style="  font-size: 13px;">{{ $val->s_name->name_ar }}</td>
                                                     <td class="created-at text-center" style="white-space: nowrap;">{{ \Carbon\Carbon::parse($val->created_at)->format('Y-m-d') }}</td>
-                                                    <td class="text-center">{{ $val->date }}</td>
+                                                    <td class="text-center">{{ $val->user->city_id ? (\App\City::find($val->user->city_id)->name_ar ?? '-') : '-' }}</td>
                                                     <td class="text-center">{{ $val->number ?? '-' }}</td>
                                                     <td class="text-center">
                                                         <input type="checkbox" class="row-checkbox" value="{{ $val->id }}" onchange="toggleBulkButton()">
