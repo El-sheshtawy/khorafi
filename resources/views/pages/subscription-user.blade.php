@@ -101,8 +101,12 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                         <p>
                             <strong>{{trans('web.mobile')}}: </strong> <span style="color: blue;"> {{$user->mobile}}</span>
                         </p>
+                        @php
+                            $selections = \App\Selection::where('subscription_id', $subscription->id ?? 0)->pluck('options')->toArray();
+                            $selectionsText = !empty($selections) ? implode(', ', $selections) : '-';
+                        @endphp
                         <p>
-                            <strong>{{trans('web.mobile2')}}: </strong> <span style="color: blue;"> {{$user->mobile2}}</span>
+                            <strong>أجزاء التسميع: </strong> <span style="color: blue;"> {{ $selectionsText }}</span>
                         </p>
 
                 </div>
