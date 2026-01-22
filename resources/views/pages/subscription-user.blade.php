@@ -33,7 +33,11 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
         .alert { border-radius: 12px; border: none; padding: 18px 24px; margin-bottom: 30px; }
         @media (max-width: 768px) {
             .form-container { padding: 15px; }
-            .user { padding: 20px; }
+            .user { padding: 20px 15px; }
+            .user h2 { font-size: 18px; margin-bottom: 20px; }
+            .user p { font-size: 15px; padding: 10px; margin-bottom: 10px; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+            .user p strong { font-size: 14px; color: #667eea; }
+            .user p span { font-size: 16px !important; }
             .signup__area { padding: 20px 0; }
             .section__title { font-size: 22px; }
             .user { padding: 25px 20px; }
