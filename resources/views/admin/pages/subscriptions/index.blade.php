@@ -426,8 +426,11 @@ $(document).ready(function() {
                                                 <a href="{{ url('admin/subscriptions/print?' . $_SERVER['QUERY_STRING']) }}" class="btn btn-sm" style="background: #dc3545; color: white; border: none; padding: 8px 20px; margin-left: 5px;" target="_blank">
                                                     <i class="fas fa-print"></i> طباعة (تاريخ)
                                                 </a>
-                                                <a href="{{ url('admin/subscriptions/print2?' . $_SERVER['QUERY_STRING']) }}" class="btn btn-sm" style="background: #6c757d; color: white; border: none; padding: 8px 20px;" target="_blank">
+                                                <a href="{{ url('admin/subscriptions/print2?' . $_SERVER['QUERY_STRING']) }}" class="btn btn-sm" style="background: #6c757d; color: white; border: none; padding: 8px 20px; margin-left: 5px;" target="_blank">
                                                     <i class="fas fa-print"></i> طباعة (محافظة)
+                                                </a>
+                                                <a href="{{ url('admin/subscriptions/stats?' . $_SERVER['QUERY_STRING']) }}" class="btn btn-sm" style="background: #28a745; color: white; border: none; padding: 8px 20px;" target="_blank">
+                                                    <i class="fas fa-chart-bar"></i> إحصائية التوزيع
                                                 </a>
                                             </div>
                                         </div>
