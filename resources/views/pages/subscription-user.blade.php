@@ -219,25 +219,6 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
         </div>
 
         <div class="result-select-subscription-type1"></div>
-        
-        <script>
-        $(document).ready(function() {
-            @if($subscription && $subscription->name_id)
-                var subscriptionType = {{ $subscription->name_id }};
-                var identify = '{{ request('identify') }}';
-                if (subscriptionType > 0) {
-                    $.ajax({
-                        type: 'get',
-                        url: "{{ url('subscription/get/') }}/" + subscriptionType,
-                        data: {'identify': identify},
-                        success: function(result) {
-                            $('.result-select-subscription-type1').html(result);
-                        }
-                    });
-                }
-            @endif
-        });
-        </script>
         <div class="sign__input-wrapper mb-10">
             <h5>{{ trans('web.subscription_notes') }}</h5>
             <div class="sign__input">

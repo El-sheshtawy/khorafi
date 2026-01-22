@@ -308,6 +308,21 @@
                     }
                 });
             });
+            
+            // Auto-load subscription parts if already selected
+            var subscriptionTypeSelect = $('.change-select-subscription-type1');
+            if (subscriptionTypeSelect.length && subscriptionTypeSelect.val() > 0) {
+                var id = subscriptionTypeSelect.val();
+                var identify = $('.user-identify').val();
+                $.ajax({
+                    type: 'get',
+                    url: "<?= url('subscription/get/') ?>/" + id,
+                    data: {'identify': identify},
+                    success: function(result) {
+                        $('.result-select-subscription-type1').html(result);
+                    }
+                });
+            }
 
         });
     </script>
