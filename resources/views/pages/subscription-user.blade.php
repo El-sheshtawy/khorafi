@@ -90,7 +90,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                             <strong>{{trans('web.gender')}}: </strong> <span style="color: blue;"> {{$user->gender == 'male' ? trans('web.male') : trans('web.female') }}</span>
                         </p>
                         <p>
-                            <strong>{{trans('web.nationality')}}: </strong> <span style="color: blue;"> {{$user->nationality}}</span>
+                            <strong>{{trans('web.nationality')}}: </strong> <span style="color: blue;"> {{ $user->nationality_id ? (\App\Nationality::find($user->nationality_id)->name_ar ?? $user->nationality) : $user->nationality }}</span>
                         </p>
                         <p>
                             <strong>{{trans('web.birthday')}}: </strong> <span style="color: blue;"> {{$user->birthday}}</span>
