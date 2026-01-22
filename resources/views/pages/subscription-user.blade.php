@@ -18,12 +18,15 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
         .section__title { color: white !important; font-weight: 800; font-size: 28px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
         .container { max-width: 1400px !important; padding: 0 15px !important; }
         .form-container { background: transparent !important; padding: 0 !important; border-radius: 0 !important; box-shadow: none !important; width: 100% !important; margin: 0 !important; max-width: none !important; }
-        .user { background: linear-gradient(135deg, #f8f9fa 0%, #e8eef5 100%); padding: 25px; border-radius: 16px; border: 2px solid #d1dce8; margin-bottom: 30px; width: 100% !important; max-width: none !important; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
-        .user h2 { color: #667eea; font-weight: 700; margin-bottom: 25px; text-align: center; border-bottom: 3px solid #667eea; padding-bottom: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.05); }
-        .user p { font-size: 16px; margin-bottom: 12px; padding: 14px 16px; background: white; border-radius: 10px; text-align: center; border-left: 4px solid #667eea; box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: all 0.3s; }
-        .user p:hover { transform: translateX(-3px); box-shadow: 0 4px 12px rgba(102,126,234,0.15); }
-        .user p strong { color: #667eea; font-weight: 700; font-size: 15px; display: block; margin-bottom: 6px; }
-        .user p span { color: #1e293b !important; font-weight: 600; font-size: 17px; }
+        .user { background: white; padding: 0; border-radius: 16px; border: none; margin-bottom: 30px; width: 100% !important; max-width: none !important; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden; }
+        .user h2 { color: white; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); font-weight: 700; margin: 0; padding: 20px; text-align: center; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+        .user-table { width: 100%; border-collapse: collapse; }
+        .user-table tr { border-bottom: 1px solid #e8eef5; transition: all 0.3s; }
+        .user-table tr:last-child { border-bottom: none; }
+        .user-table tr:hover { background: #f8f9fa; }
+        .user-table td { padding: 16px 20px; }
+        .user-table td:first-child { color: #667eea; font-weight: 700; font-size: 15px; width: 35%; background: #f8f9fa; }
+        .user-table td:last-child { color: #1e293b; font-weight: 600; font-size: 16px; text-align: center; }
         .sign__input-wrapper h5 { color: white; font-weight: 700; margin-bottom: 8px; font-size: 16px; text-align: center; }
         .form-select, .form-control { border: 2px solid #e2e8f0; border-radius: 12px; padding: 14px 16px; font-size: 15px; background: #fef3c7; height: 50px; width: 100%; color: #2563eb; font-weight: 700; transition: all 0.3s; }
         textarea.form-control { height: auto; min-height: 100px; }
@@ -34,11 +37,11 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
         .alert { border-radius: 12px; border: none; padding: 18px 24px; margin-bottom: 30px; }
         @media (max-width: 768px) {
             .form-container { padding: 10px; }
-            .user { padding: 20px 12px; border-radius: 12px; }
-            .user h2 { font-size: 20px; margin-bottom: 18px; padding-bottom: 12px; }
-            .user p { font-size: 14px; padding: 12px 10px; margin-bottom: 10px; border-radius: 8px; }
-            .user p strong { font-size: 13px; margin-bottom: 4px; }
-            .user p span { font-size: 15px !important; }
+            .user { border-radius: 12px; }
+            .user h2 { font-size: 18px; padding: 16px; }
+            .user-table td { padding: 12px 10px; font-size: 14px; }
+            .user-table td:first-child { font-size: 13px; width: 40%; }
+            .user-table td:last-child { font-size: 14px; }
             .signup__area { padding: 20px 0; }
             .section__title { font-size: 22px; }
             .user { padding: 25px 20px; }
@@ -85,35 +88,46 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
             <div class="form-container">
                 <div class="user">
                         <h2>{{$user->username}}</h2>
-                        <p>
-                            <strong>{{trans('web.email')}}: </strong> <span style="color: blue;"> {{$user->email}}</span>
-                        </p>
-                        <p>
-                            <strong>{{trans('web.identify')}}: </strong> <span style="color: blue;"> {{$user->identify}}</span>
-                        </p>
-                        <p>
-                            <strong>{{trans('web.gender')}}: </strong> <span style="color: blue;"> {{$user->gender == 'male' ? trans('web.male') : trans('web.female') }}</span>
-                        </p>
-                        <p>
-                            <strong>{{trans('web.nationality')}}: </strong> <span style="color: blue;"> {{ $user->nationality_id ? (\App\Nationality::find($user->nationality_id)->name_ar ?? $user->nationality) : $user->nationality }}</span>
-                        </p>
-                        <p>
-                            <strong>{{trans('web.birthday')}}: </strong> <span style="color: blue;"> {{$user->birthday}}</span>
-                        </p>
-                        <p>
-                            <strong>{{trans('web.address')}}: </strong> <span style="color: blue;"> {{$user->address}}</span>
-                        </p>
-                        <p>
-                            <strong>{{trans('web.mobile')}}: </strong> <span style="color: blue;"> {{$user->mobile}}</span>
-                        </p>
-                        @php
-                            $selections = \App\Selection::where('subscription_id', $subscription->id ?? 0)->pluck('options')->toArray();
-                            $selectionsText = !empty($selections) ? implode(', ', $selections) : '-';
-                        @endphp
-                        <p>
-                            <strong>أجزاء التسميع: </strong> <span style="color: blue;"> {{ $selectionsText }}</span>
-                        </p>
-
+                        <table class="user-table">
+                            <tr>
+                                <td>{{trans('web.email')}}</td>
+                                <td>{{$user->email}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{trans('web.identify')}}</td>
+                                <td>{{$user->identify}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{trans('web.gender')}}</td>
+                                <td>{{$user->gender == 'male' ? trans('web.male') : trans('web.female')}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{trans('web.nationality')}}</td>
+                                <td>{{ $user->nationality_id ? (\App\Nationality::find($user->nationality_id)->name_ar ?? $user->nationality) : $user->nationality }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{trans('web.birthday')}}</td>
+                                <td>{{$user->birthday}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{trans('web.address')}}</td>
+                                <td>{{$user->address}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{trans('web.mobile')}}</td>
+                                <td>{{$user->mobile}}</td>
+                            </tr>
+                            <tr>
+                                <td>أجزاء التسميع</td>
+                                <td>
+                                    @php
+                                        $selections = \App\Selection::where('subscription_id', $subscription->id ?? 0)->pluck('options')->toArray();
+                                        $selectionsText = !empty($selections) ? implode(', ', $selections) : '-';
+                                    @endphp
+                                    {{ $selectionsText }}
+                                </td>
+                            </tr>
+                        </table>
                 </div>
                 @if(isset($config) && !empty($config->telegram))
                 <div class="text-center mb-4" style="background: rgba(0, 136, 204, 0.1); padding: 20px; border-radius: 12px;">
