@@ -344,13 +344,17 @@ public function index()
         }
 
         // Apply ordering
-        if (!empty(request('type')) and in_array(request('type'), ['winner', 'name_id', 'degree', 'level', 'created_at', 'date', 'number', 'participation_date']) and !empty(request('order_type')) and in_array(request('order_type'), ['asc', 'desc'])) {
+        if (!empty(request('type')) and in_array(request('type'), ['winner', 'name_id', 'degree', 'level', 'created_at', 'date', 'number', 'participation_date', 'city_id']) and !empty(request('order_type')) and in_array(request('order_type'), ['asc', 'desc'])) {
             if (request('type') == 'participation_date') {
                 if (request('order_type') == 'asc') {
                     $data = $data->orderByRaw('participation_date IS NULL ASC, participation_date ASC');
                 } else {
                     $data = $data->orderByRaw('participation_date IS NULL ASC, participation_date DESC');
                 }
+            } elseif (request('type') == 'city_id') {
+                $data = $data->join('users as u', 'subscriptions.user_id', '=', 'u.id')
+                             ->orderBy('u.city_id', request('order_type'))
+                             ->select('subscriptions.*');
             } else {
                 $data = $data->orderBy(request('type'), request('order_type'));
             }

@@ -910,6 +910,7 @@ let sortOrders = {
     'username': '{{ request("type") == "username" ? request("order_type") : "desc" }}',
     'created_at': '{{ request("type") == "created_at" ? request("order_type") : "desc" }}',
     'date': '{{ request("type") == "date" ? request("order_type") : "desc" }}',
+    'city_id': '{{ request("type") == "city_id" ? request("order_type") : "desc" }}',
     'number': '{{ request("type") == "number" ? request("order_type") : "desc" }}',
     'level': '{{ request("type") == "level" ? request("order_type") : "desc" }}',
     'degree': '{{ request("type") == "degree" ? request("order_type") : "desc" }}'  
