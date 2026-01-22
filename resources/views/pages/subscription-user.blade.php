@@ -131,8 +131,9 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                 </div>
                 @if(isset($config) && !empty($config->telegram))
                 <div class="text-center mb-4" style="background: rgba(0, 136, 204, 0.1); padding: 20px; border-radius: 12px;">
-                    <p style="color: white; font-size: 16px; font-weight: 600; margin: 0;">
-                        انضم لجروب <a href="{{ $config->telegram }}" target="_blank" style="color: #0088cc; text-decoration: underline; font-weight: 700;">التليجرام</a> للاستفسار ومعرفة تاريخ مشاركتك
+                    <p style="color: white; font-size: 16px; font-weight: 600; margin: 0; line-height: 1.8;">
+                        للاستفسار ومعرفة موعد تسميعك<br>
+                        انضم لجروب <a href="{{ $config->telegram }}" target="_blank" style="color: #0088cc; text-decoration: underline; font-weight: 700;">التليجرام</a>
                     </p>
                 </div>
                 @endif
