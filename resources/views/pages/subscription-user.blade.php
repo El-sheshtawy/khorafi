@@ -24,7 +24,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
         .user-table tr { border-bottom: 1px solid #e8eef5; transition: all 0.3s; }
         .user-table tr:last-child { border-bottom: none; }
         .user-table tr:hover { background: #f8f9fa; }
-        .user-table td { padding: 16px 20px; font-weight: bold; }
+        .user-table td { padding: 16px 20px; font-weight: bold; vertical-align: top; }
         .user-table td:first-child { color: #667eea; font-size: 15px; width: 200px; background: #f8f9fa; }
         .user-table td:last-child { color: #1e293b; font-size: 16px; text-align: right; padding-right: 30px; }
         .sign__input-wrapper h5 { color: white; font-weight: 700; margin-bottom: 8px; font-size: 16px; text-align: center; }
@@ -40,7 +40,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
             .user { border-radius: 12px; }
             .user h2 { font-size: 18px; padding: 16px; }
             .user-table { max-width: 100%; }
-            .user-table td { padding: 12px 10px; font-size: 14px; font-weight: bold; }
+            .user-table td { padding: 12px 10px; font-size: 14px; font-weight: bold; vertical-align: top; }
             .user-table td:first-child { font-size: 13px; width: 40%; }
             .user-table td:last-child { font-size: 14px; text-align: right; padding-right: 15px; }
             .signup__area { padding: 20px 0; }
