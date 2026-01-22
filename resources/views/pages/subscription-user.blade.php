@@ -18,11 +18,12 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
         .section__title { color: white !important; font-weight: 800; font-size: 28px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
         .container { max-width: 1400px !important; padding: 0 15px !important; }
         .form-container { background: transparent !important; padding: 0 !important; border-radius: 0 !important; box-shadow: none !important; width: 100% !important; margin: 0 !important; max-width: none !important; }
-        .user { background: #e8eef5; padding: 25px; border-radius: 16px; border: 2px solid #d1dce8; margin-bottom: 30px; width: 100% !important; max-width: none !important; }
-        .user h2 { color: #667eea; font-weight: 700; margin-bottom: 25px; text-align: center; border-bottom: 3px solid #667eea; padding-bottom: 15px; }
-        .user p { font-size: 16px; margin-bottom: 15px; padding: 12px; background: #f8fafc; border-radius: 8px; text-align: center; }
-        .user p strong { color: #2d3748; font-weight: 700; }
-        .user p span { color: #2563eb !important; font-weight: 700; }
+        .user { background: linear-gradient(135deg, #f8f9fa 0%, #e8eef5 100%); padding: 25px; border-radius: 16px; border: 2px solid #d1dce8; margin-bottom: 30px; width: 100% !important; max-width: none !important; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        .user h2 { color: #667eea; font-weight: 700; margin-bottom: 25px; text-align: center; border-bottom: 3px solid #667eea; padding-bottom: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.05); }
+        .user p { font-size: 16px; margin-bottom: 12px; padding: 14px 16px; background: white; border-radius: 10px; text-align: center; border-left: 4px solid #667eea; box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: all 0.3s; }
+        .user p:hover { transform: translateX(-3px); box-shadow: 0 4px 12px rgba(102,126,234,0.15); }
+        .user p strong { color: #667eea; font-weight: 700; font-size: 15px; display: block; margin-bottom: 6px; }
+        .user p span { color: #1e293b !important; font-weight: 600; font-size: 17px; }
         .sign__input-wrapper h5 { color: white; font-weight: 700; margin-bottom: 8px; font-size: 16px; text-align: center; }
         .form-select, .form-control { border: 2px solid #e2e8f0; border-radius: 12px; padding: 14px 16px; font-size: 15px; background: #fef3c7; height: 50px; width: 100%; color: #2563eb; font-weight: 700; transition: all 0.3s; }
         textarea.form-control { height: auto; min-height: 100px; }
@@ -32,12 +33,12 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
         .e-btn span { display: none; }
         .alert { border-radius: 12px; border: none; padding: 18px 24px; margin-bottom: 30px; }
         @media (max-width: 768px) {
-            .form-container { padding: 15px; }
-            .user { padding: 20px 15px; }
-            .user h2 { font-size: 18px; margin-bottom: 20px; }
-            .user p { font-size: 15px; padding: 10px; margin-bottom: 10px; display: flex; flex-direction: column; align-items: center; gap: 5px; }
-            .user p strong { font-size: 14px; color: #667eea; }
-            .user p span { font-size: 16px !important; }
+            .form-container { padding: 10px; }
+            .user { padding: 20px 12px; border-radius: 12px; }
+            .user h2 { font-size: 20px; margin-bottom: 18px; padding-bottom: 12px; }
+            .user p { font-size: 14px; padding: 12px 10px; margin-bottom: 10px; border-radius: 8px; }
+            .user p strong { font-size: 13px; margin-bottom: 4px; }
+            .user p span { font-size: 15px !important; }
             .signup__area { padding: 20px 0; }
             .section__title { font-size: 22px; }
             .user { padding: 25px 20px; }
