@@ -2,6 +2,11 @@
     $config = DB::table('config')->first();
     $subscription = \App\Subscription::where('user_id', $user->id)->where('number', $config->number)->first();
     $selections = $subscription ? \App\Selection::where('subscription_id', $subscription->id)->pluck('options')->toArray() : [];
+    $selection1 = $selections[0] ?? null;
+    $selection2 = $selections[1] ?? null;
+    $selection3 = $selections[2] ?? null;
+    $selection4 = $selections[3] ?? null;
+    $selection5 = $selections[4] ?? null;
 @endphp
 
 @if($id == 1)
@@ -42,7 +47,7 @@
                     <option value="">{{trans('web.select_part')}}</option>
                     @for($i = 1; $i <= 30; $i++)
                         @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))
-                        <option value="{{$i}}" {{ in_array($i, $selections) ? 'selected' : '' }}>{{$i}}</option>
+                        <option value="{{$i}}" {{ $selection1 == $i ? 'selected' : '' }}>{{$i}}</option>
                         @endif
                     @endfor
                 </select>
@@ -57,7 +62,7 @@
                     <option value="">{{trans('web.select_part')}}</option>
                     @for($i = 1; $i <= 30; $i++)
                         @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))
-                        <option value="{{$i}}" {{ in_array($i, $selections) ? 'selected' : '' }}>{{$i}}</option>
+                        <option value="{{$i}}" {{ $selection2 == $i ? 'selected' : '' }}>{{$i}}</option>
                         @endif
                     @endfor
                 </select>
@@ -72,7 +77,7 @@
                     <option value="">{{trans('web.select_part')}}</option>
                     @for($i = 1; $i <= 30; $i++)
                         @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))
-                        <option value="{{$i}}" {{ in_array($i, $selections) ? 'selected' : '' }}>{{$i}}</option>
+                        <option value="{{$i}}" {{ $selection3 == $i ? 'selected' : '' }}>{{$i}}</option>
                         @endif
                     @endfor
                 </select>
@@ -90,7 +95,7 @@
                     <option value="">{{trans('web.select_part')}}</option>
                     @for($i = 1; $i <= 30; $i++)
                         @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))
-                        <option value="{{$i}}" {{ in_array($i, $selections) ? 'selected' : '' }}>{{$i}}</option>
+                        <option value="{{$i}}" {{ $selection1 == $i ? 'selected' : '' }}>{{$i}}</option>
                         @endif
                     @endfor
                 </select>
@@ -105,7 +110,7 @@
                     <option value="">{{trans('web.select_part')}}</option>
                     @for($i = 1; $i <= 30; $i++)
                         @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))
-                        <option value="{{$i}}" {{ in_array($i, $selections) ? 'selected' : '' }}>{{$i}}</option>
+                        <option value="{{$i}}" {{ $selection2 == $i ? 'selected' : '' }}>{{$i}}</option>
                         @endif
                     @endfor
                 </select>
@@ -120,7 +125,7 @@
                     <option value="">{{trans('web.select_part')}}</option>
                     @for($i = 1; $i <= 30; $i++)
                         @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))
-                        <option value="{{$i}}" {{ in_array($i, $selections) ? 'selected' : '' }}>{{$i}}</option>
+                        <option value="{{$i}}" {{ $selection3 == $i ? 'selected' : '' }}>{{$i}}</option>
                         @endif
                     @endfor
                 </select>
@@ -135,7 +140,7 @@
                     <option value="">{{trans('web.select_part')}}</option>
                     @for($i = 1; $i <= 30; $i++)
                         @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))
-                        <option value="{{$i}}" {{ in_array($i, $selections) ? 'selected' : '' }}>{{$i}}</option>
+                        <option value="{{$i}}" {{ $selection4 == $i ? 'selected' : '' }}>{{$i}}</option>
                         @endif
                     @endfor
                 </select>
@@ -150,7 +155,7 @@
                     <option value="">{{trans('web.select_part')}}</option>
                     @for($i = 1; $i <= 30; $i++)
                         @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))
-                        <option value="{{$i}}" {{ in_array($i, $selections) ? 'selected' : '' }}>{{$i}}</option>
+                        <option value="{{$i}}" {{ $selection5 == $i ? 'selected' : '' }}>{{$i}}</option>
                         @endif
                     @endfor
                 </select>
