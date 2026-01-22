@@ -1,3 +1,9 @@
+@php
+    $config = DB::table('config')->first();
+    $subscription = \App\Subscription::where('user_id', $user->id)->where('number', $config->number)->first();
+    $selections = $subscription ? \App\Selection::where('subscription_id', $subscription->id)->pluck('options')->toArray() : [];
+@endphp
+
 @if($id == 1)
 <div class="sign__input-wrapper mb-10">
     <h5>{{trans('web.select_hizb')}}</h5>
@@ -6,7 +12,7 @@
             <option value="">{{trans('web.select_hizb')}}</option>
             @for($i = 1; $i <= 60; $i++)
             @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'hizb')->where('options', $i)->where('active', 'active')->first()))
-            <option value="{{$i}}">{{$i}}</option>
+            <option value="{{$i}}" {{ in_array($i, $selections) ? 'selected' : '' }}>{{$i}}</option>
             @endif
             @endfor
         </select>
@@ -18,15 +24,11 @@
     <div class="sign__input">
         <select name="part_number" class="form-select change-select-subscription-type">
             <option value="">{{trans('web.select_part')}}</option>
-            <?php
-            for ($i = 1; $i <= 30; $i++) {
-            ?>
+            @for($i = 1; $i <= 30; $i++)
                 @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))
-                <option value="{{$i}}">{{$i}}</option>
+                <option value="{{$i}}" {{ in_array($i, $selections) ? 'selected' : '' }}>{{$i}}</option>
                 @endif
-            <?php
-            }
-            ?>
+            @endfor
         </select>
     </div>
 </div>
@@ -38,15 +40,11 @@
             <div class="sign__input">
                 <select name="part_number1" class="form-select change-select-subscription-type">
                     <option value="">{{trans('web.select_part')}}</option>
-                    <?php
-                    for ($i = 1; $i <= 30; $i++) {
-                    ?>
+                    @for($i = 1; $i <= 30; $i++)
                         @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))
-                        <option value="{{$i}}">{{$i}}</option>
+                        <option value="{{$i}}" {{ in_array($i, $selections) ? 'selected' : '' }}>{{$i}}</option>
                         @endif
-                    <?php
-                    }
-                    ?>
+                    @endfor
                 </select>
             </div>
         </div>
@@ -57,15 +55,11 @@
             <div class="sign__input">
                 <select name="part_number2" class="form-select change-select-subscription-type">
                     <option value="">{{trans('web.select_part')}}</option>
-                    <?php
-                    for ($i = 1; $i <= 30; $i++) {
-                    ?>
+                    @for($i = 1; $i <= 30; $i++)
                         @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))
-                        <option value="{{$i}}">{{$i}}</option>
+                        <option value="{{$i}}" {{ in_array($i, $selections) ? 'selected' : '' }}>{{$i}}</option>
                         @endif
-                    <?php
-                    }
-                    ?>
+                    @endfor
                 </select>
             </div>
         </div>
@@ -76,15 +70,11 @@
             <div class="sign__input">
                 <select name="part_number3" class="form-select change-select-subscription-type">
                     <option value="">{{trans('web.select_part')}}</option>
-                    <?php
-                    for ($i = 1; $i <= 30; $i++) {
-                    ?>
+                    @for($i = 1; $i <= 30; $i++)
                         @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))
-                        <option value="{{$i}}">{{$i}}</option>
+                        <option value="{{$i}}" {{ in_array($i, $selections) ? 'selected' : '' }}>{{$i}}</option>
                         @endif
-                    <?php
-                    }
-                    ?>
+                    @endfor
                 </select>
             </div>
         </div>
@@ -98,15 +88,11 @@
             <div class="sign__input">
                 <select name="part_number1" class="form-select change-select-subscription-type">
                     <option value="">{{trans('web.select_part')}}</option>
-                    <?php
-                    for ($i = 1; $i <= 30; $i++) {
-                    ?>
+                    @for($i = 1; $i <= 30; $i++)
                         @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))
-                        <option value="{{$i}}">{{$i}}</option>
+                        <option value="{{$i}}" {{ in_array($i, $selections) ? 'selected' : '' }}>{{$i}}</option>
                         @endif
-                    <?php
-                    }
-                    ?>
+                    @endfor
                 </select>
             </div>
         </div>
@@ -117,15 +103,11 @@
             <div class="sign__input">
                 <select name="part_number2" class="form-select change-select-subscription-type">
                     <option value="">{{trans('web.select_part')}}</option>
-                    <?php
-                    for ($i = 1; $i <= 30; $i++) {
-                    ?>
+                    @for($i = 1; $i <= 30; $i++)
                         @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))
-                        <option value="{{$i}}">{{$i}}</option>
+                        <option value="{{$i}}" {{ in_array($i, $selections) ? 'selected' : '' }}>{{$i}}</option>
                         @endif
-                    <?php
-                    }
-                    ?>
+                    @endfor
                 </select>
             </div>
         </div>
@@ -136,15 +118,11 @@
             <div class="sign__input">
                 <select name="part_number3" class="form-select change-select-subscription-type">
                     <option value="">{{trans('web.select_part')}}</option>
-                    <?php
-                    for ($i = 1; $i <= 30; $i++) {
-                    ?>
+                    @for($i = 1; $i <= 30; $i++)
                         @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))
-                        <option value="{{$i}}">{{$i}}</option>
+                        <option value="{{$i}}" {{ in_array($i, $selections) ? 'selected' : '' }}>{{$i}}</option>
                         @endif
-                    <?php
-                    }
-                    ?>
+                    @endfor
                 </select>
             </div>
         </div>
@@ -155,15 +133,11 @@
             <div class="sign__input">
                 <select name="part_number4" class="form-select change-select-subscription-type">
                     <option value="">{{trans('web.select_part')}}</option>
-                    <?php
-                    for ($i = 1; $i <= 30; $i++) {
-                    ?>
+                    @for($i = 1; $i <= 30; $i++)
                         @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))
-                        <option value="{{$i}}">{{$i}}</option>
+                        <option value="{{$i}}" {{ in_array($i, $selections) ? 'selected' : '' }}>{{$i}}</option>
                         @endif
-                    <?php
-                    }
-                    ?>
+                    @endfor
                 </select>
             </div>
         </div>
@@ -174,15 +148,11 @@
             <div class="sign__input">
                 <select name="part_number5" class="form-select change-select-subscription-type">
                     <option value="">{{trans('web.select_part')}}</option>
-                    <?php
-                    for ($i = 1; $i <= 30; $i++) {
-                    ?>
+                    @for($i = 1; $i <= 30; $i++)
                         @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))
-                        <option value="{{$i}}">{{$i}}</option>
+                        <option value="{{$i}}" {{ in_array($i, $selections) ? 'selected' : '' }}>{{$i}}</option>
                         @endif
-                    <?php
-                    }
-                    ?>
+                    @endfor
                 </select>
             </div>
         </div>
