@@ -200,7 +200,7 @@ class Home extends Controller
         
         $user->save();
         
-        if (!request('subscription_type') || !in_array(request('subscription_type'), [1, 2, 3, 4])) {
+        if (!request('subscription_type') || request('subscription_type') == '0' || !in_array(request('subscription_type'), [1, 2, 3, 4])) {
             return back()->with('success', 'تم تحديث البيانات بنجاح');
         }
 
