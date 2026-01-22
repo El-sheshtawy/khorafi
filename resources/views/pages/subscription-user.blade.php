@@ -41,7 +41,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
             .user h2 { font-size: 18px; padding: 16px; }
             .user-table td { padding: 12px 10px; font-size: 14px; font-weight: bold; }
             .user-table td:first-child { font-size: 13px; width: 40%; font-weight: bold; }
-            .user-table td:last-child { font-size: 14px; font-weight: bold; }
+            .user-table td:last-child { font-size: 14px; font-weight: bold; text-align: center; }
             .signup__area { padding: 20px 0; }
             .section__title { font-size: 22px; }
             .user { padding: 25px 20px; }
