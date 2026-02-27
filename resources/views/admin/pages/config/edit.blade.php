@@ -82,6 +82,15 @@
                                                                     <br>
                                                                     <br>
                                                                 </div>
+                                                                <div class="col-md-12">
+                                                                    <label class="control-label">حالة التسجيل</label>
+                                                                    <div class="switchery-demo">
+                                                                        <input type="checkbox" {{ $data->registration_open == 1 ? 'checked' : '' }} name="registration_open" data-plugin="switchery" data-color="#039cfd">
+                                                                    </div>
+                                                                    <small class="form-text text-muted">إيقاف هذا الخيار سيمنع التسجيل في المسابقة</small>
+                                                                    <br>
+                                                                    <br>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div class="tab-pane" id="profile">

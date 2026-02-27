@@ -79,6 +79,7 @@ class Config extends Controller
             "telegram" => request('telegram'),
             "year" => request('year'),
             "number" => request('number'),
+            "registration_open" => request('registration_open') ? 1 : 0,
             "image" => $image,
             "header_image" => $header_image,
             "slider_video" => $slider_video,

@@ -54,6 +54,11 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                 <div class="col-md-10">
                     <div class="sign__wrapper white-bg">
                         <div class="sign__form">
+                            @if($config->registration_open == 0)
+                                <div class="alert alert-warning text-center" style="font-size: 18px; font-weight: bold;">
+                                    التسجيل غير متاح حالياً
+                                </div>
+                            @else
                             @if (session('success'))
                             <div class="alert alert-success">
                                 {{ session('success') }}
@@ -90,6 +95,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
                         </div>
 
                         </form>
+                            @endif
 
                     </div>
                 </div>
