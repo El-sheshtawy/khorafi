@@ -159,6 +159,10 @@ class Home extends Controller
             return back()->with('error', trans('web.empty_user'));
         }
 
+        $request->validate([
+            'mobile' => 'nullable|numeric',
+        ]);
+
         $config = DB::table('config')->first();
         $check = Subscription::where('user_id', $user->id)->where('number', $config->number)->first();
         
@@ -177,6 +181,10 @@ class Home extends Controller
         
         if (request('region')) {
             $user->region_id = request('region');
+        }
+
+        if ($request->filled('mobile')) {
+            $user->mobile = request('mobile');
         }
         
         // Update address if city or region changed

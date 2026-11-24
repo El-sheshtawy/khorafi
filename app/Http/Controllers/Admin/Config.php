@@ -38,7 +38,7 @@ class Config extends Controller
             'telegram' => 'nullable|url',
             'image' => 'image|mimes:jpg,jpeg,png',
             'header_image' => 'image|mimes:jpg,jpeg,png',
-            'slider_video' => 'mimes:mp4,mov,avi|max:20480',
+            'slider_video' => 'mimes:mp4,mov,avi|max:10240',
         ]);
 
         if (!empty(request()->file('image'))) {

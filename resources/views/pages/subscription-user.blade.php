@@ -205,6 +205,14 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
             </div>
         </div>
 
+        <!-- Mobile Field -->
+        <div class="sign__input-wrapper mb-10">
+            <h5>{{ trans('web.mobile') }}</h5>
+            <div class="sign__input">
+                <input type="number" name="mobile" class="form-control" placeholder="{{ trans('web.mobile') }}" value="{{ old('mobile', $user->mobile) }}">
+            </div>
+        </div>
+
         <!-- Subscription Type Dropdown -->
         <div class="sign__input-wrapper mb-10">
             <h5>{{ trans('web.subscription_type') }}</h5>
