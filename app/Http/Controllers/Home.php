@@ -160,7 +160,11 @@ class Home extends Controller
         }
 
         $request->validate([
-            'mobile' => 'nullable|numeric',
+            'nationality' => 'required|numeric|exists:nationalities,id',
+            'city' => 'required|numeric|exists:cities,id',
+            'region' => 'required|numeric|exists:regions,id',
+            'mobile' => 'required|numeric',
+            'subscription_type' => 'required|in:1,2,3,4',
         ]);
 
         $config = DB::table('config')->first();
@@ -515,7 +519,10 @@ class Home extends Controller
     'nationality' => 'required|numeric|exists:nationalities,id', // nationality required and must exist in the nationality table
     'birthday' => 'required|string',
     'city' => 'required|numeric|exists:cities,id', // city required and must exist in the cities table
+    'region' => 'required|numeric|exists:regions,id',
     'mobile' => 'required|numeric',
+    'mobile2' => 'required|numeric',
+    'subscription_type' => 'required|in:1,2,3,4',
                 ]
             );
         if (!empty(User::where('identify', request('identify'))->first())) {

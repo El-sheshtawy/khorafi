@@ -77,7 +77,7 @@
                                         <div class="">
                                             <input class="form-control" type="number" name="identify"
                                                 placeholder="{{ trans('web.identify') }}"
-                                                value="{{ old('identify') ? old('identify') : request('identify') }}">
+                                                value="{{ old('identify') ? old('identify') : request('identify') }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -96,7 +96,7 @@
                                         <div class="">
                                             <input class="form-control" type="text" name="first_name"
                                                 placeholder="{{ trans('web.first_name') }}"
-                                                value="{{ old('first_name') }}">
+                                                value="{{ old('first_name') }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -106,7 +106,7 @@
                                         <div class="">
                                             <input class="form-control" type="text" name="second_name"
                                                 placeholder="{{ trans('web.second_name') }}"
-                                                value="{{ old('second_name') }}">
+                                                value="{{ old('second_name') }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -116,7 +116,7 @@
                                         <div class="">
                                             <input class="form-control" type="text" name="third_name"
                                                 placeholder="{{ trans('web.third_name') }}"
-                                                value="{{ old('third_name') }}">
+                                                value="{{ old('third_name') }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -125,7 +125,7 @@
                                         <h5>{{ trans('web.last_name') }}</h5>
                                         <div class="">
                                             <input class="form-control" type="text" name="last_name"
-                                                placeholder="{{ trans('web.last_name') }}" value="{{ old('last_name') }}">
+                                                placeholder="{{ trans('web.last_name') }}" value="{{ old('last_name') }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -133,7 +133,7 @@
                                     <div class="sign__input-wrapper mb-25">
                                         <h5>{{ trans('web.gender') }}</h5>
                                         <div class="">
-                                            <select class="form-control" name="gender">
+                                            <select class="form-control" name="gender" required>
                                                 <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>
                                                     {{ trans('web.male') }}</option>
                                                 <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>
@@ -166,7 +166,7 @@
                                         <h5>{{ trans('web.birthday') }}</h5>
                                         <div class="">
                                             <input class="form-control" type="date" name="birthday"
-                                                placeholder="{{ trans('web.birthday') }}" value="{{ old('birthday') }}">
+                                                placeholder="{{ trans('web.birthday') }}" value="{{ old('birthday') }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -202,7 +202,7 @@
                                     <div class="sign__input-wrapper mb-25">
                                         <h5>{{ trans('web.state') }}</h5>
                                         <div class="" id="result-change-city-register-page">
-                                            <select class="form-control" name="region">
+                                            <select class="form-control" name="region" required>
                                                 <option value="">...</option>
                                             </select>
                                             <?php /*
@@ -217,7 +217,7 @@
                                         <h5>{{ trans('web.mobile') }}</h5>
                                         <div class="">
                                             <input class="form-control" type="number" name="mobile"
-                                                placeholder="{{ trans('web.mobile') }}" value="{{ old('mobile') }}">
+                                                placeholder="{{ trans('web.mobile') }}" value="{{ old('mobile') }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -226,7 +226,7 @@
                                         <h5>{{ trans('web.mobile2') }}</h5>
                                         <div class="">
                                             <input class="form-control" type="number" name="mobile2"
-                                                placeholder="{{ trans('web.mobile2') }}" value="{{ old('mobile2') }}">
+                                                placeholder="{{ trans('web.mobile2') }}" value="{{ old('mobile2') }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -239,8 +239,8 @@
                             <div class="col-md-6">
                                 <div class="sign__input-wrapper">
                                     <h5>{{ trans('web.subscription_type') }}</h5>
-                                    <select name="subscription_type" class="form-select change-select-subscription-type">
-                                        <option value="0">{{ trans('web.select_subscription_type') }}</option>
+                                    <select name="subscription_type" class="form-select change-select-subscription-type" required>
+                                        <option value="">{{ trans('web.select_subscription_type') }}</option>
                                         @foreach (\App\SubscriptionsName::get() as $val)
                                             <option value="{{ $val->id }}">{{ $val->$name }}</option>
                                         @endforeach

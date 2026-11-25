@@ -7,7 +7,7 @@ if (!empty($_COOKIE['lang']) and $_COOKIE['lang'] == 2) {
     $body = "body_ar";
 }
 ?>
-<select class="form-control" name="region">
+<select class="form-control" name="region" required>
     <option value="">...</option>
     @foreach($data as $val)
     <option value="{{$val->id}}">{{$val->$name}}</option>

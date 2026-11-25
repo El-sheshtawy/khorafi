@@ -13,7 +13,7 @@
 <div class="sign__input-wrapper mb-10">
     <h5>{{trans('web.select_hizb')}}</h5>
     <div class="sign__input">
-        <select name="hizb_number" class="form-select change-select-subscription-type">
+        <select name="hizb_number" class="form-select change-select-subscription-type" required>
             <option value="">{{trans('web.select_hizb')}}</option>
             @for($i = 1; $i <= 60; $i++)
             @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'hizb')->where('options', $i)->where('active', 'active')->first()))
@@ -27,7 +27,7 @@
 <div class="sign__input-wrapper mb-10">
     <h5>{{trans('web.select_part')}}</h5>
     <div class="sign__input">
-        <select name="part_number" class="form-select change-select-subscription-type">
+        <select name="part_number" class="form-select change-select-subscription-type" required>
             <option value="">{{trans('web.select_part')}}</option>
             @for($i = 1; $i <= 30; $i++)
                 @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))
@@ -43,7 +43,7 @@
         <div class="sign__input-wrapper mb-10">
             <h5>{{trans('web.select_part')}}</h5>
             <div class="sign__input">
-                <select name="part_number1" class="form-select change-select-subscription-type">
+                <select name="part_number1" class="form-select change-select-subscription-type" required>
                     <option value="">{{trans('web.select_part')}}</option>
                     @for($i = 1; $i <= 30; $i++)
                         @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))
@@ -58,7 +58,7 @@
         <div class="sign__input-wrapper mb-10">
             <h5>{{trans('web.select_part')}}</h5>
             <div class="sign__input">
-                <select name="part_number2" class="form-select change-select-subscription-type">
+                <select name="part_number2" class="form-select change-select-subscription-type" required>
                     <option value="">{{trans('web.select_part')}}</option>
                     @for($i = 1; $i <= 30; $i++)
                         @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))
@@ -73,7 +73,7 @@
         <div class="sign__input-wrapper mb-10">
             <h5>{{trans('web.select_part')}}</h5>
             <div class="sign__input">
-                <select name="part_number3" class="form-select change-select-subscription-type">
+                <select name="part_number3" class="form-select change-select-subscription-type" required>
                     <option value="">{{trans('web.select_part')}}</option>
                     @for($i = 1; $i <= 30; $i++)
                         @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))
@@ -91,7 +91,7 @@
         <div class="sign__input-wrapper mb-10">
             <h5>{{trans('web.select_part')}}</h5>
             <div class="sign__input">
-                <select name="part_number1" class="form-select change-select-subscription-type">
+                <select name="part_number1" class="form-select change-select-subscription-type" required>
                     <option value="">{{trans('web.select_part')}}</option>
                     @for($i = 1; $i <= 30; $i++)
                         @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))
@@ -106,7 +106,7 @@
         <div class="sign__input-wrapper mb-10">
             <h5>{{trans('web.select_part')}}</h5>
             <div class="sign__input">
-                <select name="part_number2" class="form-select change-select-subscription-type">
+                <select name="part_number2" class="form-select change-select-subscription-type" required>
                     <option value="">{{trans('web.select_part')}}</option>
                     @for($i = 1; $i <= 30; $i++)
                         @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))
@@ -121,7 +121,7 @@
         <div class="sign__input-wrapper mb-10">
             <h5>{{trans('web.select_part')}}</h5>
             <div class="sign__input">
-                <select name="part_number3" class="form-select change-select-subscription-type">
+                <select name="part_number3" class="form-select change-select-subscription-type" required>
                     <option value="">{{trans('web.select_part')}}</option>
                     @for($i = 1; $i <= 30; $i++)
                         @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))
@@ -136,7 +136,7 @@
         <div class="sign__input-wrapper mb-10">
             <h5>{{trans('web.select_part')}}</h5>
             <div class="sign__input">
-                <select name="part_number4" class="form-select change-select-subscription-type">
+                <select name="part_number4" class="form-select change-select-subscription-type" required>
                     <option value="">{{trans('web.select_part')}}</option>
                     @for($i = 1; $i <= 30; $i++)
                         @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))
@@ -151,7 +151,7 @@
         <div class="sign__input-wrapper mb-10">
             <h5>{{trans('web.select_part')}}</h5>
             <div class="sign__input">
-                <select name="part_number5" class="form-select change-select-subscription-type">
+                <select name="part_number5" class="form-select change-select-subscription-type" required>
                     <option value="">{{trans('web.select_part')}}</option>
                     @for($i = 1; $i <= 30; $i++)
                         @if(empty(\App\UsersPrevent::where('user_id', $user->id)->where('type', 'part')->where('options', $i)->where('active', 'active')->first()))

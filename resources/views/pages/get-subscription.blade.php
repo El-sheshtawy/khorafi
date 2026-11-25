@@ -2,7 +2,7 @@
 <div class="sign__input-wrapper mb-10">
     <h5>{{trans('web.select_hizb')}}</h5>
     <div class="sign__input">
-        <select name="hizb_number" class="form-select change-select-subscription-type">
+        <select name="hizb_number" class="form-select change-select-subscription-type" required>
             <option value="">{{trans('web.select_hizb')}}</option>
             @for($i = 1; $i <= 60; $i++)
             <option value="{{$i}}">{{$i}}</option>
@@ -14,7 +14,7 @@
 <div class="sign__input-wrapper mb-10">
     <h5>{{trans('web.select_part')}}</h5>
     <div class="sign__input">
-        <select name="part_number" class="form-select change-select-subscription-type">
+        <select name="part_number" class="form-select change-select-subscription-type" required>
             <option value="">{{trans('web.select_part')}}</option>
             <?php
             for ($i = 1; $i <= 30; $i++) {
@@ -32,7 +32,7 @@
         <div class="sign__input-wrapper mb-10">
             <h5>{{trans('web.select_part')}}</h5>
             <div class="sign__input">
-                <select name="part_number1" class="form-select change-select-subscription-type">
+                <select name="part_number1" class="form-select change-select-subscription-type" required>
                     <option value="">{{trans('web.select_part')}}</option>
                     <?php
                     for ($i = 1; $i <= 30; $i++) {
@@ -49,7 +49,7 @@
         <div class="sign__input-wrapper mb-10">
             <h5>{{trans('web.select_part')}}</h5>
             <div class="sign__input">
-                <select name="part_number2" class="form-select change-select-subscription-type">
+                <select name="part_number2" class="form-select change-select-subscription-type" required>
                     <option value="">{{trans('web.select_part')}}</option>
                     <?php
                     for ($i = 1; $i <= 30; $i++) {
@@ -66,7 +66,7 @@
         <div class="sign__input-wrapper mb-10">
             <h5>{{trans('web.select_part')}}</h5>
             <div class="sign__input">
-                <select name="part_number3" class="form-select change-select-subscription-type">
+                <select name="part_number3" class="form-select change-select-subscription-type" required>
                     <option value="">{{trans('web.select_part')}}</option>
                     <?php
                     for ($i = 1; $i <= 30; $i++) {
@@ -86,7 +86,7 @@
         <div class="sign__input-wrapper mb-10">
             <h5>{{trans('web.select_part')}}</h5>
             <div class="sign__input">
-                <select name="part_number1" class="form-select change-select-subscription-type">
+                <select name="part_number1" class="form-select change-select-subscription-type" required>
                     <option value="">{{trans('web.select_part')}}</option>
                     <?php
                     for ($i = 1; $i <= 30; $i++) {
@@ -103,7 +103,7 @@
         <div class="sign__input-wrapper mb-10">
             <h5>{{trans('web.select_part')}}</h5>
             <div class="sign__input">
-                <select name="part_number2" class="form-select change-select-subscription-type">
+                <select name="part_number2" class="form-select change-select-subscription-type" required>
                     <option value="">{{trans('web.select_part')}}</option>
                     <?php
                     for ($i = 1; $i <= 30; $i++) {
@@ -120,7 +120,7 @@
         <div class="sign__input-wrapper mb-10">
             <h5>{{trans('web.select_part')}}</h5>
             <div class="sign__input">
-                <select name="part_number3" class="form-select change-select-subscription-type">
+                <select name="part_number3" class="form-select change-select-subscription-type" required>
                     <option value="">{{trans('web.select_part')}}</option>
                     <?php
                     for ($i = 1; $i <= 30; $i++) {
@@ -137,7 +137,7 @@
         <div class="sign__input-wrapper mb-10">
             <h5>{{trans('web.select_part')}}</h5>
             <div class="sign__input">
-                <select name="part_number4" class="form-select change-select-subscription-type">
+                <select name="part_number4" class="form-select change-select-subscription-type" required>
                     <option value="">{{trans('web.select_part')}}</option>
                     <?php
                     for ($i = 1; $i <= 30; $i++) {
@@ -154,7 +154,7 @@
         <div class="sign__input-wrapper mb-10">
             <h5>{{trans('web.select_part')}}</h5>
             <div class="sign__input">
-                <select name="part_number5" class="form-select change-select-subscription-type">
+                <select name="part_number5" class="form-select change-select-subscription-type" required>
                     <option value="">{{trans('web.select_part')}}</option>
                     <?php
                     for ($i = 1; $i <= 30; $i++) {
