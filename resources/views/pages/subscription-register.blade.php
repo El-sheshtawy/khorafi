@@ -278,4 +278,65 @@
 
     </main>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const identifyInput = document.querySelector('input[name="identify"]');
+            const birthdayInput = document.querySelector('input[name="birthday"]');
+
+            if (!identifyInput || !birthdayInput) return;
+
+            function extractBirthdayFromIdentify(val) {
+                const str = String(val || '').trim();
+                if (str.length < 7) return '';
+
+                const centuryDigit = str.charAt(0);
+                let century = '';
+                if (centuryDigit === '2') {
+                    century = '19';
+                } else if (centuryDigit === '3') {
+                    century = '20';
+                } else {
+                    return '';
+                }
+
+                const yy = str.substring(1, 3);
+                const mm = str.substring(3, 5);
+                const dd = str.substring(5, 7);
+
+                if (!/^\d{6}$/.test(yy + mm + dd)) return '';
+
+                const year = parseInt(century + yy, 10);
+                const month = parseInt(mm, 10);
+                const day = parseInt(dd, 10);
+
+                if (month < 1 || month > 12 || day < 1 || day > 31) return '';
+
+                const date = new Date(year, month - 1, day);
+                if (
+                    date.getFullYear() !== year ||
+                    date.getMonth() !== month - 1 ||
+                    date.getDate() !== day
+                ) {
+                    return '';
+                }
+
+                return `${year}-${mm}-${dd}`;
+            }
+
+            function syncBirthday() {
+                const extracted = extractBirthdayFromIdentify(identifyInput.value);
+                if (extracted) {
+                    birthdayInput.value = extracted;
+                }
+            }
+
+            if (!birthdayInput.value && identifyInput.value) {
+                syncBirthday();
+            }
+
+            identifyInput.addEventListener('input', syncBirthday);
+            identifyInput.addEventListener('change', syncBirthday);
+        });
+    </script>
+
 @endsection
